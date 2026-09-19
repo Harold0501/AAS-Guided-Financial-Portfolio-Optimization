@@ -1,0 +1,453 @@
+{
+  "arm": "B",
+  "features": [
+    {
+      "feature_id": "cross_sectional_volatility_ratio",
+      "name": "Cross-Sectional Volatility Ratio",
+      "discovered_gap": "The relationship between cross-sectional return dispersion and median asset volatility reveals systemic co-movement vs divergence",
+      "financial_interpretation": "Higher values indicate returns diverge more relative to typical asset volatility",
+      "inputs": [
+        "cross_sectional_return_dispersion",
+        "median_asset_volatility"
+      ],
+      "preprocessing": [
+        "Use provided summaries"
+      ],
+      "mathematical_definition": "cross_sectional_return_dispersion / median_asset_volatility",
+      "aggregation": "Single value per instance",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "1 observation",
+      "missing_and_zero_policy": "Use provided summaries; skip if denominator is zero",
+      "expected_range": "0.3 to 1.5",
+      "invariances": [
+        "asset ordering",
+        "portfolio size"
+      ],
+      "synthetic_test": {
+        "input": {
+          "cross_sectional_return_dispersion": 0.015,
+          "median_asset_volatility": 0.02
+        },
+        "expected": 0.75
+      },
+      "reconstruction_pseudocode": "return dispersion_summary / volatility_summary",
+      "leakage_argument": "Uses only historical summaries without future data"
+    },
+    {
+      "feature_id": "volume_return_correlation",
+      "name": "Volume-Return Correlation",
+      "discovered_gap": "Captures how trading volume relates to price movement magnitude across assets",
+      "financial_interpretation": "Positive values suggest higher volume accompanies larger price swings",
+      "inputs": [
+        "volume",
+        "close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Calculate volume-return correlations per asset"
+      ],
+      "mathematical_definition": "Mean of asset-level correlations between |return| and volume over time",
+      "aggregation": "Average across assets",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "30 observations",
+      "missing_and_zero_policy": "Exclude days with missing data; skip zero-volume days",
+      "expected_range": "-0.5 to 0.5",
+      "invariances": [
+        "asset ordering",
+        "calendar time"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            0.01,
+            -0.02,
+            0.03
+          ],
+          "volumes": [
+            1000,
+            500,
+            2000
+          ]
+        },
+        "expected": 0.8
+      },
+      "reconstruction_pseudocode": "for each asset: correlate(abs(returns), volume) then average",
+      "leakage_argument": "Uses only historical price/volume data"
+    },
+    {
+      "feature_id": "extreme_return_frequency",
+      "name": "Extreme Return Frequency",
+      "discovered_gap": "Measures how often assets experience outlier returns relative to their own history",
+      "financial_interpretation": "High values indicate frequent volatility spikes in portfolio components",
+      "inputs": [
+        "close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Normalize returns per asset"
+      ],
+      "mathematical_definition": "Mean across assets of (count of |return| > 2\u03c3) / total observations",
+      "aggregation": "Average across assets",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "20 observations",
+      "missing_and_zero_policy": "Exclude missing data; treat zero returns as neutral",
+      "expected_range": "0.05 to 0.25",
+      "invariances": [
+        "asset ordering",
+        "return magnitude scaling"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.05,
+              -0.03,
+              0.08
+            ],
+            [
+              0.02,
+              0.04,
+              -0.06
+            ]
+          ]
+        },
+        "expected": 0.33
+      },
+      "reconstruction_pseudocode": "for each asset: count(|r| > 2\u03c3)/n then average",
+      "leakage_argument": "Based solely on historical return distributions"
+    },
+    {
+      "feature_id": "return_skewness",
+      "name": "Cross-Asset Return Skewness",
+      "discovered_gap": "Captures asymmetry in return distributions across assets",
+      "financial_interpretation": "Positive values indicate more frequent large positive returns",
+      "inputs": [
+        "close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Calculate skewness per observation"
+      ],
+      "mathematical_definition": "Mean of daily skewness values across all observations",
+      "aggregation": "Average over time",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "3 observations",
+      "missing_and_zero_policy": "Exclude incomplete days",
+      "expected_range": "-1.0 to 1.0",
+      "invariances": [
+        "asset ordering",
+        "portfolio composition"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              2,
+              2
+            ],
+            [
+              3,
+              2,
+              1
+            ]
+          ],
+          "days": 3
+        },
+        "expected": 0.0
+      },
+      "reconstruction_pseudocode": "for each day: compute skew(returns) then average",
+      "leakage_argument": "Uses only historical price data"
+    },
+    {
+      "feature_id": "volatility_concentration",
+      "name": "Volatility Concentration Index",
+      "discovered_gap": "Measures how evenly volatility is distributed across assets",
+      "financial_interpretation": "High values indicate volatility is concentrated in a few assets",
+      "inputs": [
+        "median_asset_volatility",
+        "cross_sectional_return_dispersion"
+      ],
+      "preprocessing": [
+        "Use provided summaries"
+      ],
+      "mathematical_definition": "1 - (cross_sectional_return_dispersion / (2 * median_asset_volatility))",
+      "aggregation": "Single value per instance",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "1 observation",
+      "missing_and_zero_policy": "Use provided summaries",
+      "expected_range": "0.0 to 1.0",
+      "invariances": [
+        "asset ordering",
+        "portfolio size"
+      ],
+      "synthetic_test": {
+        "input": {
+          "dispersion": 0.02,
+          "volatility": 0.02
+        },
+        "expected": 0.5
+      },
+      "reconstruction_pseudocode": "return 1 - (dispersion / (2 * volatility))",
+      "leakage_argument": "Based on historical volatility summaries"
+    },
+    {
+      "feature_id": "volume_volatility_ratio",
+      "name": "Volume Volatility Ratio",
+      "discovered_gap": "Compares volume volatility to price volatility across assets",
+      "financial_interpretation": "Higher values suggest volume changes are more volatile than prices",
+      "inputs": [
+        "volume_log_change_volatility",
+        "median_asset_volatility"
+      ],
+      "preprocessing": [
+        "Use provided summaries"
+      ],
+      "mathematical_definition": "volume_log_change_volatility / median_asset_volatility",
+      "aggregation": "Single value per instance",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "1 observation",
+      "missing_and_zero_policy": "Use provided summaries",
+      "expected_range": "1.0 to 3.0",
+      "invariances": [
+        "asset ordering",
+        "portfolio size"
+      ],
+      "synthetic_test": {
+        "input": {
+          "volume_vol": 0.4,
+          "price_vol": 0.2
+        },
+        "expected": 2.0
+      },
+      "reconstruction_pseudocode": "return volume_vol / price_vol",
+      "leakage_argument": "Uses only historical volatility summaries"
+    },
+    {
+      "feature_id": "return_sign_stability",
+      "name": "Return Sign Stability",
+      "discovered_gap": "Measures consistency of return direction across time",
+      "financial_interpretation": "High values indicate returns frequently change direction",
+      "inputs": [
+        "close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Track sign changes"
+      ],
+      "mathematical_definition": "Mean across assets of (count of sign changes) / (observations - 1)",
+      "aggregation": "Average across assets",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "2 observations",
+      "missing_and_zero_policy": "Exclude missing data; treat zero returns as neutral",
+      "expected_range": "0.0 to 1.0",
+      "invariances": [
+        "asset ordering",
+        "return magnitude"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.01,
+              -0.02,
+              0.03
+            ],
+            [
+              -0.01,
+              0.02,
+              -0.03
+            ]
+          ]
+        },
+        "expected": 1.0
+      },
+      "reconstruction_pseudocode": "for each asset: count sign changes / (n-1) then average",
+      "leakage_argument": "Based on historical return direction patterns"
+    },
+    {
+      "feature_id": "max_return_concentration",
+      "name": "Max Return Concentration",
+      "discovered_gap": "Measures how often the top-performing asset changes",
+      "financial_interpretation": "High values indicate unstable leadership in returns",
+      "inputs": [
+        "close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Identify max return asset per day"
+      ],
+      "mathematical_definition": "Count of unique max-return assets / total observations",
+      "aggregation": "Single value per instance",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "3 observations",
+      "missing_and_zero_policy": "Exclude days with missing data",
+      "expected_range": "0.3 to 1.0",
+      "invariances": [
+        "asset ordering",
+        "calendar time"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.05,
+              0.02
+            ],
+            [
+              0.03,
+              0.06
+            ],
+            [
+              0.04,
+              0.01
+            ]
+          ]
+        },
+        "expected": 0.666
+      },
+      "reconstruction_pseudocode": "count unique max assets / n",
+      "leakage_argument": "Uses only historical return data"
+    },
+    {
+      "feature_id": "negative_return_clustering",
+      "name": "Negative Return Clustering",
+      "discovered_gap": "Measures temporal clustering of negative returns",
+      "financial_interpretation": "High values indicate frequent negative return sequences",
+      "inputs": [
+        "close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Track consecutive negative returns"
+      ],
+      "mathematical_definition": "Mean across assets of (longest negative streak) / observations",
+      "aggregation": "Average across assets",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "10 observations",
+      "missing_and_zero_policy": "Exclude missing data; treat zero returns as neutral",
+      "expected_range": "0.0 to 0.5",
+      "invariances": [
+        "asset ordering",
+        "return magnitude"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              -0.01,
+              -0.02,
+              0.03
+            ],
+            [
+              -0.01,
+              -0.01,
+              -0.02
+            ]
+          ]
+        },
+        "expected": 0.666
+      },
+      "reconstruction_pseudocode": "for each asset: longest negative streak / n then average",
+      "leakage_argument": "Based on historical return sequences"
+    },
+    {
+      "feature_id": "positive_return_clustering",
+      "name": "Positive Return Clustering",
+      "discovered_gap": "Measures temporal clustering of positive returns",
+      "financial_interpretation": "High values indicate frequent positive return sequences",
+      "inputs": [
+        "close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Track consecutive positive returns"
+      ],
+      "mathematical_definition": "Mean across assets of (longest positive streak) / observations",
+      "aggregation": "Average across assets",
+      "parameters": {
+        "name": "fixed value"
+      },
+      "minimum_sample": "10 observations",
+      "missing_and_zero_policy": "Exclude missing data; treat zero returns as neutral",
+      "expected_range": "0.0 to 0.5",
+      "invariances": [
+        "asset ordering",
+        "return magnitude"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.01,
+              0.02,
+              -0.03
+            ],
+            [
+              0.01,
+              0.01,
+              0.02
+            ]
+          ]
+        },
+        "expected": 0.666
+      },
+      "reconstruction_pseudocode": "for each asset: longest positive streak / n then average",
+      "leakage_argument": "Based on historical return sequences"
+    }
+  ],
+  "_provenance": {
+    "requested_model": "qwen/qwen3-32b",
+    "returned_model": "qwen/qwen3-32b",
+    "response_id": "gen-1786560157-HmbjyNVeAHs4bXPgj7ZP",
+    "created": 1786560157,
+    "usage": {
+      "prompt_tokens": 4893,
+      "completion_tokens": 5432,
+      "total_tokens": 10325,
+      "cost": 0.0019124,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0019124,
+        "upstream_inference_prompt_cost": 0.00039144,
+        "upstream_inference_completions_cost": 0.00152096
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3579,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "seed": 3103,
+    "generated_at": "2026-08-12T18:45:28.720499+00:00"
+  }
+}

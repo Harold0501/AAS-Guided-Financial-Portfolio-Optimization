@@ -1,0 +1,10 @@
+{
+  "selector": "RF",
+  "criterion": "MDD",
+  "configuration": "Fin+GPT+A+B+C",
+  "seed": 42,
+  "features": 74,
+  "selection_mean": -0.2837154752794854,
+  "regret_mean": 0.021633556106841038,
+  "completed_at": "2026-08-12T20:03:06.501332+00:00"
+}

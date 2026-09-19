@@ -1,0 +1,40 @@
+Selected Max Average Value: 1.4156903704885773
+Shapley Importance
+                         Feature  Shapley_Importance
+                        P/S mean            0.171278
+                          Period            0.131497
+                        SPS mean            0.095900
+               Gross Margin mean            0.086944
+                        FCF mean            0.080423
+                        P/B mean            0.051397
+          IQS standard deviation            0.046919
+          SPS standard deviation            0.045781
+                        PLF mean            0.043572
+ Gross Margin standard deviation            0.037370
+    EV/EBITDA standard deviation            0.036281
+          P/S standard deviation            0.033998
+          ROA standard deviation            0.031432
+          ROE standard deviation            0.030882
+                        ROA mean            0.030150
+FCF per Share standard deviation            0.029317
+                  EV/EBITDA mean            0.028802
+         P/CF standard deviation            0.028726
+                 Net Margin mean            0.028499
+                       P/CF mean            0.027610
+                        VEC mean            0.026972
+          FCF standard deviation            0.026624
+          PLF standard deviation            0.025368
+                        P/E mean            0.023076
+              FCF per Share mean            0.021009
+                        ROE mean            0.020224
+          EVC standard deviation            0.019206
+                        PVS mean            0.019047
+          P/B standard deviation            0.018136
+                       RAPS mean            0.017999
+                        EVC mean            0.017602
+          VEC standard deviation            0.016976
+          P/E standard deviation            0.012656
+                        IQS mean            0.012635
+   Net Margin standard deviation            0.012215
+         RAPS standard deviation            0.009233
+          PVS standard deviation            0.009170

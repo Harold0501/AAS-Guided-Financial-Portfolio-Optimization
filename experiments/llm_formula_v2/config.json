@@ -1,0 +1,15 @@
+{
+  "experiment_id": "llm_formula_v2_2026-08-12",
+  "source_root": "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main",
+  "paper_pdf": "/Users/wanweilin/Documents/Sean's PO AAS/DKU_SUFE__LLM_AAS_Portfolio_Optimization-5.pdf",
+  "paper_project": "/Users/wanweilin/Documents/Sean's PO AAS/DKU_SUFE__LLM_AAS_Portfolio_Optimization",
+  "mapping_csv": "LLM/Assets_and_Instances/combined_asset_components_time.csv",
+  "raw_data_dir": "LLMD-AS-FPO/LLM_Generated_Feature/data",
+  "historical_model": "Qwen3-32B",
+  "criteria": ["AR", "CR", "MDD", "SHR", "SOR"],
+  "algorithms": ["EW", "MCW", "mSSRM", "MS-M", "OH-M", "MS-T", "OH-T", "MS-L", "OH-L"],
+  "random_seed": 42,
+  "folds": 10,
+  "rf_estimators": 240,
+  "allowed_raw_fields": ["date", "company", "open", "high", "low", "close", "volume", "div_adj_close"]
+}

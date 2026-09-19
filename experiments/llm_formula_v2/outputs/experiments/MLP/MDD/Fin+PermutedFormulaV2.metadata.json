@@ -1,0 +1,15 @@
+{
+  "selector": "MLP",
+  "criterion": "MDD",
+  "configuration": "Fin+PermutedFormulaV2",
+  "n_instances": 762,
+  "n_features": 42,
+  "folds": 10,
+  "seed": 42,
+  "protocol": "exact repository shuffled KFold; one scalar model per target/fold",
+  "selection_mean": -0.27815300695886613,
+  "regret_mean": 0.016071087786221794,
+  "sbs_mean": -0.2776807136780766,
+  "vbs_mean": -0.26208191917264434,
+  "completed_at": "2026-08-11T19:15:13.443640+00:00"
+}

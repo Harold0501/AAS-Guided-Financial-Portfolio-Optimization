@@ -1,0 +1,44 @@
+{"selector": "RF", "criterion": "AR", "configuration": "Fin", "seed": 42, "features": 25, "selection_mean": 0.24136464955862738, "regret_mean": 0.14726904953269004, "completed_at": "2026-08-12T19:28:33.811670+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin", "seed": 142, "features": 25, "selection_mean": 0.24615203329107196, "regret_mean": 0.1424816658002454, "completed_at": "2026-08-12T19:28:39.719412+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin", "seed": 242, "features": 25, "selection_mean": 0.23892358052035773, "regret_mean": 0.14971011857095964, "completed_at": "2026-08-12T19:28:45.590732+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin", "seed": 342, "features": 25, "selection_mean": 0.23902815161010044, "regret_mean": 0.14960554748121696, "completed_at": "2026-08-12T19:31:28.443809+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin", "seed": 442, "features": 25, "selection_mean": 0.2381008718002636, "regret_mean": 0.1505328272910538, "completed_at": "2026-08-12T19:31:37.168942+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A", "seed": 42, "features": 42, "selection_mean": 0.2575423307592559, "regret_mean": 0.13109136833206148, "completed_at": "2026-08-12T19:31:56.495762+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A", "seed": 142, "features": 42, "selection_mean": 0.2477161705072775, "regret_mean": 0.14091752858403986, "completed_at": "2026-08-12T19:32:13.570056+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A", "seed": 242, "features": 42, "selection_mean": 0.25365490278124614, "regret_mean": 0.13497879631007123, "completed_at": "2026-08-12T19:32:31.009413+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A", "seed": 342, "features": 42, "selection_mean": 0.24759028264415023, "regret_mean": 0.14104341644716717, "completed_at": "2026-08-12T19:32:45.610459+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A", "seed": 442, "features": 42, "selection_mean": 0.25030594861268146, "regret_mean": 0.138327750478636, "completed_at": "2026-08-12T19:33:00.311787+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+B", "seed": 42, "features": 35, "selection_mean": 0.2430176028391389, "regret_mean": 0.1456160962521785, "completed_at": "2026-08-12T19:33:11.719401+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+B", "seed": 142, "features": 35, "selection_mean": 0.24973931627477836, "regret_mean": 0.13889438281653904, "completed_at": "2026-08-12T19:33:22.925416+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+B", "seed": 242, "features": 35, "selection_mean": 0.25503981148605875, "regret_mean": 0.13359388760525864, "completed_at": "2026-08-12T19:33:34.088699+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+B", "seed": 342, "features": 35, "selection_mean": 0.25478347876868385, "regret_mean": 0.1338502203226336, "completed_at": "2026-08-12T19:33:45.040470+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+B", "seed": 442, "features": 35, "selection_mean": 0.25364628270200906, "regret_mean": 0.1349874163893084, "completed_at": "2026-08-12T19:33:56.281766+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A+B", "seed": 42, "features": 52, "selection_mean": 0.2526655424348043, "regret_mean": 0.13596815665651313, "completed_at": "2026-08-12T19:34:14.167214+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A+B", "seed": 142, "features": 52, "selection_mean": 0.2564350576856433, "regret_mean": 0.13219864140567414, "completed_at": "2026-08-12T19:34:31.939100+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A+B", "seed": 242, "features": 52, "selection_mean": 0.2557578783555731, "regret_mean": 0.13287582073574428, "completed_at": "2026-08-12T19:34:49.528029+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A+B", "seed": 342, "features": 52, "selection_mean": 0.25170964123973655, "regret_mean": 0.13692405785158085, "completed_at": "2026-08-12T19:35:07.699592+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A+B", "seed": 442, "features": 52, "selection_mean": 0.25748418182884036, "regret_mean": 0.13114951726247703, "completed_at": "2026-08-12T19:35:25.658880+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+C", "seed": 42, "features": 35, "selection_mean": 0.26392496391142184, "regret_mean": 0.12470873517989559, "completed_at": "2026-08-12T19:35:36.548974+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+C", "seed": 142, "features": 35, "selection_mean": 0.2558265775238182, "regret_mean": 0.1328071215674992, "completed_at": "2026-08-12T19:35:47.502485+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+C", "seed": 242, "features": 35, "selection_mean": 0.2602750615139015, "regret_mean": 0.12835863757741592, "completed_at": "2026-08-12T19:35:58.602742+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+C", "seed": 342, "features": 35, "selection_mean": 0.2579544006157978, "regret_mean": 0.1306792984755196, "completed_at": "2026-08-12T19:36:09.460524+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+C", "seed": 442, "features": 35, "selection_mean": 0.2612997674119584, "regret_mean": 0.12733393167935905, "completed_at": "2026-08-12T19:36:20.891153+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A+C", "seed": 42, "features": 52, "selection_mean": 0.2703975052593229, "regret_mean": 0.11823619383199453, "completed_at": "2026-08-12T19:36:38.894142+00:00"}
+{"selector": "RF", "criterion": "AR", "configuration": "Fin+A+C", "seed": 142, "features": 52, "selection_mean": 0.2700032900698072, "regret_mean": 0.11863040902151017, "completed_at": "2026-08-12T19:36:56.847989+00:00"}
+Traceback (most recent call last):
+  File "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main/experiments/llm_discovery_v3/run_factorial.py", line 48, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main/experiments/llm_discovery_v3/run_factorial.py", line 46, in main
+    z=one(a.selector,crit,name,seed,a.jobs);rows.append(z);print(json.dumps(z),flush=True)
+  File "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main/experiments/llm_discovery_v3/run_factorial.py", line 37, in one
+    res=Parallel(n_jobs=jobs)(delayed(fit)(sel,X,y,a,tr,te,seed,k) for a,tr,te,k in tasks);pred=pd.DataFrame(index=d.index,columns=ALG,dtype=float)
+  File "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main/experiments/llm_discovery_v3/.venv/lib/python3.13/site-packages/joblib/parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main/experiments/llm_discovery_v3/.venv/lib/python3.13/site-packages/joblib/parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main/experiments/llm_discovery_v3/.venv/lib/python3.13/site-packages/joblib/parallel.py", line 1800, in _retrieve
+    time.sleep(0.01)
+    ~~~~~~~~~~^^^^^^
+KeyboardInterrupt

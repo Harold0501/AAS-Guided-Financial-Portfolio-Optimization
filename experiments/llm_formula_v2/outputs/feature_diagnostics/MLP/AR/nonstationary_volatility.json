@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "AR",
+  "feature": "nonstationary_volatility",
+  "selection_mean": 0.24033515247021625,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

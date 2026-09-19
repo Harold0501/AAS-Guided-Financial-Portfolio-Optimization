@@ -1,0 +1,40 @@
+Selected Max Average Value: 0.33884535261443066
+Shapley Importance
+                         Feature  Shapley_Importance
+                          Period            0.032145
+                        SPS mean            0.023009
+                        FCF mean            0.021706
+                        P/S mean            0.020703
+          ROA standard deviation            0.014260
+          SPS standard deviation            0.014102
+               Gross Margin mean            0.012784
+          FCF standard deviation            0.012720
+                        P/B mean            0.010058
+                 Net Margin mean            0.008852
+                        VEC mean            0.007773
+                  EV/EBITDA mean            0.007748
+          P/S standard deviation            0.007727
+          IQS standard deviation            0.007466
+    EV/EBITDA standard deviation            0.007118
+          EVC standard deviation            0.007032
+          ROE standard deviation            0.006951
+                       P/CF mean            0.005879
+                        ROA mean            0.005811
+                        PLF mean            0.005504
+          PLF standard deviation            0.005501
+ Gross Margin standard deviation            0.005466
+                        P/E mean            0.004866
+         P/CF standard deviation            0.004484
+   Net Margin standard deviation            0.004049
+              FCF per Share mean            0.004013
+          P/B standard deviation            0.003976
+          VEC standard deviation            0.003856
+FCF per Share standard deviation            0.003723
+                       RAPS mean            0.003209
+                        ROE mean            0.003189
+                        PVS mean            0.003152
+                        EVC mean            0.002769
+         RAPS standard deviation            0.002490
+          PVS standard deviation            0.002424
+                        IQS mean            0.002244
+          P/E standard deviation            0.002208

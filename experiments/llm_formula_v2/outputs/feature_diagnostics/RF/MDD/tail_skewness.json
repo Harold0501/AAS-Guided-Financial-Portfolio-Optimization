@@ -1,0 +1,7 @@
+{
+  "selector": "RF",
+  "criterion": "MDD",
+  "feature": "tail_skewness",
+  "selection_mean": -0.2763777544155087,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

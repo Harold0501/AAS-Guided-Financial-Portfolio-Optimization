@@ -1,0 +1,10 @@
+{
+  "selector": "MLP",
+  "criterion": "AR",
+  "configuration": "Fin",
+  "seed": 442,
+  "features": 25,
+  "selection_mean": 0.2203566156871751,
+  "regret_mean": 0.16827708340414235,
+  "completed_at": "2026-08-12T21:15:02.876202+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "selector": "MLP",
+  "criterion": "MDD",
+  "configuration": "Fin+C",
+  "seed": 42,
+  "features": 35,
+  "selection_mean": -0.28859973284369467,
+  "regret_mean": 0.026517813671050324,
+  "completed_at": "2026-08-12T20:22:31.465025+00:00"
+}

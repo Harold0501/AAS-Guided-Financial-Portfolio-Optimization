@@ -1,0 +1,64 @@
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Quantifies the spread of risk across stocks in the portfolio by analyzing the distribution of individual stock weights and their pairwise correlations. Captures how effectively the portfolio mitigates unsystematic risk through diversification, with lower values indicating better diversification."
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Measures the extent to which a small subset of stocks drives portfolio performance. Identifies if returns are dominated by a few 'leader' stocks versus distributed across the portfolio, indicating potential vulnerability to leadership shifts."
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Tracks the rate at which the portfolio transitions between positive and negative momentum regimes. Captures behavioral patterns in collective stock movements, signaling potential instability or regime changes in market dynamics."
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Evaluates consistency in the portfolio's volatility clustering patterns over time. Identifies if volatility remains in prolonged high/low states or shifts unpredictably, revealing structural changes in market conditions."
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Quantifies how often the portfolio moves between distinct market states (e.g., bull, bear, sideways). Captures adaptability to changing environments and potential misalignment with market conditions."
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Measures how much portfolio risk is magnified by systemic market factors (beyond simple beta). Captures the compounding effect of correlated shocks across stocks during market stress."
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Assesses the speed at which the portfolio recovers from drawdowns relative to historical benchmarks. Captures behavioral resilience patterns in the collective stock response to adversity."
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Quantifies synchronized liquidity shocks across portfolio stocks. Identifies systemic liquidity risk where multiple stocks experience simultaneous trading halts or depth erosion."
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Measures alignment between portfolio price movements and macroeconomic sentiment indicators. Captures whether stocks move in unison with or independently of broader market sentiment signals."
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Evaluates how evenly risk is distributed across stocks, beyond simple diversification. Identifies portfolios where risk is concentrated in specific sectors or factors despite appearing diversified."
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Quantifies the portfolio's ability to maintain performance consistency across different market regimes (e.g., high volatility vs. low volatility). Captures structural flexibility in asset allocation."
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "Measures the proportion of portfolio price movements attributable to information-driven trading versus noise. Identifies if collective stock behavior is primarily driven by fundamental news or speculative activity."
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Evaluates the persistence of pairwise stock correlations over time. Captures structural changes in inter-stock relationships that may indicate shifting market dynamics or sector rotations."
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Quantifies the geographic or sectoral concentration of extreme risk events within the portfolio. Identifies if tail risks are diversified across multiple dimensions or concentrated in specific vulnerabilities."
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Measures the unpredictability of the portfolio's aggregate return distribution. Higher entropy indicates more random/chaotic behavior, while lower entropy suggests structured patterns in collective stock movements."
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+You are an expert financial data analyst specializing in reproducible feature engineering for portfolio-level stock-market analysis.
+
+You will be given a list of previously generated portfolio-level features.
+
+Your task is to REWRITE and REFINE the definitions of these features so that they become precise, operational, and reproducible, while keeping the SAME feature names and preserving their original semantic meaning.
+
+The goal is NOT to invent new features.
+The goal is to turn each existing feature into a deterministic feature extraction protocol that can later be formalized mathematically.
+
+You must behave like a careful financial feature refinement agent:
+1. First, identify the intended portfolio-level behavior behind each feature.
+2. Then, determine which allowed OHLCV-style fields can support that behavior.
+3. Then, rewrite the feature as a step-by-step procedure.
+4. Then, silently check that the procedure is reproducible, leakage-free, portfolio-level, and JSON-valid.
+
+Do all reasoning internally.
+Only output the final JSON object.
+
+--------------------------------------------------
+STRICT RULES
+--------------------------------------------------
+
+1. DO NOT change feature names.
+2. DO NOT add features.
+3. DO NOT remove features.
+4. DO NOT merge features.
+5. DO NOT reorder features.
+6. Keep the total number of features exactly the same.
+7. Preserve the original conceptual meaning of each feature as much as possible.
+
+8. You MUST ONLY use the following available data fields:
+   - date
+   - company
+   - open
+   - high
+   - low
+   - close
+   - volume
+   - div_adj_close
+
+9. You MUST NOT assume access to:
+   - market capitalization
+   - shares outstanding
+   - portfolio weights unless derived explicitly from the given data
+   - benchmark indices
+   - S&P 500
+   - sector labels
+   - industry labels
+   - bid-ask spread
+   - macroeconomic indicators
+   - news
+   - sentiment data
+   - analyst forecasts
+   - accounting fundamentals
+   - any external datasets
+
+10. Do NOT use future information.
+    A feature computed at date t must use only information available on or before date t.
+
+11. Every feature must remain PORTFOLIO-LEVEL.
+    The procedure may compute stock-level intermediate quantities, but the final value must describe the portfolio as a whole.
+
+--------------------------------------------------
+DEFAULT OPERATIONAL CONVENTIONS
+--------------------------------------------------
+
+Use these conventions unless the original feature explicitly requires something else:
+
+1. Sort the data by company and date.
+
+2. Use div_adj_close for return-based calculations.
+
+3. Use close, open, high, and low only when the feature concerns price level, intraday movement, gap, range, or drawdown.
+
+4. Use volume for trading activity.
+   If a liquidity-like proxy is needed, use close × volume as a deterministic dollar-volume proxy.
+
+5. Use equal-weight portfolio aggregation unless the feature explicitly defines a different weighting rule.
+
+6. If the original feature does not specify a time window:
+   - use 5 trading days for short-term behavior
+   - use 20 trading days for recent or standard behavior
+   - use 60 trading days for medium-term baseline behavior
+   Choose the window that most closely matches the original feature meaning.
+
+7. If the original feature refers to "market" or "benchmark" but no benchmark is available:
+   reinterpret it as the equal-weight average behavior of all companies in the given portfolio universe.
+
+8. If the original feature refers to unavailable external information:
+   reinterpret it conservatively using price, return, volume, range, drawdown, volatility, correlation, dispersion, or breadth.
+   Do not invent external data.
+
+9. If the original meaning cannot be fully supported by the allowed fields:
+   state the conservative reinterpretation inside the "description" and "procedure", while keeping the original feature name.
+
+--------------------------------------------------
+RECOMMENDED FEATURE OPERATIONS
+--------------------------------------------------
+
+Use these operations when they match the original feature meaning:
+
+1. Return:
+   daily percentage or log change in div_adj_close.
+
+2. Momentum:
+   cumulative return over a rolling window.
+
+3. Volatility:
+   rolling standard deviation of daily returns.
+
+4. Drawdown:
+   decline from rolling maximum price.
+
+5. Breadth:
+   fraction of stocks with positive return, rising volume, high volatility, or another condition.
+
+6. Dispersion:
+   cross-sectional standard deviation or interquartile range across stock-level quantities.
+
+7. Co-movement:
+   average pairwise rolling correlation across stock returns.
+
+8. Reversal:
+   comparison between recent return and prior-window return.
+
+9. Volume activity:
+   current or rolling volume relative to its own historical rolling average or median.
+
+10. Intraday range:
+    high-low range scaled by close or previous close.
+
+11. Gap:
+    difference between current open and previous close, scaled by previous close.
+
+12. Portfolio aggregation:
+    mean, standard deviation, fraction, average pairwise correlation, or percentile across companies.
+
+--------------------------------------------------
+WHAT YOU MUST PRODUCE FOR EACH FEATURE
+--------------------------------------------------
+
+Each feature definition MUST contain ALL of the following fields:
+
+- "name":
+  Original feature name exactly as provided.
+
+- "description":
+  A concise explanation of what portfolio-level behavior this feature measures.
+  If the original concept is unavailable from the allowed fields, mention the conservative proxy being used.
+
+- "inputs":
+  Explicitly list which data fields are used.
+  Every input must come from the allowed list only.
+
+- "procedure":
+  A step-by-step, deterministic, implementation-ready procedure.
+  The procedure MUST:
+  - specify data sorting or grouping when needed
+  - define all time windows
+  - specify stock-level intermediate calculations
+  - specify portfolio-level aggregation
+  - specify how missing or insufficient history is handled
+  - specify the final scalar output
+
+- "output_range":
+  The expected numerical range, such as:
+  - "[0, 1]"
+  - "[-1, 1]"
+  - "[0, +infinity)"
+  - "unbounded"
+  - "approximately unbounded after standardization"
+
+- "interpretation":
+  Explain what HIGH and LOW values mean in concrete portfolio-analysis terms.
+
+--------------------------------------------------
+STYLE REQUIREMENTS
+--------------------------------------------------
+
+1. Be concrete and operational.
+2. Do NOT provide mathematical formulas.
+3. Do NOT write vague conceptual explanations.
+4. Do NOT use phrases such as:
+   - "captures broad sentiment"
+   - "reflects market confidence"
+   - "indicates generally"
+   - "measures in a broad sense"
+   unless they are immediately translated into price/volume operations.
+5. Use deterministic language:
+   - "Calculate..."
+   - "Group by..."
+   - "For each stock..."
+   - "Over the most recent 20 trading days..."
+   - "Take the equal-weight mean across all valid stocks..."
+6. Make the procedure detailed enough that two independent implementations would produce similar values.
+
+--------------------------------------------------
+INTERNAL VALIDATION CHECKLIST
+--------------------------------------------------
+
+Before producing the final answer, silently check each feature:
+
+1. Is the original feature name unchanged?
+2. Is the feature count unchanged?
+3. Are only allowed data fields used?
+4. Is the procedure deterministic?
+5. Are all windows explicit?
+6. Is the final value portfolio-level?
+7. Is there no future information leakage?
+8. Is unavailable information conservatively reinterpreted?
+9. Does the output_range match the procedure?
+10. Is the final answer valid JSON only?
+
+If any feature fails a check, revise it silently before output.
+
+--------------------------------------------------
+OUTPUT FORMAT
+--------------------------------------------------
+
+Return ONLY a valid JSON object in the following format:
+
+{
+  "features": [
+    {
+      "name": "Feature Name",
+      "description": "...",
+      "inputs": ["field1", "field2", "..."],
+      "procedure": [
+        "Step 1: ...",
+        "Step 2: ...",
+        "Step 3: ..."
+      ],
+      "output_range": "...",
+      "interpretation": "..."
+    }
+  ]
+}
+
+JSON rules:
+- Use double quotes for all keys and string values.
+- Use arrays for "inputs" and "procedure".
+- Do not use trailing commas.
+- Do not include comments.
+- Do not include markdown.
+- Do not include explanations outside the JSON.
+- Do not output NaN, Infinity, or undefined values.
+
+Now rewrite and refine the given portfolio-level features.
+
+Previously generated features:
+{{PREVIOUS_FEATURES}}

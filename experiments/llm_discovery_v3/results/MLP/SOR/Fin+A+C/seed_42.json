@@ -1,0 +1,10 @@
+{
+  "selector": "MLP",
+  "criterion": "SOR",
+  "configuration": "Fin+A+C",
+  "seed": 42,
+  "features": 52,
+  "selection_mean": 1.1974365473375799,
+  "regret_mean": 0.4245858398872424,
+  "completed_at": "2026-08-12T20:33:17.177387+00:00"
+}

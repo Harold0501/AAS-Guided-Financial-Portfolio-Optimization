@@ -1,0 +1,161 @@
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Measures cross-sectional dispersion of stock returns as a proxy for diversification effectiveness.",
+      "formula": "mean_{t ∈ [T-59, T]}(std_i(r_{i,t}))",
+      "variables": {
+        "r_{i,t}": "daily log return of stock i on date t calculated as log(div_adj_close_{i,t}/div_adj_close_{i,t-1})",
+        "std_i(r_{i,t})": "cross-sectional standard deviation of daily returns across all valid stocks in the portfolio universe at date t"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate uneven return distribution (lower diversification), low values indicate uniform returns (better diversification)"
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Measures concentration of portfolio performance in top-performing stocks using relative return dominance.",
+      "formula": "mean_{t ∈ [T-19, T]}(Top_10%_R_t / R_t)",
+      "variables": {
+        "R_t": "equal-weight portfolio return on date t calculated as mean_i(r_{i,t})",
+        "Top_10%_R_t": "average daily return of top 10% stocks by r_{i,t} on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate performance is driven by a small subset of stocks, low values indicate broad-based performance"
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Counts transitions between positive and negative momentum regimes in portfolio returns.",
+      "formula": "count_{t ∈ [T-59, T]}(sign(R_rolling_5d_t) != sign(R_rolling_5d_{t-1}))",
+      "variables": {
+        "R_rolling_5d_t": "equal-weight 5-day rolling return of the portfolio ending on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate frequent momentum regime shifts, low values indicate stable momentum direction"
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Measures consistency in portfolio volatility patterns over time.",
+      "formula": "std_{t ∈ [T-59, T]}(sigma_20d_t)",
+      "variables": {
+        "sigma_20d_t": "equal-weight 20-day rolling standard deviation of daily returns ending on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate unstable volatility patterns, low values indicate consistent volatility clustering"
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Counts transitions between distinct market states based on return thresholds.",
+      "formula": "count_{t ∈ [T-59, T]}(R_rolling_20d_t > 1% ∧ R_rolling_20d_{t-1} ≤ 1% ∨ R_rolling_20d_t < -1% ∧ R_rolling_20d_{t-1} ≥ -1%)",
+      "variables": {
+        "R_rolling_20d_t": "equal-weight 20-day rolling return of the portfolio ending on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate frequent regime changes, low values indicate stable market conditions"
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Measures correlation between portfolio returns and equal-weighted benchmark proxy.",
+      "formula": "corr(R_t, B_t) over t ∈ [T-59, T]",
+      "variables": {
+        "R_t": "equal-weight portfolio return on date t calculated as mean_i(r_{i,t})",
+        "B_t": "equal-weight average return of all companies in the portfolio universe on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High absolute values indicate strong systematic risk alignment with market-wide movements"
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Measures average time to recover from drawdowns in portfolio value.",
+      "formula": "mean_{i,t ∈ [T-59, T]}(D_i,t)",
+      "variables": {
+        "D_i,t": "number of days from peak to recovery for stock i on date t"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate faster recovery from losses, higher values indicate prolonged drawdowns"
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Measures synchronization of liquidity shocks across portfolio stocks.",
+      "formula": "mean_{t ∈ [T-59, T]}(corr(V_sigma_20d,i))",
+      "variables": {
+        "V_sigma_20d,i": "20-day rolling standard deviation of volume for stock i ending on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High positive values indicate synchronized liquidity risk, low values indicate independent liquidity patterns"
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Measures alignment between portfolio returns and equal-weighted benchmark proxy.",
+      "formula": "corr(R_t, B_t) over t ∈ [T-59, T]",
+      "variables": {
+        "R_t": "equal-weight portfolio return on date t calculated as mean_i(r_{i,t})",
+        "B_t": "equal-weight average return of all companies in the portfolio universe on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High absolute values indicate strong alignment with market-wide sentiment patterns"
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Measures dispersion of individual stock volatility contributions to portfolio risk.",
+      "formula": "mean_{t ∈ [T-59, T]}(std_i(sigma_i,t))",
+      "variables": {
+        "sigma_i,t": "20-day rolling standard deviation of daily returns for stock i ending on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate uneven risk contributions (lower uniformity), low values indicate balanced risk distribution"
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Measures performance consistency across different volatility regimes.",
+      "formula": "mean_{t ∈ [T-59, T]}(R_high_t / R_low_t)",
+      "variables": {
+        "R_high_t": "portfolio return during periods where 20-day rolling sigma > 1%",
+        "R_low_t": "portfolio return during periods where 20-day rolling sigma ≤ 1%"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate better performance in volatile conditions, low values indicate poor adaptability"
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "Measures correlation between price changes and volume spikes as information proxy.",
+      "formula": "corr(|r_{i,t}|, V_sigma_5d,i) over t ∈ [T-59, T]",
+      "variables": {
+        "r_{i,t}": "daily log return of stock i on date t calculated as log(div_adj_close_{i,t}/div_adj_close_{i,t-1})",
+        "V_sigma_5d,i": "5-day rolling standard deviation of volume for stock i ending on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High positive values indicate strong information-driven price movements, low values indicate noise dominance"
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Measures persistence of pairwise stock correlations over time.",
+      "formula": "std_{t ∈ [T-59, T]}(corr_ij_t)",
+      "variables": {
+        "corr_ij_t": "20-day rolling correlation between daily returns of stock i and stock j ending on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate unstable correlations, low values indicate persistent inter-stock relationships"
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Measures dispersion of extreme return events across portfolio stocks.",
+      "formula": "mean_{t ∈ [T-59, T]}(std_i(r_{i,t} | R_quantile_1pct_t))",
+      "variables": {
+        "R_quantile_1pct_t": "portfolio-wide 1% quantile return on date t",
+        "r_{i,t}": "daily log return of stock i on date t calculated as log(div_adj_close_{i,t}/div_adj_close_{i,t-1})"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate concentrated tail risk exposure, low values indicate diversified extreme risks"
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Measures unpredictability in portfolio return distribution using information entropy.",
+      "formula": "-∑_{r} p_r * log(p_r)",
+      "variables": {
+        "p_r": "probability distribution of equal-weight average returns over the most recent 60 trading days"
+      },
+      "normalization": "None",
+      "interpretation": "High values indicate chaotic/unordered return patterns, low values indicate structured behavior"
+    }
+  ]
+}

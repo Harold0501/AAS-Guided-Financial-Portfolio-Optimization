@@ -1,0 +1,28 @@
+{
+  "instances": 762,
+  "features": 20,
+  "finite": true,
+  "missing": 0,
+  "unique": {
+    "B_volume_return_correlation": 762,
+    "B_cross_sectional_return_skewness": 722,
+    "B_negative_return_persistence": 752,
+    "B_volume_volatility_ratio": 748,
+    "B_daily_price_range": 762,
+    "B_return_entropy": 762,
+    "B_tail_return_co_occurrence": 542,
+    "B_volatility_concentration": 762,
+    "B_return_serial_correlation": 741,
+    "B_missingness_volatility_correlation": 664,
+    "C_correlation_stability": 762,
+    "C_cross_sectional_return_kurtosis": 712,
+    "C_return_volume_joint_skewness": 762,
+    "C_return_volume_joint_kurtosis": 762,
+    "C_extreme_return_participation": 46,
+    "C_volume_adjusted_dispersion": 750,
+    "C_skew_volatility_ratio": 738,
+    "C_return_mad_ratio": 742,
+    "C_correlation_duration": 762,
+    "C_cross_asset_return_asymmetry": 762
+  }
+}

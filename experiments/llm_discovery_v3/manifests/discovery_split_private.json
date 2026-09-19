@@ -1,0 +1,31 @@
+{
+  "discovery_development_assets": [
+    "asset_15",
+    "asset_16",
+    "asset_18",
+    "asset_19",
+    "asset_21",
+    "asset_22",
+    "asset_23",
+    "asset_24",
+    "asset_27",
+    "asset_28",
+    "asset_29",
+    "asset_30",
+    "asset_32",
+    "asset_33",
+    "asset_34",
+    "asset_35",
+    "asset_37",
+    "asset_38"
+  ],
+  "discovery_test_assets": [
+    "asset_14",
+    "asset_20",
+    "asset_25",
+    "asset_31",
+    "asset_36"
+  ],
+  "development_instances": 615,
+  "test_instances": 147
+}

@@ -1,0 +1,8 @@
+{
+  "file": "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main/merge_csv.py",
+  "bug_present": true,
+  "description": "Fin+GPT+formula summary reads gpt_detail_path instead of gpt_formula_path.",
+  "source_line": 38,
+  "source_sha256": "7e102f0dd87a278782600098ee1793c9150815fd347c8fd6f6d61c7365bf448b",
+  "source_modified": false
+}

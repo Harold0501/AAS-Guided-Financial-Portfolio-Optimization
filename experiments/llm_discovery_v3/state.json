@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "completed_stages": [
+    "analysis",
+    "bootstrap",
+    "compute_features",
+    "factorial_screen",
+    "freeze_features",
+    "generate_B",
+    "generate_C",
+    "integrity_audit",
+    "multiseed_confirmation"
+  ],
+  "next_stage": "paper_analysis",
+  "api_status": "verified",
+  "notes": []
+}

@@ -1,0 +1,50 @@
+Selected Max Average Value: 0.8016085061526405
+Shapley Importance
+                         Feature  Shapley_Importance
+                        P/S mean            0.099798
+                         max_var            0.057073
+                        SPS mean            0.053451
+               Gross Margin mean            0.041267
+                        FCF mean            0.037888
+                        P/B mean            0.025044
+                      median_var            0.023240
+          IQS standard deviation            0.023238
+                          Period            0.022587
+                         std_var            0.022448
+                        mean_var            0.020969
+          SPS standard deviation            0.020616
+                        PLF mean            0.020512
+          P/S standard deviation            0.017055
+ Gross Margin standard deviation            0.016183
+    EV/EBITDA standard deviation            0.016069
+          ROA standard deviation            0.015537
+FCF per Share standard deviation            0.014638
+                 Net Margin mean            0.014459
+                  EV/EBITDA mean            0.014291
+          ROE standard deviation            0.014246
+                         std_avg            0.014163
+         P/CF standard deviation            0.013521
+                        mean_avg            0.013295
+                       P/CF mean            0.013280
+                        ROA mean            0.012574
+                         min_avg            0.012438
+                        VEC mean            0.011431
+                        ROE mean            0.011029
+          PLF standard deviation            0.010881
+              FCF per Share mean            0.010829
+          FCF standard deviation            0.010824
+                        PVS mean            0.010714
+                       RAPS mean            0.010684
+          P/B standard deviation            0.010645
+                        P/E mean            0.009784
+                         max_avg            0.009469
+                      median_avg            0.009061
+          EVC standard deviation            0.008846
+                        EVC mean            0.007783
+                         min_var            0.006811
+          VEC standard deviation            0.006390
+          P/E standard deviation            0.005700
+                        IQS mean            0.005310
+   Net Margin standard deviation            0.004815
+          PVS standard deviation            0.003596
+         RAPS standard deviation            0.003551

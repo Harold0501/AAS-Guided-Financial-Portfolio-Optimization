@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "MDD",
+  "feature": "volatility_sync",
+  "selection_mean": -0.29458141796292414,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

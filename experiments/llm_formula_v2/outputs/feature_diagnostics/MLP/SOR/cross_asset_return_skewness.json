@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "SOR",
+  "feature": "cross_asset_return_skewness",
+  "selection_mean": 1.0964916196588395,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

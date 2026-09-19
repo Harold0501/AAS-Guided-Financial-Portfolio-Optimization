@@ -1,0 +1,15 @@
+{
+  "selector": "RF",
+  "criterion": "CR",
+  "configuration": "Fin+FormulaV2All",
+  "n_instances": 762,
+  "n_features": 42,
+  "folds": 10,
+  "seed": 42,
+  "protocol": "exact repository shuffled KFold; one scalar model per target/fold",
+  "selection_mean": 3.72849093103309,
+  "regret_mean": 0.19957999095987744,
+  "sbs_mean": 3.2254270028366214,
+  "vbs_mean": 3.9280709219929673,
+  "completed_at": "2026-08-11T18:16:33.574910+00:00"
+}

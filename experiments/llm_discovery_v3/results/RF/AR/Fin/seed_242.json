@@ -1,0 +1,10 @@
+{
+  "selector": "RF",
+  "criterion": "AR",
+  "configuration": "Fin",
+  "seed": 242,
+  "features": 25,
+  "selection_mean": 0.23892358052035773,
+  "regret_mean": 0.14971011857095964,
+  "completed_at": "2026-08-12T19:28:45.590732+00:00"
+}

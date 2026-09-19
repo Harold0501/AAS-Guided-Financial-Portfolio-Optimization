@@ -1,0 +1,594 @@
+{
+  "arm": "C",
+  "features": [
+    {
+      "feature_id": "cross_sectional_return_skewness",
+      "name": "Cross-Sectional Return Skewness",
+      "discovered_gap": "The existing basis captures cross-sectional return dispersion but not the asymmetry in the distribution of returns across assets.",
+      "financial_interpretation": "A positive skewness indicates that the portfolio has more frequent small negative returns and fewer large positive returns, while a negative skewness indicates the opposite. This can inform risk management and help understand the tail behavior of the portfolio.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Handle missing values by forward-filling or dropping them.",
+        "Normalize returns by dividing by the volume to account for trading activity."
+      ],
+      "mathematical_definition": "For each time point, compute the skewness of the returns across all assets in the portfolio. The skewness is calculated as the third standardized moment of the return distribution: skewness = E[(R - \u03bc)^3] / \u03c3^3, where R is the return, \u03bc is the mean return, and \u03c3 is the standard deviation of returns.",
+      "aggregation": "Compute the average skewness across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 30 observations to ensure reliable skewness estimation.",
+      "missing_and_zero_policy": "Assets with missing returns are excluded from the calculation at that time point. If all assets are missing, the skewness for that time point is set to zero.",
+      "expected_range": "Typically between -3 and 3, with values closer to zero indicating a more symmetric distribution.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ]
+        },
+        "expected": 0.0
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_skewness(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    skewness_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        mean_return = mean(returns)\n        std_return = std(returns)\n        skewness = (1 / len(returns)) * sum((r - mean_return)^3 / std_return^3 for r in returns)\n        skewness_values.append(skewness)\n    return mean(skewness_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_return_kurtosis",
+      "name": "Cross-Sectional Return Kurtosis",
+      "discovered_gap": "The existing basis includes measures of return dispersion but not the 'tailedness' or the presence of extreme values in the return distribution.",
+      "financial_interpretation": "High kurtosis (leptokurtic) indicates a higher probability of extreme returns (both positive and negative), while low kurtosis (platykurtic) indicates lighter tails. This helps in understanding the risk of rare events in the portfolio.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Handle missing values by forward-filling or dropping them.",
+        "Normalize returns by dividing by the volume to account for trading activity."
+      ],
+      "mathematical_definition": "For each time point, compute the kurtosis of the returns across all assets in the portfolio. The kurtosis is calculated as the fourth standardized moment of the return distribution: kurtosis = E[(R - \u03bc)^4] / \u03c3^4 - 3, where R is the return, \u03bc is the mean return, and \u03c3 is the standard deviation of returns.",
+      "aggregation": "Compute the average kurtosis across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 50 observations to ensure reliable kurtosis estimation.",
+      "missing_and_zero_policy": "Assets with missing returns are excluded from the calculation at that time point. If all assets are missing, the kurtosis for that time point is set to zero.",
+      "expected_range": "Typically between -3 and 10, with values closer to 0 indicating a normal distribution.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ]
+        },
+        "expected": -1.2
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_kurtosis(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    kurtosis_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        mean_return = mean(returns)\n        std_return = std(returns)\n        kurtosis = (1 / len(returns)) * sum((r - mean_return)^4 / std_return^4 for r in returns) - 3\n        kurtosis_values.append(kurtosis)\n    return mean(kurtosis_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_volume_skewness",
+      "name": "Cross-Sectional Volume Skewness",
+      "discovered_gap": "The existing basis includes volume volatility but not the asymmetry in the distribution of trading volumes across assets.",
+      "financial_interpretation": "Positive skewness in volume indicates that most assets have low trading volumes with a few having very high volumes, which might suggest liquidity issues or market attention. Negative skewness indicates the opposite pattern.",
+      "inputs": [
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the skewness of the trading volumes across all assets in the portfolio. The skewness is calculated as the third standardized moment of the volume distribution: skewness = E[(V - \u03bc)^3] / \u03c3^3, where V is the volume, \u03bc is the mean volume, and \u03c3 is the standard deviation of volumes.",
+      "aggregation": "Compute the average skewness across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 30 observations to ensure reliable skewness estimation.",
+      "missing_and_zero_policy": "Assets with missing volumes are excluded from the calculation at that time point. If all assets are missing, the skewness for that time point is set to zero.",
+      "expected_range": "Typically between -3 and 3, with values closer to zero indicating a more symmetric distribution.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": 0.0
+      },
+      "reconstruction_pseudocode": "function cross_sectional_volume_skewness(portfolio):\n    daily_volumes = portfolio.volume\n    daily_volumes = handle_missing_values(daily_volumes)\n    skewness_values = []\n    for each time_point in daily_volumes:\n        volumes = daily_volumes[time_point]\n        mean_volume = mean(volumes)\n        std_volume = std(volumes)\n        skewness = (1 / len(volumes)) * sum((v - mean_volume)^3 / std_volume^3 for v in volumes)\n        skewness_values.append(skewness)\n    return mean(skewness_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_volume_kurtosis",
+      "name": "Cross-Sectional Volume Kurtosis",
+      "discovered_gap": "The existing basis includes volume volatility but not the 'tailedness' or the presence of extreme values in the volume distribution.",
+      "financial_interpretation": "High kurtosis in volume indicates a higher probability of extreme trading volumes (both high and low), while low kurtosis indicates lighter tails. This helps in understanding the liquidity risk and market attention in the portfolio.",
+      "inputs": [
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the kurtosis of the trading volumes across all assets in the portfolio. The kurtosis is calculated as the fourth standardized moment of the volume distribution: kurtosis = E[(V - \u03bc)^4] / \u03c3^4 - 3, where V is the volume, \u03bc is the mean volume, and \u03c3 is the standard deviation of volumes.",
+      "aggregation": "Compute the average kurtosis across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 50 observations to ensure reliable kurtosis estimation.",
+      "missing_and_zero_policy": "Assets with missing volumes are excluded from the calculation at that time point. If all assets are missing, the kurtosis for that time point is set to zero.",
+      "expected_range": "Typically between -3 and 10, with values closer to 0 indicating a normal distribution.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": -1.2
+      },
+      "reconstruction_pseudocode": "function cross_sectional_volume_kurtosis(portfolio):\n    daily_volumes = portfolio.volume\n    daily_volumes = handle_missing_values(daily_volumes)\n    kurtosis_values = []\n    for each time_point in daily_volumes:\n        volumes = daily_volumes[time_point]\n        mean_volume = mean(volumes)\n        std_volume = std(volumes)\n        kurtosis = (1 / len(volumes)) * sum((v - mean_volume)^4 / std_volume^4 for v in volumes) - 3\n        kurtosis_values.append(kurtosis)\n    return mean(kurtosis_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_return_volume_correlation",
+      "name": "Cross-Sectional Return-Volume Correlation",
+      "discovered_gap": "The existing basis includes return dispersion and volume volatility but not the relationship between returns and trading volumes across assets.",
+      "financial_interpretation": "A positive correlation indicates that assets with higher returns tend to have higher trading volumes, which might suggest market attention or liquidity. A negative correlation suggests the opposite pattern.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the Pearson correlation coefficient between the returns and the volume changes across all assets in the portfolio. The correlation is calculated as: correlation = cov(R, V) / (\u03c3_R * \u03c3_V), where R is the return, V is the volume change, cov is the covariance, and \u03c3_R and \u03c3_V are the standard deviations of returns and volumes, respectively.",
+      "aggregation": "Compute the average correlation across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 30 observations to ensure reliable correlation estimation.",
+      "missing_and_zero_policy": "Assets with missing returns or volumes are excluded from the calculation at that time point. If all assets are missing, the correlation for that time point is set to zero.",
+      "expected_range": "Typically between -1 and 1, with values closer to 1 indicating a strong positive correlation and values closer to -1 indicating a strong negative correlation.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ],
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": 0.0
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_volume_correlation(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_volumes = calculate_daily_volume_changes(portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    daily_volumes = handle_missing_values(daily_volumes)\n    correlation_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        volumes = daily_volumes[time_point]\n        mean_return = mean(returns)\n        mean_volume = mean(volumes)\n        std_return = std(returns)\n        std_volume = std(volumes)\n        covariance = (1 / len(returns)) * sum((r - mean_return) * (v - mean_volume) for r, v in zip(returns, volumes))\n        correlation = covariance / (std_return * std_volume)\n        correlation_values.append(correlation)\n    return mean(correlation_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_return_volume_skewness",
+      "name": "Cross-Sectional Return-Volume Skewness",
+      "discovered_gap": "The existing basis includes measures of return and volume skewness but not the combined skewness of the joint distribution of returns and volumes.",
+      "financial_interpretation": "This feature captures the asymmetry in the joint distribution of returns and volumes. A positive skewness indicates that the portfolio has more frequent small negative return-volume combinations and fewer large positive return-volume combinations, while a negative skewness indicates the opposite. This can inform risk management and help understand the tail behavior in the relationship between returns and volumes.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the skewness of the product of returns and volume changes across all assets in the portfolio. The skewness is calculated as the third standardized moment of the product distribution: skewness = E[(RV - \u03bc)^3] / \u03c3^3, where RV is the product of return and volume change, \u03bc is the mean of the product, and \u03c3 is the standard deviation of the product.",
+      "aggregation": "Compute the average skewness across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 30 observations to ensure reliable skewness estimation.",
+      "missing_and_zero_policy": "Assets with missing returns or volumes are excluded from the calculation at that time point. If all assets are missing, the skewness for that time point is set to zero.",
+      "expected_range": "Typically between -3 and 3, with values closer to zero indicating a more symmetric distribution.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ],
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": 0.0
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_volume_skewness(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_volumes = calculate_daily_volume_changes(portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    daily_volumes = handle_missing_values(daily_volumes)\n    skewness_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        volumes = daily_volumes[time_point]\n        product_rv = [r * v for r, v in zip(returns, volumes)]\n        mean_rv = mean(product_rv)\n        std_rv = std(product_rv)\n        skewness = (1 / len(product_rv)) * sum((rv - mean_rv)^3 / std_rv^3 for rv in product_rv)\n        skewness_values.append(skewness)\n    return mean(skewness_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_return_volume_kurtosis",
+      "name": "Cross-Sectional Return-Volume Kurtosis",
+      "discovered_gap": "The existing basis includes measures of return and volume kurtosis but not the combined kurtosis of the joint distribution of returns and volumes.",
+      "financial_interpretation": "This feature captures the 'tailedness' of the joint distribution of returns and volumes. High kurtosis indicates a higher probability of extreme return-volume combinations, while low kurtosis indicates lighter tails. This helps in understanding the risk of rare events in the relationship between returns and volumes.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the kurtosis of the product of returns and volume changes across all assets in the portfolio. The kurtosis is calculated as the fourth standardized moment of the product distribution: kurtosis = E[(RV - \u03bc)^4] / \u03c3^4 - 3, where RV is the product of return and volume change, \u03bc is the mean of the product, and \u03c3 is the standard deviation of the product.",
+      "aggregation": "Compute the average kurtosis across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 50 observations to ensure reliable kurtosis estimation.",
+      "missing_and_zero_policy": "Assets with missing returns or volumes are excluded from the calculation at that time point. If all assets are missing, the kurtosis for that time point is set to zero.",
+      "expected_range": "Typically between -3 and 10, with values closer to 0 indicating a normal distribution.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ],
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": -1.2
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_volume_kurtosis(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_volumes = calculate_daily_volume_changes(portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    daily_volumes = handle_missing_values(daily_volumes)\n    kurtosis_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        volumes = daily_volumes[time_point]\n        product_rv = [r * v for r, v in zip(returns, volumes)]\n        mean_rv = mean(product_rv)\n        std_rv = std(product_rv)\n        kurtosis = (1 / len(product_rv)) * sum((rv - mean_rv)^4 / std_rv^4 for rv in product_rv) - 3\n        kurtosis_values.append(kurtosis)\n    return mean(kurtosis_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_return_volume_skewness_ratio",
+      "name": "Cross-Sectional Return-Volume Skewness Ratio",
+      "discovered_gap": "The existing basis includes measures of return and volume skewness but not the ratio of these skewness values, which can provide insights into the relative asymmetry of returns and volumes.",
+      "financial_interpretation": "This feature captures the ratio of the skewness of returns to the skewness of volumes. A higher ratio indicates that returns are more asymmetric compared to volumes, which might suggest different underlying factors affecting returns and volumes. This can inform risk management and help understand the dynamics between returns and volumes.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the skewness of the returns and the skewness of the volumes across all assets in the portfolio. The skewness ratio is calculated as the skewness of returns divided by the skewness of volumes.",
+      "aggregation": "Compute the average skewness ratio across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 30 observations to ensure reliable skewness estimation.",
+      "missing_and_zero_policy": "Assets with missing returns or volumes are excluded from the calculation at that time point. If all assets are missing, the skewness ratio for that time point is set to zero.",
+      "expected_range": "Typically between -10 and 10, with values closer to 1 indicating similar skewness in returns and volumes.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ],
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": 0.0
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_volume_skewness_ratio(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_volumes = calculate_daily_volume_changes(portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    daily_volumes = handle_missing_values(daily_volumes)\n    skewness_ratio_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        volumes = daily_volumes[time_point]\n        mean_return = mean(returns)\n        std_return = std(returns)\n        skewness_return = (1 / len(returns)) * sum((r - mean_return)^3 / std_return^3 for r in returns)\n        mean_volume = mean(volumes)\n        std_volume = std(volumes)\n        skewness_volume = (1 / len(volumes)) * sum((v - mean_volume)^3 / std_volume^3 for v in volumes)\n        if skewness_volume != 0:\n            skewness_ratio = skewness_return / skewness_volume\n        else:\n            skewness_ratio = 0\n        skewness_ratio_values.append(skewness_ratio)\n    return mean(skewness_ratio_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_return_volume_kurtosis_ratio",
+      "name": "Cross-Sectional Return-Volume Kurtosis Ratio",
+      "discovered_gap": "The existing basis includes measures of return and volume kurtosis but not the ratio of these kurtosis values, which can provide insights into the relative 'tailedness' of returns and volumes.",
+      "financial_interpretation": "This feature captures the ratio of the kurtosis of returns to the kurtosis of volumes. A higher ratio indicates that returns have heavier tails compared to volumes, which might suggest different underlying factors affecting returns and volumes. This can inform risk management and help understand the dynamics between returns and volumes.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the kurtosis of the returns and the kurtosis of the volumes across all assets in the portfolio. The kurtosis ratio is calculated as the kurtosis of returns divided by the kurtosis of volumes.",
+      "aggregation": "Compute the average kurtosis ratio across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 50 observations to ensure reliable kurtosis estimation.",
+      "missing_and_zero_policy": "Assets with missing returns or volumes are excluded from the calculation at that time point. If all assets are missing, the kurtosis ratio for that time point is set to zero.",
+      "expected_range": "Typically between -10 and 10, with values closer to 1 indicating similar kurtosis in returns and volumes.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ],
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": -1.2
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_volume_kurtosis_ratio(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_volumes = calculate_daily_volume_changes(portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    daily_volumes = handle_missing_values(daily_volumes)\n    kurtosis_ratio_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        volumes = daily_volumes[time_point]\n        mean_return = mean(returns)\n        std_return = std(returns)\n        kurtosis_return = (1 / len(returns)) * sum((r - mean_return)^4 / std_return^4 for r in returns) - 3\n        mean_volume = mean(volumes)\n        std_volume = std(volumes)\n        kurtosis_volume = (1 / len(volumes)) * sum((v - mean_volume)^4 / std_volume^4 for v in volumes) - 3\n        if kurtosis_volume != 0:\n            kurtosis_ratio = kurtosis_return / kurtosis_volume\n        else:\n            kurtosis_ratio = 0\n        kurtosis_ratio_values.append(kurtosis_ratio)\n    return mean(kurtosis_ratio_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    },
+    {
+      "feature_id": "cross_sectional_return_volume_skewness_kurtosis_product",
+      "name": "Cross-Sectional Return-Volume Skewness-Kurtosis Product",
+      "discovered_gap": "The existing basis includes measures of return and volume skewness and kurtosis but not the product of these higher-order moments, which can provide insights into the combined effect of asymmetry and tailedness in the joint distribution of returns and volumes.",
+      "financial_interpretation": "This feature captures the product of the skewness and kurtosis of the joint distribution of returns and volumes. A higher product indicates a stronger combined effect of asymmetry and tailedness, which might suggest different underlying factors affecting returns and volumes. This can inform risk management and help understand the dynamics between returns and volumes.",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Calculate daily returns for each asset using close prices.",
+        "Calculate daily volume changes for each asset.",
+        "Handle missing values by forward-filling or dropping them."
+      ],
+      "mathematical_definition": "For each time point, compute the skewness and kurtosis of the product of returns and volume changes across all assets in the portfolio. The product is calculated as the product of the skewness and kurtosis values.",
+      "aggregation": "Compute the average product of skewness and kurtosis across all time points in the portfolio's history.",
+      "parameters": {
+        "name": "window_size",
+        "value": 21
+      },
+      "minimum_sample": "At least 50 observations to ensure reliable estimation of both skewness and kurtosis.",
+      "missing_and_zero_policy": "Assets with missing returns or volumes are excluded from the calculation at that time point. If all assets are missing, the product for that time point is set to zero.",
+      "expected_range": "Typically between -100 and 100, with values closer to zero indicating a balanced combination of skewness and kurtosis.",
+      "invariances": [
+        "Invariant to the order of assets.",
+        "Invariant to the order of time points."
+      ],
+      "synthetic_test": {
+        "input": {
+          "observations": 100,
+          "assets": 10,
+          "returns": [
+            0.01,
+            -0.01,
+            0.02,
+            -0.02,
+            0.03,
+            -0.03,
+            0.04,
+            -0.04,
+            0.05,
+            -0.05
+          ],
+          "volumes": [
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+            6000,
+            7000,
+            8000,
+            9000,
+            10000
+          ]
+        },
+        "expected": 0.0
+      },
+      "reconstruction_pseudocode": "function cross_sectional_return_volume_skewness_kurtosis_product(portfolio):\n    daily_returns = calculate_daily_returns(portfolio.close, portfolio.volume)\n    daily_volumes = calculate_daily_volume_changes(portfolio.volume)\n    daily_returns = handle_missing_values(daily_returns)\n    daily_volumes = handle_missing_values(daily_volumes)\n    product_values = []\n    for each time_point in daily_returns:\n        returns = daily_returns[time_point]\n        volumes = daily_volumes[time_point]\n        product_rv = [r * v for r, v in zip(returns, volumes)]\n        mean_rv = mean(product_rv)\n        std_rv = std(product_rv)\n        skewness = (1 / len(product_rv)) * sum((rv - mean_rv)^3 / std_rv^3 for rv in product_rv)\n        kurtosis = (1 / len(product_rv)) * sum((rv - mean_rv)^4 / std_rv^4 for rv in product_rv) - 3\n        product = skewness * kurtosis\n        product_values.append(product)\n    return mean(product_values)",
+      "leakage_argument": "The feature is computed using only historical data up to the decision date and does not incorporate future information or outcomes."
+    }
+  ],
+  "_provenance": {
+    "requested_model": "qwen/qwen3-32b",
+    "returned_model": "qwen/qwen3-32b",
+    "response_id": "gen-1786561668-aYy5LTQcmJizhGrnVTWt",
+    "created": 1786561668,
+    "usage": {
+      "prompt_tokens": 5109,
+      "completion_tokens": 7607,
+      "total_tokens": 12716,
+      "cost": 0.002793,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 5104,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.002793,
+        "upstream_inference_prompt_cost": 0.0005109,
+        "upstream_inference_completions_cost": 0.0022821
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "seed": 3104,
+    "generated_at": "2026-08-12T19:11:49.355195+00:00"
+  }
+}

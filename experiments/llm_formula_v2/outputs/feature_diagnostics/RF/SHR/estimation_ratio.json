@@ -1,0 +1,7 @@
+{
+  "selector": "RF",
+  "criterion": "SHR",
+  "feature": "estimation_ratio",
+  "selection_mean": 0.7090069524230888,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

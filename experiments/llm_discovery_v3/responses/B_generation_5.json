@@ -1,0 +1,524 @@
+{
+  "arm": "B",
+  "features": [
+    {
+      "feature_id": "cross_sectional_return_skewness",
+      "name": "Cross-sectional Return Skewness",
+      "discovered_gap": "Standard metrics focus on dispersion and correlation but ignore higher-order return distribution asymmetry across assets.",
+      "financial_interpretation": "Measures asymmetry in asset return distributions across the portfolio, indicating systemic risk or opportunity concentration.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close"
+      ],
+      "preprocessing": [
+        "Compute daily log returns using div_adj_close",
+        "Align returns across assets by date",
+        "Remove missing returns using forward fill"
+      ],
+      "mathematical_definition": "For each date, calculate asset return skewness as (1/(n-2)) * \u03a3[(r_i - r\u0304)^3 / \u03c3^3] where r\u0304 is median return and \u03c3 is median volatility. Aggregate across dates using median.",
+      "aggregation": "Median of daily cross-sectional skewness values",
+      "parameters": {
+        "window_days": 21,
+        "min_assets": 5
+      },
+      "minimum_sample": "At least 21 days with \u22655 assets",
+      "missing_and_zero_policy": "Forward fill missing returns; exclude dates with <5 assets",
+      "expected_range": "[-2.0, 2.0]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.01,
+              0.02,
+              -0.01
+            ],
+            [
+              0.02,
+              -0.01,
+              0.01
+            ],
+            [
+              -0.01,
+              0.01,
+              0.02
+            ]
+          ],
+          "volatilities": [
+            0.02,
+            0.02,
+            0.02
+          ]
+        },
+        "expected": "0.0"
+      },
+      "reconstruction_pseudocode": "for each date: compute asset returns \u2192 calculate median return and volatility \u2192 compute skewness \u2192 aggregate medians",
+      "leakage_argument": "Uses only historical data up to decision date; no future returns or algorithmic feedback"
+    },
+    {
+      "feature_id": "volume_weighted_return_dispersion",
+      "name": "Volume-Weighted Return Dispersion",
+      "discovered_gap": "Standard dispersion metrics ignore volume context, which may indicate liquidity-driven volatility patterns.",
+      "financial_interpretation": "Quantifies how return dispersion scales with trading volume volatility, capturing liquidity-sensitive risk factors.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Compute daily log returns",
+        "Calculate volume log changes",
+        "Normalize volume volatility with rolling 21-day standard deviation"
+      ],
+      "mathematical_definition": "For each date: dispersion = median(|r_i - r\u0304|) where r\u0304 is portfolio median return. Weight by volume volatility: (dispersion \u00d7 \u03c3_volume) / max(\u03c3_volume). Aggregate with median.",
+      "aggregation": "Median of daily weighted dispersion values",
+      "parameters": {
+        "volatility_window": 21,
+        "min_assets": 5
+      },
+      "minimum_sample": "21 days with \u22655 assets",
+      "missing_and_zero_policy": "Exclude assets with missing volume; cap at 95th percentile",
+      "expected_range": "[0.005, 0.03]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.01,
+              0.02,
+              -0.01
+            ],
+            [
+              0.02,
+              -0.01,
+              0.01
+            ],
+            [
+              -0.01,
+              0.01,
+              0.02
+            ]
+          ],
+          "volume_volatility": [
+            0.3,
+            0.4,
+            0.3
+          ]
+        },
+        "expected": "0.012"
+      },
+      "reconstruction_pseudocode": "for each date: compute returns \u2192 calculate median \u2192 compute dispersion \u2192 multiply by volume volatility \u2192 aggregate medians",
+      "leakage_argument": "Volume data is contemporaneous with returns; no forward-looking signals"
+    },
+    {
+      "feature_id": "tail_return_co_occurrence",
+      "name": "Tail Return Co-Occurrence",
+      "discovered_gap": "Standard correlation metrics miss simultaneous extreme returns in multiple assets, which may indicate systemic risk events.",
+      "financial_interpretation": "Measures frequency of extreme negative returns occurring across \u22653 assets simultaneously, signaling potential contagion risk.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close"
+      ],
+      "preprocessing": [
+        "Compute daily log returns",
+        "Identify extreme returns as < -2\u00d7median_volatility",
+        "Count co-occurrences across assets"
+      ],
+      "mathematical_definition": "For each date: count assets with returns < -2\u00d7median_volatility. Aggregate as monthly frequency of dates with \u22653 such assets.",
+      "aggregation": "Annualized frequency of co-occurrence events",
+      "parameters": {
+        "extreme_threshold": 2.0,
+        "min_assets": 3
+      },
+      "minimum_sample": "At least 12 months of data",
+      "missing_and_zero_policy": "Exclude dates with missing returns; treat zero returns as neutral",
+      "expected_range": "[0.0, 0.3]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              -0.05,
+              -0.04,
+              -0.03
+            ],
+            [
+              0.02,
+              0.01,
+              -0.02
+            ],
+            [
+              -0.03,
+              -0.02,
+              -0.01
+            ]
+          ],
+          "volatility": 0.02
+        },
+        "expected": "0.333"
+      },
+      "reconstruction_pseudocode": "for each date: identify extreme returns \u2192 count co-occurring assets \u2192 aggregate events",
+      "leakage_argument": "Uses only historical return patterns; no predictive modeling"
+    },
+    {
+      "feature_id": "missingness_volatility_correlation",
+      "name": "Missingness-Volatility Correlation",
+      "discovered_gap": "Standard missing data handling ignores potential relationships between data quality and volatility regimes.",
+      "financial_interpretation": "Quantifies if assets with higher volatility systematically have more missing data, indicating data quality issues during volatile periods.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Compute daily volatility",
+        "Track missing data fractions per asset",
+        "Align by date"
+      ],
+      "mathematical_definition": "For each asset, calculate Pearson correlation between volatility and missingness fractions. Aggregate as median correlation across assets.",
+      "aggregation": "Median asset-level correlation",
+      "parameters": {
+        "min_obs": 20
+      },
+      "minimum_sample": "At least 20 non-missing observations per asset",
+      "missing_and_zero_policy": "Exclude assets with <20 observations; cap at \u00b10.99",
+      "expected_range": "[-0.5, 0.5]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "volatility": [
+            0.02,
+            0.03,
+            0.01
+          ],
+          "missingness": [
+            0.1,
+            0.2,
+            0.05
+          ]
+        },
+        "expected": "0.8"
+      },
+      "reconstruction_pseudocode": "for each asset: compute volatility \u2192 calculate missingness \u2192 correlate \u2192 aggregate medians",
+      "leakage_argument": "Correlation is calculated within historical window; no future data used"
+    },
+    {
+      "feature_id": "volume_return_asymmetry",
+      "name": "Volume-Return Asymmetry",
+      "discovered_gap": "Standard volume analysis ignores directional return asymmetry in trading activity, which may indicate informed trading patterns.",
+      "financial_interpretation": "Measures if volume increases more following negative vs. positive returns, potentially signaling liquidity imbalances.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Calculate volume changes",
+        "Classify returns as positive/negative"
+      ],
+      "mathematical_definition": "For each date: compute \u0394volume after positive returns vs. negative returns. Aggregate as median ratio of negative-to-positive volume changes.",
+      "aggregation": "Median of daily asymmetry ratios",
+      "parameters": {
+        "min_return_move": 0.01
+      },
+      "minimum_sample": "At least 20 return events per direction",
+      "missing_and_zero_policy": "Exclude dates with zero volume; normalize by total volume",
+      "expected_range": "[0.5, 2.0]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "positive_volume": [
+            100,
+            200
+          ],
+          "negative_volume": [
+            150,
+            250
+          ]
+        },
+        "expected": "1.5"
+      },
+      "reconstruction_pseudocode": "for each date: track volume by return direction \u2192 calculate ratio \u2192 aggregate medians",
+      "leakage_argument": "Uses only contemporaneous volume-return relationships; no predictive modeling"
+    },
+    {
+      "feature_id": "long_term_mean_reversion",
+      "name": "Long-Term Mean Reversion",
+      "discovered_gap": "Standard metrics focus on short-term volatility; long-term mean reversion patterns may indicate fundamental value alignment.",
+      "financial_interpretation": "Quantifies how returns revert to the median over extended horizons, suggesting equilibrium-seeking behavior.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close"
+      ],
+      "preprocessing": [
+        "Compute 60-day rolling median returns",
+        "Calculate deviations from median",
+        "Normalize by volatility"
+      ],
+      "mathematical_definition": "For each date: compute (current_return - 60-day_median_return) / volatility. Aggregate as median absolute deviation across assets.",
+      "aggregation": "Median of absolute deviations",
+      "parameters": {
+        "window_days": 60
+      },
+      "minimum_sample": "At least 60 days of data",
+      "missing_and_zero_policy": "Forward fill missing returns; exclude dates with <5 assets",
+      "expected_range": "[0.0, 0.15]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.01,
+              0.02
+            ],
+            [
+              0.02,
+              -0.01
+            ],
+            [
+              -0.01,
+              0.01
+            ]
+          ],
+          "volatility": 0.02
+        },
+        "expected": "0.05"
+      },
+      "reconstruction_pseudocode": "for each date: compute rolling median \u2192 calculate deviation \u2192 aggregate medians",
+      "leakage_argument": "Uses historical return patterns; no future returns or algorithmic signals"
+    },
+    {
+      "feature_id": "high_volatility_concentration",
+      "name": "High-Volatility Asset Concentration",
+      "discovered_gap": "Standard dispersion metrics don't account for how volatility is distributed among assets in the portfolio.",
+      "financial_interpretation": "Measures concentration of volatility in a subset of assets, indicating potential risk overexposure.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close"
+      ],
+      "preprocessing": [
+        "Compute daily volatility",
+        "Identify top 20% most volatile assets",
+        "Calculate their contribution to total volatility"
+      ],
+      "mathematical_definition": "For each date: calculate total volatility as sum of individual volatilities. Compute concentration as (sum of top 20% volatilities) / total volatility. Aggregate with median.",
+      "aggregation": "Median of daily concentration ratios",
+      "parameters": {
+        "top_percentile": 20
+      },
+      "minimum_sample": "At least 21 days with \u22655 assets",
+      "missing_and_zero_policy": "Exclude assets with missing volatility; normalize by total assets",
+      "expected_range": "[0.2, 0.6]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "volatilities": [
+            [
+              0.02,
+              0.03,
+              0.01
+            ],
+            [
+              0.01,
+              0.02,
+              0.03
+            ]
+          ],
+          "expected": "0.5"
+        },
+        "expected": "0.5"
+      },
+      "reconstruction_pseudocode": "for each date: compute volatilities \u2192 identify top 20% \u2192 calculate concentration \u2192 aggregate medians",
+      "leakage_argument": "Uses only historical volatility distribution; no predictive modeling"
+    },
+    {
+      "feature_id": "time_weighted_return_dispersion",
+      "name": "Time-Weighted Return Dispersion",
+      "discovered_gap": "Standard dispersion metrics treat all time points equally, ignoring potential temporal patterns in divergence.",
+      "financial_interpretation": "Quantifies how return dispersion evolves over time, capturing emerging trends or divergences in asset performance.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Assign weights decreasing exponentially with time"
+      ],
+      "mathematical_definition": "For each date: calculate weighted dispersion as \u03a3(weight_t \u00d7 |r_i,t - r\u0304_t|) where weights decay by 0.95 daily. Aggregate with median.",
+      "aggregation": "Median of weighted dispersion values",
+      "parameters": {
+        "decay_factor": 0.95,
+        "window_days": 21
+      },
+      "minimum_sample": "At least 21 days of data",
+      "missing_and_zero_policy": "Forward fill missing returns; normalize weights",
+      "expected_range": "[0.005, 0.025]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "returns": [
+            [
+              0.01,
+              0.02
+            ],
+            [
+              0.02,
+              -0.01
+            ],
+            [
+              -0.01,
+              0.01
+            ]
+          ],
+          "weights": [
+            0.9,
+            0.85,
+            0.8
+          ]
+        },
+        "expected": "0.015"
+      },
+      "reconstruction_pseudocode": "for each date: compute returns \u2192 apply time weights \u2192 calculate dispersion \u2192 aggregate medians",
+      "leakage_argument": "Weights decay with time but use only historical data; no future signals"
+    },
+    {
+      "feature_id": "return_volatility_volume_ratio",
+      "name": "Return-Volatility-Volume Ratio",
+      "discovered_gap": "Standard metrics separate return volatility and volume volatility, missing their potential co-movement.",
+      "financial_interpretation": "Measures the ratio of return volatility to volume volatility, indicating if price and liquidity risks move in sync.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close",
+        "volume"
+      ],
+      "preprocessing": [
+        "Compute daily return volatility",
+        "Compute daily volume volatility",
+        "Align by date"
+      ],
+      "mathematical_definition": "For each date: calculate ratio = return_volatility / volume_volatility. Aggregate as median ratio across dates.",
+      "aggregation": "Median of daily ratios",
+      "parameters": {
+        "min_assets": 5
+      },
+      "minimum_sample": "At least 21 days with \u22655 assets",
+      "missing_and_zero_policy": "Exclude dates with zero volume; cap at 95th percentile",
+      "expected_range": "[0.5, 2.0]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "return_volatility": 0.02,
+          "volume_volatility": 0.01
+        },
+        "expected": "2.0"
+      },
+      "reconstruction_pseudocode": "for each date: compute volatilities \u2192 calculate ratio \u2192 aggregate medians",
+      "leakage_argument": "Uses contemporaneous volatility measures; no predictive modeling"
+    },
+    {
+      "feature_id": "asymmetric_skewness_volatility",
+      "name": "Asymmetric Skewness-Volatility",
+      "discovered_gap": "Standard skewness metrics don't account for volatility regimes, which may distort risk interpretation.",
+      "financial_interpretation": "Measures how skewness changes with volatility, capturing nonlinear risk dynamics.",
+      "inputs": [
+        "date",
+        "close",
+        "div_adj_close"
+      ],
+      "preprocessing": [
+        "Compute daily returns and volatility",
+        "Classify days as high/low volatility (top/bottom 20%)",
+        "Calculate skewness separately for each regime"
+      ],
+      "mathematical_definition": "For each date: compute skewness conditional on volatility quartile. Aggregate as difference between high and low volatility skewness.",
+      "aggregation": "Median of regime differences",
+      "parameters": {
+        "volatility_quartile": 0.2
+      },
+      "minimum_sample": "At least 20 high/low volatility days",
+      "missing_and_zero_policy": "Exclude days with missing volatility; normalize by regime count",
+      "expected_range": "[-1.0, 1.0]",
+      "invariances": [
+        "Asset ordering",
+        "Date ordering"
+      ],
+      "synthetic_test": {
+        "input": {
+          "high_skew": 1.0,
+          "low_skew": -0.5
+        },
+        "expected": "1.5"
+      },
+      "reconstruction_pseudocode": "for each date: classify volatility regime \u2192 compute conditional skewness \u2192 calculate difference \u2192 aggregate medians",
+      "leakage_argument": "Uses historical volatility regimes; no future data or algorithmic signals"
+    }
+  ],
+  "_provenance": {
+    "requested_model": "qwen/qwen3-32b",
+    "returned_model": "qwen/qwen3-32b",
+    "response_id": "gen-1786560884-YFKtdyrW0gYUDeqZbwhY",
+    "created": 1786560884,
+    "usage": {
+      "prompt_tokens": 4893,
+      "completion_tokens": 4399,
+      "total_tokens": 9292,
+      "cost": 0.00162316,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00162316,
+        "upstream_inference_prompt_cost": 0.00039144,
+        "upstream_inference_completions_cost": 0.00123172
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1127,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "seed": 3105,
+    "generated_at": "2026-08-12T18:56:09.556819+00:00"
+  }
+}

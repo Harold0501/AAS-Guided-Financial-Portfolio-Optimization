@@ -1,0 +1,7 @@
+{
+  "selector": "RF",
+  "criterion": "CR",
+  "feature": "kurtosis_concentration",
+  "selection_mean": 3.0000920521524534,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

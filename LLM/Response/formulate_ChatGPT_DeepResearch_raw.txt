@@ -1,0 +1,176 @@
+
+
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Measures cross-sectional dispersion of daily dollar-volume-adjusted returns using a rolling 20-day window. Higher values indicate greater concentration in specific stocks.",
+      "formula": "F_t = std_dev_{i}(σ_i,t) / median(σ_i,t), where σ_i,t = rolling_std_dev(r_i,t, 20) and r_i,t = (div_adj_close_t / div_adj_close_{t-1} - 1) / portfolio_median_return_t",
+      "variables": {
+        "div_adj_close_t": "dividend-adjusted closing price on date t",
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)",
+        "σ_i,t": "rolling 20-day standard deviation of normalized returns for stock i on date t",
+        "portfolio_median_return_t": "median daily return across all stocks with valid data on date t",
+        "F_t": "final portfolio-level diversification index value on date t"
+      },
+      "normalization": "Divided by portfolio median volatility to ensure scale invariance",
+      "interpretation": "High values indicate extreme return dispersion and poor diversification; low values suggest uniform risk distribution across stocks"
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Calculates the cumulative contribution of top 10% highest dollar-volume stocks to total portfolio return over 60-day window using dollar volume as liquidity proxy.",
+      "formula": "F_t = min(1.0, sum_{i ∈ top_10%}(cum_return_i,t) / cum_return_portfolio_t), where cum_return_i,t = product_{τ=t-59}^t (div_adj_close_τ / div_adj_close_{τ-1}) and dollar_volume_i,t = div_adj_close_t * volume_t",
+      "variables": {
+        "dollar_volume_i,t": "daily dollar volume for stock i on date t calculated as div_adj_close_t * volume_t",
+        "cum_return_i,t": "60-day cumulative return for stock i ending on date t",
+        "cum_return_portfolio_t": "equal-weighted 60-day cumulative return of all stocks with valid data on date t"
+      },
+      "normalization": "Capped at 1.0 to ensure bounded output",
+      "interpretation": "Values near 1.0 indicate performance dominated by a few large-cap stocks; lower values suggest broad-based participation"
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Counts the number of sign changes in rolling 20-day momentum (div_adj_close return) across all stocks on each date, normalized by total stock count.",
+      "formula": "F_t = (count_{i}(sign(rolling_mom_i,t) ≠ sign(rolling_mom_i,t-1)) / N_t), where rolling_mom_i,t = sum_{τ=t-19}^t (div_adj_close_τ / div_adj_close_{τ-1} - 1)",
+      "variables": {
+        "rolling_mom_i,t": "20-day momentum for stock i on date t calculated as sum of daily returns",
+        "N_t": "number of stocks with valid data on date t"
+      },
+      "normalization": "Normalized by total number of stocks to create proportion metric",
+      "interpretation": "High values indicate frequent momentum regime shifts; low values suggest stable directional trends"
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Measures consistency of rolling 60-day volatility (standard deviation of div_adj_close returns) across the portfolio, normalized by median volatility.",
+      "formula": "F_t = std_dev_{i}(vol_i,t) / median(vol_i,t), where vol_i,t = rolling_std_dev(r_i,t, 60) and r_i,t = (div_adj_close_t / div_adj_close_{t-1} - 1)",
+      "variables": {
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)",
+        "vol_i,t": "rolling 60-day standard deviation of returns for stock i on date t",
+        "median(vol_i,t)": "median volatility across all stocks with valid data on date t"
+      },
+      "normalization": "Divided by portfolio median volatility to ensure scale invariance",
+      "interpretation": "High values indicate unstable volatility patterns; low values suggest consistent clustering behavior"
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Counts transitions between bull/bear regimes defined by cumulative div_adj_close returns over 60-day window, normalized by total stock count.",
+      "formula": "F_t = (count_{i}(crossed_5%_threshold_i,t) / N_t), where crossed_5%_threshold_i,t = 1 if |cum_return_i,t| ≥ 0.05 and sign(cum_return_i,t) ≠ sign(cum_return_i,t-1) else 0",
+      "variables": {
+        "cum_return_i,t": "60-day cumulative return for stock i ending on date t calculated as product_{τ=t-59}^t (div_adj_close_τ / div_adj_close_{τ-1})",
+        "N_t": "number of stocks with valid data on date t"
+      },
+      "normalization": "Normalized by total number of stocks to create proportion metric",
+      "interpretation": "High values indicate frequent market state transitions; low values suggest prolonged regime persistence"
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Measures correlation between individual stock returns and portfolio-wide return (internal benchmark) over rolling 60-day window.",
+      "formula": "F_t = mean_{i}(corr(r_i,t, r_portfolio,t)), where r_portfolio,t = mean_{j}(r_j,t) and corr(x,y) = covariance(x,y)/sqrt(var(x)*var(y))",
+      "variables": {
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)",
+        "r_portfolio,t": "equal-weighted daily return of all stocks with valid data on date t"
+      },
+      "normalization": "None",
+      "interpretation": "High positive values indicate strong systematic risk alignment; low values suggest idiosyncratic behavior"
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Measures time-to-recover from drawdowns using cumulative div_adj_close returns over 60-day window.",
+      "formula": "F_t = median_{i}(days_to_recover_i,t), where days_to_recover_i,t = min(τ ≥ t-59 such that cum_return_i,τ ≥ peak_return_i,t-1)",
+      "variables": {
+        "cum_return_i,t": "60-day cumulative return for stock i ending on date t calculated as product_{τ=t-59}^t (div_adj_close_τ / div_adj_close_{τ-1})",
+        "peak_return_i,t-1": "maximum cumulative return for stock i up to date t-1"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate faster recovery from losses; higher values suggest persistent drawdowns"
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Measures synchronization of dollar-volume changes across stocks using rolling 20-day window, normalized by median volume change volatility.",
+      "formula": "F_t = std_dev_{i}(Δdollar_volume_i,t) / median(Δdollar_volume_i,t), where Δdollar_volume_i,t = (div_adj_close_t * volume_t - div_adj_close_{t-1} * volume_{t-1}) / (div_adj_close_{t-1} * volume_{t-1})",
+      "variables": {
+        "dollar_volume_i,t": "daily dollar volume for stock i on date t calculated as div_adj_close_t * volume_t",
+        "Δdollar_volume_i,t": "20-day percentage change in dollar volume for stock i on date t"
+      },
+      "normalization": "Divided by portfolio median volume change volatility to ensure scale invariance",
+      "interpretation": "High values indicate synchronized liquidity shocks; low values suggest independent trading activity"
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Measures alignment between individual stock returns and portfolio-wide return (internal benchmark) over rolling 60-day window, normalized by median correlation.",
+      "formula": "F_t = std_dev_{i}(corr(r_i,t, r_portfolio,t)) / median(corr(r_i,t, r_portfolio,t)), where corr(x,y) = covariance(x,y)/sqrt(var(x)*var(y))",
+      "variables": {
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)",
+        "r_portfolio,t": "equal-weighted daily return of all stocks with valid data on date t"
+      },
+      "normalization": "Divided by portfolio median correlation to ensure scale invariance",
+      "interpretation": "High values indicate divergent behavior from internal benchmark; low values suggest coherent movement"
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Measures standard deviation of individual stock contributions to portfolio volatility over rolling 60-day window, normalized by median volatility.",
+      "formula": "F_t = std_dev_{i}(vol_i,t) / median(vol_i,t), where vol_i,t = rolling_std_dev(r_i,t, 60) and r_i,t = (div_adj_close_t / div_adj_close_{t-1} - 1)",
+      "variables": {
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)",
+        "vol_i,t": "rolling 60-day standard deviation of returns for stock i on date t",
+        "median(vol_i,t)": "median volatility across all stocks with valid data on date t"
+      },
+      "normalization": "Divided by portfolio median volatility to ensure scale invariance",
+      "interpretation": "High values indicate uneven risk distribution; low values suggest uniform contribution patterns"
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Measures difference in cumulative returns between high and low volatility periods over rolling 60-day window.",
+      "formula": "F_t = (mean_{i ∈ high_vol}(cum_return_i,t) - mean_{i ∈ low_vol}(cum_return_i,t)), where high_vol = {i | vol_i,t ≥ median(vol_i,t)}, low_vol = {i | vol_i,t < median(vol_i,t)}",
+      "variables": {
+        "vol_i,t": "rolling 60-day standard deviation of returns for stock i on date t calculated as rolling_std_dev(r_i,t, 60)",
+        "cum_return_i,t": "60-day cumulative return for stock i ending on date t calculated as product_{τ=t-59}^t (div_adj_close_τ / div_adj_close_{τ-1})"
+      },
+      "normalization": "None",
+      "interpretation": "High positive values indicate better performance during high volatility; negative values suggest underperformance"
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "Measures ratio of absolute return to dollar volume as proxy for information-driven trading activity, normalized by median ratio.",
+      "formula": "F_t = std_dev_{i}(abs(r_i,t) / dollar_volume_i,t) / median(abs(r_i,t) / dollar_volume_i,t), where r_i,t = (div_adj_close_t / div_adj_close_{t-1} - 1) and dollar_volume_i,t = div_adj_close_t * volume_t",
+      "variables": {
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)",
+        "dollar_volume_i,t": "daily dollar volume for stock i on date t calculated as div_adj_close_t * volume_t"
+      },
+      "normalization": "Divided by portfolio median ratio to ensure scale invariance",
+      "interpretation": "High values indicate returns are driven more by information flow than liquidity; low values suggest noise dominance"
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Measures consistency of pairwise stock correlations over rolling 60-day window, normalized by median correlation.",
+      "formula": "F_t = std_dev_{i,j}(corr(r_i,t, r_j,t)) / median(corr(r_i,t, r_j,t)), where corr(x,y) = covariance(x,y)/sqrt(var(x)*var(y))",
+      "variables": {
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)"
+      },
+      "normalization": "Divided by portfolio median correlation to ensure scale invariance",
+      "interpretation": "High values indicate unstable inter-stock relationships; low values suggest persistent correlations"
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Measures contribution of top 10% highest dollar-volume stocks to maximum drawdowns over rolling 60-day window.",
+      "formula": "F_t = sum_{i ∈ top_10%}(max_drawdown_i,t) / max_drawdown_portfolio,t, where max_drawdown_i,t = (div_adj_close_min - div_adj_close_t) / div_adj_close_min and dollar_volume_i,t = div_adj_close_t * volume_t",
+      "variables": {
+        "dollar_volume_i,t": "daily dollar volume for stock i on date t calculated as div_adj_close_t * volume_t",
+        "max_drawdown_i,t": "maximum drawdown for stock i over 60-day window ending on date t"
+      },
+      "normalization": "Normalized by portfolio maximum drawdown to ensure scale invariance",
+      "interpretation": "High values indicate tail risk concentrated in large-cap stocks; low values suggest diversified exposure"
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Calculates Shannon entropy of daily div_adj_close returns across the portfolio over rolling 60-day window, normalized by maximum possible entropy.",
+      "formula": "F_t = (1 / log(N_t)) * sum_{i}(p_i,t * log(p_i,t)), where p_i,t = frequency of return bins for stock i and N_t = number of stocks with valid data on date t",
+      "variables": {
+        "r_i,t": "daily return for stock i on date t calculated as (div_adj_close_t / div_adj_close_{t-1} - 1)",
+        "p_i,t": "probability distribution of returns for stock i over rolling 60-day window"
+      },
+      "normalization": "Divided by log(N_t) to normalize entropy scale",
+      "interpretation": "High values indicate chaotic, unpredictable return patterns; low values suggest structured behavior"
+    }
+  ]
+}

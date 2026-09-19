@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "MDD",
+  "feature": "estimation_ratio",
+  "selection_mean": -0.2902575937246057,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

@@ -1,0 +1,7 @@
+{
+  "selector": "RF",
+  "criterion": "MDD",
+  "feature": "covariance_condition",
+  "selection_mean": -0.27654754940598314,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "MDD",
+  "feature": "nonstationary_correlation_variance",
+  "selection_mean": -0.3000420948987894,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

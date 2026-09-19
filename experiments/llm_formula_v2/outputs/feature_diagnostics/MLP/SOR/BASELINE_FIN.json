@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "SOR",
+  "feature": "BASELINE_FIN",
+  "selection_mean": 1.133319345239383,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

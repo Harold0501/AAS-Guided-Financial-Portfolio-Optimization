@@ -1,0 +1,204 @@
+
+
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Measures cross-sectional dispersion of stock returns as a proxy for diversification effectiveness. Lower values indicate more uniform return distribution across stocks.",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "For each day, compute cross-sectional standard deviation of stock-level returns across all companies in the portfolio",
+        "Take equal-weight mean of these standard deviations over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate uneven return distribution (lower diversification), low values indicate uniform returns (better diversification)"
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Measures concentration of portfolio performance in top-performing stocks using relative return dominance",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "For each day, identify top 10% of stocks by return",
+        "Compute average return of these top stocks and compare to portfolio-wide mean return",
+        "Take equal-weight mean of the ratio (top-10% return / portfolio return) over the most recent 20 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate performance is driven by a small subset of stocks, low values indicate broad-based performance"
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Counts transitions between positive and negative momentum regimes in portfolio returns",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "For each day, compute 5-day rolling return for the portfolio",
+        "Count number of times the rolling return crosses zero (from positive to negative or vice versa) over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate frequent momentum regime shifts, low values indicate stable momentum direction"
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Measures consistency in portfolio volatility patterns over time",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "Compute 20-day rolling standard deviation of returns for the portfolio",
+        "Measure standard deviation of these volatility values over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate unstable volatility patterns, low values indicate consistent volatility clustering"
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Counts transitions between distinct market states based on return thresholds",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "Define bull state as 20-day rolling return > 1%, bear state as < -1%",
+        "Count transitions between these states over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate frequent regime changes, low values indicate stable market conditions"
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Measures correlation between portfolio returns and equal-weighted benchmark proxy",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close for all stocks",
+        "Compute equal-weight average return of all companies as benchmark proxy",
+        "Measure correlation coefficient between portfolio returns and this proxy over the most recent 60 trading days"
+      ],
+      "output_range": "[-1, 1]",
+      "interpretation": "High absolute values indicate strong systematic risk alignment with market-wide movements"
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Measures average time to recover from drawdowns in portfolio value",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "For each stock, compute drawdown duration (days from peak to recovery)",
+        "Take equal-weight mean of these durations over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "Lower values indicate faster recovery from losses, higher values indicate prolonged drawdowns"
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Measures synchronization of liquidity shocks across portfolio stocks",
+      "inputs": ["volume", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate 20-day rolling standard deviation of volume for each stock",
+        "Compute cross-sectional correlation of these volatility values across all stocks",
+        "Take equal-weight mean of this correlation over the most recent 60 trading days"
+      ],
+      "output_range": "[-1, 1]",
+      "interpretation": "High positive values indicate synchronized liquidity risk, low values indicate independent liquidity patterns"
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Measures alignment between portfolio returns and equal-weighted benchmark proxy",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close for all stocks",
+        "Compute equal-weight average return of all companies as benchmark proxy",
+        "Measure correlation coefficient between portfolio returns and this proxy over the most recent 60 trading days"
+      ],
+      "output_range": "[-1, 1]",
+      "interpretation": "High absolute values indicate strong alignment with market-wide sentiment patterns"
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Measures dispersion of individual stock volatility contributions to portfolio risk",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "Compute cross-sectional standard deviation of stock-level return volatilities",
+        "Take equal-weight mean of these standard deviations over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate uneven risk contributions (lower uniformity), low values indicate balanced risk distribution"
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Measures performance consistency across different volatility regimes",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "Split data into high-volatility (20-day std > 1%) and low-volatility periods",
+        "Compute ratio of portfolio returns in high-volatility vs low-volatility periods",
+        "Take equal-weight mean of this ratio over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate better performance in volatile conditions, low values indicate poor adaptability"
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "Measures correlation between price changes and volume spikes as information proxy",
+      "inputs": ["div_adj_close", "volume", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "Compute 5-day rolling standard deviation of volume for each stock",
+        "Measure correlation between return magnitude and volume volatility over the most recent 60 trading days"
+      ],
+      "output_range": "[-1, 1]",
+      "interpretation": "High positive values indicate strong information-driven price movements, low values indicate noise dominance"
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Measures persistence of pairwise stock correlations over time",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close for all stocks",
+        "Compute rolling 20-day correlation matrix between all pairs of stocks",
+        "Measure standard deviation of these correlation values over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate unstable correlations, low values indicate persistent inter-stock relationships"
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Measures dispersion of extreme return events across portfolio stocks",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close",
+        "Identify days with portfolio-wide 1% quantile returns (extreme downside)",
+        "Compute cross-sectional standard deviation of individual stock returns on these days",
+        "Take equal-weight mean of this standard deviation over the most recent 60 trading days"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate concentrated tail risk exposure, low values indicate diversified extreme risks"
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Measures unpredictability in portfolio return distribution using information entropy",
+      "inputs": ["div_adj_close", "date", "company"],
+      "procedure": [
+        "Sort data by company and date",
+        "Calculate daily log returns using div_adj_close for all stocks",
+        "Compute equal-weight average return distribution over the most recent 60 trading days",
+        "Calculate Shannon entropy of this return distribution"
+      ],
+      "output_range": "[0, +infinity)",
+      "interpretation": "High values indicate chaotic/unordered return patterns, low values indicate structured behavior"
+    }
+  ]
+}

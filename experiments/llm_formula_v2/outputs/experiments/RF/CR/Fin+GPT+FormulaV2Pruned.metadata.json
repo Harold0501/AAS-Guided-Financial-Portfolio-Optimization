@@ -1,0 +1,15 @@
+{
+  "selector": "RF",
+  "criterion": "CR",
+  "configuration": "Fin+GPT+FormulaV2Pruned",
+  "n_instances": 762,
+  "n_features": 53,
+  "folds": 10,
+  "seed": 42,
+  "protocol": "exact repository shuffled KFold; one scalar model per target/fold",
+  "selection_mean": 3.7319614068149956,
+  "regret_mean": 0.19610951517797187,
+  "sbs_mean": 3.2254270028366214,
+  "vbs_mean": 3.9280709219929673,
+  "completed_at": "2026-08-11T18:19:45.110112+00:00"
+}

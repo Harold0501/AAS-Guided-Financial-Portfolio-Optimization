@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "SOR",
+  "feature": "momentum_dispersion",
+  "selection_mean": 1.1514609923879062,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

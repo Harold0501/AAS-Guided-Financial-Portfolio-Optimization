@@ -1,0 +1,24 @@
+You are designing auditable portfolio-INSTANCE characteristics, not stock-selection alpha signals.
+
+HARD CONSTRAINTS:
+1. Use only point-in-time fields and distribution summaries supplied below.
+2. Do not predict future returns and do not invent algorithm outcomes or selector feedback.
+3. Each feature is one finite scalar for a variable-size, variable-length multi-asset instance.
+4. It must be invariant to row ordering and asset ordering, with explicit sorting/window rules.
+5. Give a complete mathematical reconstruction contract: inputs, preprocessing, formula,
+   aggregation, normalization, hyperparameters, minimum sample, missing/zero policy, range,
+   and a hand-checkable synthetic unit test with expected value.
+6. Prefer characteristics whose meaning and values should remain stable across asset families.
+7. Avoid standard mean return, volatility, Sharpe/Sortino, drawdown, simple pairwise correlation,
+   momentum, or dimensionality ratios unless the proposal captures a demonstrably different
+   structural property.
+8. Return exactly the requested number of features as strict JSON—no markdown.
+
+Required JSON schema:
+{"arm": "<ARM>", "features": [{"feature_id": "snake_case", "name": "...",
+"discovered_gap": "...", "financial_interpretation": "...", "inputs": ["..."],
+"preprocessing": ["..."], "mathematical_definition": "...", "aggregation": "...",
+"parameters": {"name": "fixed value"}, "minimum_sample": "...",
+"missing_and_zero_policy": "...", "expected_range": "...",
+"invariances": ["..."], "synthetic_test": {"input": "...", "expected": "..."},
+"reconstruction_pseudocode": "...", "leakage_argument": "..."}]}

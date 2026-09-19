@@ -1,0 +1,52 @@
+{
+  "runs": [
+    {
+      "prompt": "detailed_ChatGPT_DeepResearch.txt",
+      "status": "success",
+      "json_output": "Response\\detailed_ChatGPT_DeepResearch_response.json",
+      "raw_output": "Response\\detailed_ChatGPT_DeepResearch_raw.txt"
+    },
+    {
+      "prompt": "detailed_ChatGPT_Optimized.txt",
+      "status": "success",
+      "json_output": "Response\\detailed_ChatGPT_Optimized_response.json",
+      "raw_output": "Response\\detailed_ChatGPT_Optimized_raw.txt"
+    },
+    {
+      "prompt": "detailed_Ref_Fatemi2024.txt",
+      "status": "success",
+      "json_output": "Response\\detailed_Ref_Fatemi2024_response.json",
+      "raw_output": "Response\\detailed_Ref_Fatemi2024_raw.txt"
+    },
+    {
+      "prompt": "detailed_Ref_Koa2024.txt",
+      "status": "success",
+      "json_output": "Response\\detailed_Ref_Koa2024_response.json",
+      "raw_output": "Response\\detailed_Ref_Koa2024_raw.txt"
+    },
+    {
+      "prompt": "formulate_ChatGPT_DeepResearch.txt",
+      "status": "success",
+      "json_output": "Response\\formulate_ChatGPT_DeepResearch_response.json",
+      "raw_output": "Response\\formulate_ChatGPT_DeepResearch_raw.txt"
+    },
+    {
+      "prompt": "formulate_ChatGPT_Optimized.txt",
+      "status": "success",
+      "json_output": "Response\\formulate_ChatGPT_Optimized_response.json",
+      "raw_output": "Response\\formulate_ChatGPT_Optimized_raw.txt"
+    },
+    {
+      "prompt": "formulate_Ref_Fatemi2024.txt",
+      "status": "success",
+      "json_output": "Response\\formulate_Ref_Fatemi2024_response.json",
+      "raw_output": "Response\\formulate_Ref_Fatemi2024_raw.txt"
+    },
+    {
+      "prompt": "formulate_Ref_Koa2024.txt",
+      "status": "success",
+      "json_output": "Response\\formulate_Ref_Koa2024_response.json",
+      "raw_output": "Response\\formulate_Ref_Koa2024_raw.txt"
+    }
+  ]
+}

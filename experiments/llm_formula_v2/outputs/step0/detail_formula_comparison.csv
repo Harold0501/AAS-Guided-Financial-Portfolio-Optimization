@@ -1,0 +1,6 @@
+criterion,rows,detail_columns,formula_columns,matrices_identical,mean_absolute_difference,different_cells
+AR,762,15,15,False,2.744812248468941,10281
+CR,762,15,15,False,2.744812248468941,10281
+MDD,762,15,15,False,2.744812248468941,10281
+SHR,762,15,15,False,2.744812248468941,10281
+SOR,762,15,15,False,2.744812248468941,10281

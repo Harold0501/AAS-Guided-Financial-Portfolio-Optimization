@@ -1,0 +1,352 @@
+{
+  "arm": "C",
+  "features": [
+    {
+      "feature_id": "return_skewness",
+      "name": "Return Skewness",
+      "discovered_gap": "Captures asymmetry in cross-sectional returns not addressed by standard dispersion metrics.",
+      "financial_interpretation": "Positive skewness indicates frequent small gains with occasional large losses; negative skewness suggests the opposite. Affects portfolio tail risk characteristics.",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute daily returns for each asset",
+        "Remove missing returns using forward fill"
+      ],
+      "mathematical_definition": "For each date, calculate daily returns r_i. Compute skewness = E[(r - \u03bc)^3]/\u03c3^3 where \u03bc is mean return and \u03c3 is standard deviation.",
+      "aggregation": "Portfolio-level skewness is the median of daily skewness values across all assets.",
+      "parameters": {
+        "window_days": 21
+      },
+      "minimum_sample": "At least 10 non-missing daily returns required.",
+      "missing_and_zero_policy": "Forward-fill missing returns; zero returns are treated as zero.",
+      "expected_range": "[-3, 3]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Daily returns: [0.01, -0.02, 0.03, -0.01, 0.05, -0.05, 0.1, -0.1, 0.2, -0.3]",
+        "expected": "Positive skewness due to larger positive outliers"
+      },
+      "reconstruction_pseudocode": "for each asset:\n    compute daily returns\n    calculate daily skewness\nportfolio_skewness = median(daily_skewness_values)",
+      "leakage_argument": "Uses only historical price data up to decision date; no future information."
+    },
+    {
+      "feature_id": "volume_return_correlation",
+      "name": "Volume-Return Correlation",
+      "discovered_gap": "Measures relationship between trading volume changes and price returns, not captured by volume volatility alone.",
+      "financial_interpretation": "Positive correlation suggests volume increases with price movements (speculative behavior); negative correlation indicates volume rises during price declines (liquidity risk).",
+      "inputs": [
+        "volume",
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute daily volume changes (log)",
+        "Compute daily returns",
+        "Align on common dates"
+      ],
+      "mathematical_definition": "For each asset, calculate Pearson correlation between daily volume log changes and daily returns over 21-day window.",
+      "aggregation": "Portfolio-level metric is median of asset-level correlations.",
+      "parameters": {
+        "window_days": 21
+      },
+      "minimum_sample": "At least 15 non-missing daily observations",
+      "missing_and_zero_policy": "Remove dates with missing volume or returns; zero volume treated as zero.",
+      "expected_range": "[-1, 1]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Asset A: volume doubles on up days; Asset B: volume stable",
+        "expected": "Positive correlation for Asset A, zero for B; portfolio median depends on composition"
+      },
+      "reconstruction_pseudocode": "for each asset:\n    compute volume log changes and returns\n    calculate daily correlation\nportfolio_metric = median(asset_correlations)",
+      "leakage_argument": "Only uses historical volume and price data up to decision date."
+    },
+    {
+      "feature_id": "volatility_diversity",
+      "name": "Volatility Diversity Index",
+      "discovered_gap": "Quantifies diversity of asset volatility profiles beyond standard deviation metrics.",
+      "financial_interpretation": "Higher Gini coefficient indicates more varied volatility profiles among assets, potentially reducing portfolio-wide risk concentration.",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute 30-day rolling volatility for each asset",
+        "Normalize volatilities to sum to 1"
+      ],
+      "mathematical_definition": "Gini coefficient = 1 - \u03a3(w_i^2) where w_i is normalized volatility of each asset.",
+      "aggregation": "Portfolio-level Gini coefficient calculated from all assets in instance.",
+      "parameters": {
+        "window_days": 30
+      },
+      "minimum_sample": "At least 2 assets with complete volatility data",
+      "missing_and_zero_policy": "Exclude assets with missing volatility data; zero volatility assets removed.",
+      "expected_range": "[0, 1]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Two assets with identical volatility",
+        "expected": "Gini coefficient = 0"
+      },
+      "reconstruction_pseudocode": "compute asset volatilities\nnormalize to sum=1\ncalculate Gini = 1 - sum(normalized_volatilities^2)",
+      "leakage_argument": "Uses only historical price data up to decision date."
+    },
+    {
+      "feature_id": "extreme_return_frequency",
+      "name": "Extreme Return Frequency",
+      "discovered_gap": "Captures frequency of extreme returns (beyond 3\u03c3) not quantified by standard dispersion metrics.",
+      "financial_interpretation": "Higher frequency indicates increased tail risk exposure across portfolio assets.",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Calculate rolling 30-day volatility for each asset"
+      ],
+      "mathematical_definition": "For each asset, count daily returns exceeding \u00b13\u03c3 over 30-day window. Portfolio metric is median count across assets.",
+      "aggregation": "Portfolio-level median of asset-specific extreme return counts.",
+      "parameters": {
+        "window_days": 30,
+        "threshold_sigma": 3
+      },
+      "minimum_sample": "At least 10 non-missing daily returns",
+      "missing_and_zero_policy": "Exclude dates with missing returns; zero returns counted normally.",
+      "expected_range": "[0, 21]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Asset with 3 extreme returns in 21 days",
+        "expected": "Contribution to portfolio median depends on other assets"
+      },
+      "reconstruction_pseudocode": "for each asset:\n    compute daily returns and volatility\n    count extreme returns\nportfolio_metric = median(extreme_counts)",
+      "leakage_argument": "Only uses historical price data up to decision date."
+    },
+    {
+      "feature_id": "return_volatility_ratio",
+      "name": "Return-Volatility Coefficient",
+      "discovered_gap": "Measures relationship between return dispersion and individual asset volatility.",
+      "financial_interpretation": "High ratio suggests returns vary more relative to individual asset risk profiles, potentially indicating mispricing or systemic factors.",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute cross-sectional return dispersion",
+        "Compute median asset volatility"
+      ],
+      "mathematical_definition": "Ratio = cross_sectional_return_dispersion / median_asset_volatility",
+      "aggregation": "Direct calculation using instance-level metrics.",
+      "parameters": {},
+      "minimum_sample": "Valid cross-sectional dispersion and volatility metrics available",
+      "missing_and_zero_policy": "Exclude instances with missing dispersion or volatility data",
+      "expected_range": "[0.5, 3.0]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Dispersion=0.02, median_volatility=0.01",
+        "expected": "Ratio=2.0"
+      },
+      "reconstruction_pseudocode": "ratio = dispersion / median_volatility",
+      "leakage_argument": "Uses only historical price data up to decision date."
+    },
+    {
+      "feature_id": "correlation_stability",
+      "name": "Correlation Stability Index",
+      "discovered_gap": "Measures temporal stability of asset correlations beyond mean pairwise correlation.",
+      "financial_interpretation": "Low stability indicates rapidly changing correlations, increasing portfolio rebalancing needs and model risk.",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute rolling 21-day pairwise correlations",
+        "Calculate standard deviation of correlations for each asset pair"
+      ],
+      "mathematical_definition": "Portfolio metric is median of standard deviations across all asset pairs.",
+      "aggregation": "Portfolio-level median of correlation volatility metrics.",
+      "parameters": {
+        "window_days": 21
+      },
+      "minimum_sample": "At least 3 assets with complete correlation data",
+      "missing_and_zero_policy": "Exclude pairs with missing correlation data; zero volatility treated normally.",
+      "expected_range": "[0.0, 0.5]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Asset pairs with stable correlations (SD=0.1) vs volatile (SD=0.4)",
+        "expected": "Portfolio metric reflects median of input values"
+      },
+      "reconstruction_pseudocode": "for each asset pair:\n    compute correlation volatility\nportfolio_metric = median(correlation_volatilities)",
+      "leakage_argument": "Only uses historical price data up to decision date."
+    },
+    {
+      "feature_id": "return_concentration",
+      "name": "Return Concentration Index",
+      "discovered_gap": "Quantifies concentration of returns among assets beyond simple pairwise correlation metrics.",
+      "financial_interpretation": "High concentration indicates portfolio returns are disproportionately influenced by a small number of assets.",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute daily returns for each asset",
+        "Normalize returns to sum of squares = 1"
+      ],
+      "mathematical_definition": "Herfindahl index = \u03a3(r_i^2) where r_i are normalized returns for each asset.",
+      "aggregation": "Portfolio-level Herfindahl index calculated from all assets.",
+      "parameters": {},
+      "minimum_sample": "At least 2 assets with non-zero returns",
+      "missing_and_zero_policy": "Exclude assets with missing returns; zero returns removed.",
+      "expected_range": "[0.0, 1.0]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Two assets with equal returns",
+        "expected": "Herfindahl index = 0.5"
+      },
+      "reconstruction_pseudocode": "normalize returns to unit norm\ncompute Herfindahl = sum(normalized_returns^2)",
+      "leakage_argument": "Uses only historical price data up to decision date."
+    },
+    {
+      "feature_id": "volume_asymmetry",
+      "name": "Volume Asymmetry Index",
+      "discovered_gap": "Measures differential volume behavior during positive vs negative returns.",
+      "financial_interpretation": "Positive asymmetry indicates higher volume during price increases (bullish momentum); negative asymmetry suggests higher volume during declines (bearish pressure).",
+      "inputs": [
+        "volume",
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Separate volume into positive and negative return days",
+        "Compute median volume for each case"
+      ],
+      "mathematical_definition": "Asymmetry = (median_volume_positive_returns - median_volume_negative_returns) / (median_volume_positive_returns + median_volume_negative_returns)",
+      "aggregation": "Portfolio-level metric is median of asset-specific asymmetry values.",
+      "parameters": {},
+      "minimum_sample": "At least 5 positive and 5 negative return days per asset",
+      "missing_and_zero_policy": "Exclude days with missing volume or returns; zero volume treated normally.",
+      "expected_range": "[-1, 1]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Asset with volume doubling on up days vs normal on down days",
+        "expected": "Positive asymmetry value"
+      },
+      "reconstruction_pseudocode": "for each asset:\n    compute median volume for up/down days\n    calculate asymmetry\nportfolio_metric = median(asset_asymmetries)",
+      "leakage_argument": "Only uses historical volume and price data up to decision date."
+    },
+    {
+      "feature_id": "return_mad_ratio",
+      "name": "Return Median Absolute Deviation Ratio",
+      "discovered_gap": "Provides robust measure of return dispersion less sensitive to outliers than standard deviation.",
+      "financial_interpretation": "Higher ratio indicates greater dispersion of returns around median, capturing typical deviations without extreme value influence.",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute daily returns",
+        "Calculate median return for each asset"
+      ],
+      "mathematical_definition": "MAD = median(|r_i - median(r)|) for each asset. Portfolio metric is median MAD across all assets.",
+      "aggregation": "Portfolio-level median of asset-specific MAD values.",
+      "parameters": {},
+      "minimum_sample": "At least 10 non-missing daily returns per asset",
+      "missing_and_zero_policy": "Exclude dates with missing returns; zero returns treated normally.",
+      "expected_range": "[0.0, 0.1]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Asset with returns: [0.01, -0.01, 0.02, -0.02, 0.03, -0.03]",
+        "expected": "MAD around 0.02"
+      },
+      "reconstruction_pseudocode": "for each asset:\n    compute daily returns and median\n    calculate MAD\nportfolio_metric = median(MAD_values)",
+      "leakage_argument": "Uses only historical price data up to decision date."
+    },
+    {
+      "feature_id": "correlation_duration",
+      "name": "Correlation Duration Index",
+      "discovered_gap": "Measures persistence of asset correlations over time beyond mean pairwise correlation.",
+      "financial_interpretation": "Longer duration indicates stable correlations (easier to model), while short duration suggests rapidly changing relationships (increased model risk).",
+      "inputs": [
+        "close",
+        "date"
+      ],
+      "preprocessing": [
+        "Compute rolling 21-day pairwise correlations",
+        "Calculate time between correlation sign changes for each pair"
+      ],
+      "mathematical_definition": "Portfolio metric is median of duration between sign changes across all asset pairs.",
+      "aggregation": "Portfolio-level median of correlation duration values.",
+      "parameters": {
+        "window_days": 21
+      },
+      "minimum_sample": "At least 3 consecutive correlation sign changes per pair",
+      "missing_and_zero_policy": "Exclude pairs with insufficient data; zero duration treated as missing.",
+      "expected_range": "[1, 100]",
+      "invariances": [
+        "asset ordering",
+        "row ordering"
+      ],
+      "synthetic_test": {
+        "input": "Asset pairs with stable positive correlations (duration=50) vs volatile (duration=5)",
+        "expected": "Portfolio metric reflects median of input values"
+      },
+      "reconstruction_pseudocode": "for each asset pair:\n    track correlation sign changes\n    calculate duration between changes\nportfolio_metric = median(duration_values)",
+      "leakage_argument": "Only uses historical price data up to decision date."
+    }
+  ],
+  "_provenance": {
+    "requested_model": "qwen/qwen3-32b",
+    "returned_model": "qwen/qwen3-32b",
+    "response_id": "gen-1786560987-vTvkut1yON4y8JgGjPcX",
+    "created": 1786560987,
+    "usage": {
+      "prompt_tokens": 5109,
+      "completion_tokens": 4186,
+      "total_tokens": 9295,
+      "cost": 0.0015808,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0015808,
+        "upstream_inference_prompt_cost": 0.00040872,
+        "upstream_inference_completions_cost": 0.00117208
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1467,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "seed": 3101,
+    "generated_at": "2026-08-12T18:57:57.079914+00:00"
+  }
+}

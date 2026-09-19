@@ -1,0 +1,7 @@
+{
+  "selector": "MLP",
+  "criterion": "AR",
+  "feature": "volatility_clustering",
+  "selection_mean": 0.2526756087596246,
+  "protocol": "diagnostic 5-fold GroupKFold by Asset; multi-output selector; RF uses 80 trees"
+}

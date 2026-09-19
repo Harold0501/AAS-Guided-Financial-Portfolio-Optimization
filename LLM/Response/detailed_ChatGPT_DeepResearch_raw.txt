@@ -1,0 +1,216 @@
+
+
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Measures cross-sectional dispersion of daily dollar-volume-adjusted returns across the portfolio using a rolling 20-day window. Higher values indicate greater concentration in specific stocks.",
+      "inputs": ["date", "company", "div_adj_close", "volume"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Compute daily dollar volume (div_adj_close * volume) for each stock",
+        "Calculate rolling 20-day standard deviation of normalized returns (div_adj_close return / portfolio median return) per stock",
+        "Aggregate cross-sectional standard deviation of these values across all stocks on the same date using equal weights",
+        "If fewer than 50% of stocks have valid data, set value to NaN"
+      ],
+      "output_range": "0.0 to 1.0 (normalized by portfolio median)",
+      "interpretation": "High values indicate poor diversification with extreme return dispersion; low values suggest uniform risk distribution across stocks"
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Calculates the cumulative contribution of top 10% highest dollar-volume stocks to total portfolio return over 60-day window",
+      "inputs": ["date", "company", "div_adj_close", "volume"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Compute daily dollar volume (div_adj_close * volume) for each stock",
+        "For each date, identify top 10% of stocks by current dollar volume",
+        "Calculate cumulative return contribution of these stocks to total portfolio return over 60-day window",
+        "Normalize by total portfolio return and cap at 1.0"
+      ],
+      "output_range": "0.0 to 1.0",
+      "interpretation": "Values near 1.0 indicate performance dominated by a few large-cap stocks; lower values suggest broad-based participation"
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Counts the number of sign changes in rolling 20-day momentum (div_adj_close return) across all stocks on each date",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 20-day momentum (sum of returns) per stock",
+        "Count how many stocks changed sign from positive to negative or vice versa compared to previous day",
+        "Normalize by total number of stocks with valid data"
+      ],
+      "output_range": "0.0 to 1.0",
+      "interpretation": "High values indicate frequent momentum regime shifts; low values suggest stable directional trends"
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Measures consistency of rolling 60-day volatility (standard deviation of div_adj_close returns) across the portfolio",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 60-day volatility (standard deviation) per stock",
+        "Aggregate cross-sectional standard deviation of these volatilities across all stocks on the same date using equal weights",
+        "Normalize by portfolio median volatility"
+      ],
+      "output_range": "0.0 to 1.0 (normalized by median)",
+      "interpretation": "High values indicate unstable volatility patterns; low values suggest consistent clustering behavior"
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Counts transitions between bull/bear regimes defined by cumulative div_adj_close returns over 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 60-day cumulative return per stock",
+        "Identify regime changes (crossing +5% or -5% thresholds) compared to previous day",
+        "Normalize count by total number of stocks with valid data"
+      ],
+      "output_range": "0.0 to 1.0",
+      "interpretation": "High values indicate frequent market state transitions; low values suggest prolonged regime persistence"
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Measures correlation between individual stock returns and portfolio-wide return (internal benchmark) over rolling 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute equal-weighted portfolio return as average of all stocks' returns on same date",
+        "Calculate rolling 60-day correlation between each stock's return and portfolio return",
+        "Aggregate cross-sectional average of these correlations using equal weights"
+      ],
+      "output_range": "-1.0 to 1.0",
+      "interpretation": "High positive values indicate strong systematic risk alignment; low values suggest idiosyncratic behavior"
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Measures time-to-recover from drawdowns using cumulative div_adj_close returns over 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 60-day cumulative return per stock",
+        "For each drawdown event, measure days to recover to previous peak",
+        "Aggregate cross-sectional median recovery time across all stocks on same date"
+      ],
+      "output_range": "1.0 to 30.0 (days)",
+      "interpretation": "Lower values indicate faster recovery from losses; higher values suggest persistent drawdowns"
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Measures synchronization of dollar-volume changes across stocks using rolling 20-day window",
+      "inputs": ["date", "company", "div_adj_close", "volume"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Compute daily dollar volume (div_adj_close * volume) for each stock",
+        "Calculate rolling 20-day percentage change in dollar volume per stock",
+        "Aggregate cross-sectional standard deviation of these changes across all stocks on same date using equal weights",
+        "Normalize by portfolio median volume change volatility"
+      ],
+      "output_range": "0.0 to 1.0 (normalized by median)",
+      "interpretation": "High values indicate synchronized liquidity shocks; low values suggest independent trading activity"
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Measures alignment between individual stock returns and portfolio-wide return (internal benchmark) over rolling 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute equal-weighted portfolio return as average of all stocks' returns on same date",
+        "Calculate rolling 60-day correlation between each stock's return and portfolio return",
+        "Aggregate cross-sectional standard deviation of these correlations using equal weights"
+      ],
+      "output_range": "0.0 to 1.0 (normalized by median)",
+      "interpretation": "High values indicate divergent behavior from internal benchmark; low values suggest coherent movement"
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Measures standard deviation of individual stock contributions to portfolio volatility over rolling 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 60-day volatility (standard deviation) per stock",
+        "Aggregate cross-sectional standard deviation of these volatilities across all stocks on same date using equal weights",
+        "Normalize by portfolio median volatility"
+      ],
+      "output_range": "0.0 to 1.0 (normalized by median)",
+      "interpretation": "High values indicate uneven risk distribution; low values suggest uniform contribution patterns"
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Measures difference in cumulative returns between high and low volatility periods over rolling 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 60-day cumulative return per stock",
+        "Identify periods where volatility (std dev of returns) is above/below median",
+        "Aggregate cross-sectional difference in average returns between these periods using equal weights"
+      ],
+      "output_range": "-1.0 to 1.0",
+      "interpretation": "High positive values indicate better performance during high volatility; negative values suggest underperformance"
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "Measures ratio of absolute return to dollar volume as proxy for information-driven trading activity",
+      "inputs": ["date", "company", "div_adj_close", "volume"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns and dollar volume (div_adj_close * volume) per stock",
+        "Compute ratio of absolute return to dollar volume for each stock",
+        "Aggregate cross-sectional standard deviation of these ratios across all stocks on same date using equal weights",
+        "Normalize by portfolio median ratio"
+      ],
+      "output_range": "0.0 to 1.0 (normalized by median)",
+      "interpretation": "High values indicate returns are driven more by information flow than liquidity; low values suggest noise dominance"
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Measures consistency of pairwise stock correlations over rolling 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 60-day correlation matrix between all pairs of stocks",
+        "Aggregate cross-sectional standard deviation of these correlations using equal weights",
+        "Normalize by portfolio median correlation"
+      ],
+      "output_range": "0.0 to 1.0 (normalized by median)",
+      "interpretation": "High values indicate unstable inter-stock relationships; low values suggest persistent correlations"
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Measures contribution of top 10% highest dollar-volume stocks to maximum drawdowns over rolling 60-day window",
+      "inputs": ["date", "company", "div_adj_close", "volume"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Compute daily dollar volume (div_adj_close * volume) for each stock",
+        "For each date, identify top 10% of stocks by current dollar volume",
+        "Calculate cumulative drawdown contribution of these stocks to portfolio max drawdown over 60-day window",
+        "Normalize by total portfolio drawdown"
+      ],
+      "output_range": "0.0 to 1.0",
+      "interpretation": "High values indicate tail risk concentrated in large-cap stocks; low values suggest diversified exposure"
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Calculates Shannon entropy of daily div_adj_close returns across the portfolio over rolling 60-day window",
+      "inputs": ["date", "company", "div_adj_close"],
+      "procedure": [
+        "Sort each stock's data by date ascending",
+        "Calculate daily div_adj_close returns for each stock",
+        "Compute rolling 60-day distribution of returns per stock",
+        "Aggregate cross-sectional Shannon entropy across all stocks on same date using equal weights",
+        "Normalize by maximum possible entropy value"
+      ],
+      "output_range": "0.0 to 1.0 (normalized)",
+      "interpretation": "High values indicate chaotic, unpredictable return patterns; low values suggest structured behavior"
+    }
+  ]
+}

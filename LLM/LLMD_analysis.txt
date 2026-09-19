@@ -1,0 +1,30 @@
+LLMD-AS-FPO — LLM驱动的金融投资组合算法选择
+这是一个研究项目，利用大语言模型（LLM）预测给定股票组合在特定时间段内应使用哪种投资组合构建算法（等权重、均值方差优化、最大索提诺比率等10种算法）。
+---
+顶层文件
+文件	功能
+Data_extraction_CS.py/.ipynb	使用 akshare 提取中国A股（CSI 300）的基本面数据（P/E、P/B、ROE 等18个指标），按实例保存到 instances_CS/
+LLM-gen-features.py	调用 Qwen3-235B 大模型，为每个资产组合生成16个抽象特征（相关性、HHI、VaR、CVaR 等）
+get_Finn_News.py	从 GDELT 获取指定股票的新闻数据（测试用，硬编码了 Apple、Tesla 等）
+get_feature_values.ipynb	演示如何用 yfinance 获取个股基本面数据
+extract.ipynb	加载并展示完整特征数据框架（基本面+技术指标+LLM特征）
+stock_code.ipynb	生成 S&P 500 股票代码列表
+stock_news_dataset.csv	空文件，原本用于存放新闻数据集
+---
+子目录
+目录	功能
+workspace/DataLoader/	核心训练流水线 — 下载股价数据、计算目标投资组合权重（One-Hot / Max-Sortino）、训练 LSTM/Transformer/Mamba 模型预测最优权重并回测
+CleanLoader/	workspace/DataLoader 的精简副本，结构更清晰
+LLM_Generated_Feature/	LLM特征生成与评估 — 使用 vLLM 部署 Qwen 模型，让 LLM 自主发现和计算投资组合级别的抽象特征，再用 LSTM 评估这些特征的效果
+All/	结果聚合中心 — 合并中美两国市场数据（AM+CS），运行 RF/MLP/LSTM 三个模型做算法选择，汇总最终结果
+RF/	随机森林算法选择 — 独立 RF 实现，附带 SHAP 特征重要性分析
+Wilcoxon/	统计显著性检验 — 对10种算法进行两两 Wilcoxon 符号秩检验，生成 p 值矩阵和热力图
+news_method/	GDELT 新闻数据采集 — 从 GDELT API 批量获取每个实例中每只股票的新闻，提供文本/情感特征
+instances_CS/	A股基本面数据 — 存储每个中国股票资产组合实例的基本面指标（850+ 个 CSV）
+Asset Info/	资产信息数据
+Raw Result/	原始策略结果
+Filtered Result/	筛选后的策略结果
+Feature/	特征数据
+Feature - Result Assemble/	特征与结果拼接数据
+---
+核心流程：股价数据 → 计算目标权重 → 提取基本面+LLM特征+新闻 → 训练RF/MLP/LSTM选择最优算法 → 统计检验验证。

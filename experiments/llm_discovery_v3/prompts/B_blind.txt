@@ -1,0 +1,12 @@
+ARM B — BLIND OUTCOME-BLIND DISCOVERY
+
+Inspect the supplied development-data context and discover non-obvious, reconstructable
+portfolio-instance characteristics. You are NOT given any established feature basis. Explain
+which empirical structural gap in the context motivates every proposal.
+
+<COMMON>
+
+DEVELOPMENT-ONLY CONTEXT:
+<CONTEXT>
+
+Return <N> features and set arm to "B".

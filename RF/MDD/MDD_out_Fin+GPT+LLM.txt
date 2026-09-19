@@ -1,0 +1,50 @@
+Selected Max Average Value: -0.2749624342965755
+Shapley Importance
+                         Feature  Shapley_Importance
+                          Period            0.061787
+          FCF standard deviation            0.006576
+                  EV/EBITDA mean            0.005631
+                      median_var            0.005454
+         P/CF standard deviation            0.005390
+                         min_avg            0.005361
+          IQS standard deviation            0.005216
+          EVC standard deviation            0.004471
+                        P/B mean            0.004308
+              FCF per Share mean            0.004002
+                        ROA mean            0.002985
+FCF per Share standard deviation            0.002778
+                        P/E mean            0.002542
+                        VEC mean            0.002525
+ Gross Margin standard deviation            0.002492
+                        mean_var            0.002226
+                        EVC mean            0.002170
+                         max_var            0.002159
+                        mean_avg            0.002106
+                        FCF mean            0.002032
+          ROA standard deviation            0.001995
+                       P/CF mean            0.001863
+                        P/S mean            0.001857
+          SPS standard deviation            0.001837
+                         min_var            0.001765
+                        SPS mean            0.001738
+          P/S standard deviation            0.001692
+                         max_avg            0.001614
+          P/B standard deviation            0.001496
+                      median_avg            0.001449
+    EV/EBITDA standard deviation            0.001401
+                        PLF mean            0.001262
+                         std_var            0.001231
+               Gross Margin mean            0.001202
+                        IQS mean            0.001172
+                         std_avg            0.001115
+   Net Margin standard deviation            0.001065
+                        ROE mean            0.001059
+          ROE standard deviation            0.001004
+                 Net Margin mean            0.000980
+          P/E standard deviation            0.000819
+          PLF standard deviation            0.000705
+          VEC standard deviation            0.000629
+                        PVS mean            0.000500
+                       RAPS mean            0.000478
+         RAPS standard deviation            0.000372
+          PVS standard deviation            0.000342

@@ -1,0 +1,161 @@
+
+
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Cross-sectional standard deviation of stock-level volatility within the portfolio over a fixed time window.",
+      "formula": "σ_portfolio,t = std_{i ∈ U_t}(volatility_i,t), where volatility_i,t = std_{s=t-19}^{t}(r_{i,s})",
+      "variables": {
+        "W": "20 trading days rolling window for volatility calculation",
+        "volatility_i,t": "20-day rolling standard deviation of returns for stock i at date t",
+        "σ_portfolio,t": "Cross-sectional standard deviation of volatilities across all stocks in U_t"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate greater dispersion in risk contributions across stocks, suggesting lower diversification effectiveness."
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Fraction of stocks with returns exceeding the portfolio mean over a fixed period.",
+      "formula": "score_t = (number of i ∈ U_t where r_i,t > R_t) / |U_t|, where R_t = mean_{i ∈ U_t}(r_i,t)",
+      "variables": {
+        "W": "10 trading days rolling window for returns",
+        "R_t": "Equal-weight portfolio return at date t from 10-day rolling returns"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more concentrated leadership (fewer stocks driving performance)."
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Number of sign changes in portfolio mean momentum over a fixed window.",
+      "formula": "count_t = number of times sign(R_t) ≠ sign(R_{t-1}) for t ∈ [t-59, t], where R_t = mean_{i ∈ U_t}(r_i,t), r_i,t = std_{s=t-4}^{t}(P_{i,s}/P_{i,s-1} - 1)",
+      "variables": {
+        "W": "5 trading days rolling window for returns",
+        "R_t": "Equal-weight portfolio return at date t from 5-day rolling returns"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more frequent momentum regime shifts."
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Number of times portfolio volatility crosses ±1.5σ thresholds over a fixed window.",
+      "formula": "count_t = number of times |R_vol,t| > 1.5 * σ_prev, where R_vol,t = mean_{i ∈ U_t}(volatility_i,t), volatility_i,t = std_{s=t-19}^{t}(r_{i,s}), σ_prev = std_{s=t-59}^{t-1}(R_vol,s)",
+      "variables": {
+        "W": "20 trading days rolling window for volatility calculation",
+        "σ_prev": "Rolling standard deviation of past 60-day portfolio volatility values"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more unstable volatility patterns."
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Number of transitions between bull and bear states in portfolio cumulative returns over a fixed window.",
+      "formula": "count_t = number of times (R_cum,t > 0.05) ≠ (R_cum,t < -0.03) for t ∈ [t-119, t], where R_cum,t = mean_{i ∈ U_t}(cumulative_return_i,t), cumulative_return_i,t = product_{s=t-59}^{t}(P_{i,s}/P_{i,s-1})",
+      "variables": {
+        "W": "60 trading days rolling window for cumulative returns"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more frequent regime shifts."
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Equal-weight mean of pairwise correlations between stock-level returns over a fixed window.",
+      "formula": "score_t = mean_{i < j ∈ U_t}(correlation(r_i,t, r_j,t)), where r_i,t = std_{s=t-19}^{t}(P_{i,s}/P_{i,s-1} - 1)",
+      "variables": {
+        "W": "20 trading days rolling window for returns"
+      },
+      "normalization": "None",
+      "interpretation": "Higher positive values indicate greater systematic risk amplification."
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Number of days required to recover from maximum drawdown in portfolio cumulative returns over a fixed window.",
+      "formula": "recovery_t = min{d | R_cum,t-d ≥ max_drawdown_t}, where max_drawdown_t = min_{s=t-59}^{t}(R_cum,s), R_cum,s = mean_{i ∈ U_t}(product_{k=s-59}^{s}(P_{i,k}/P_{i,k-1}))",
+      "variables": {
+        "W": "60 trading days rolling window for cumulative returns"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate faster recovery from drawdowns."
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Equal-weight mean of pairwise correlations between stock-level volume volatility over a fixed window.",
+      "formula": "score_t = mean_{i < j ∈ U_t}(correlation(volatility_i,t, volatility_j,t)), where volatility_i,t = std_{s=t-9}^{t}(volume_{i,s})",
+      "variables": {
+        "W": "10 trading days rolling window for volume volatility"
+      },
+      "normalization": "None",
+      "interpretation": "Higher positive values indicate synchronized liquidity shocks."
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Equal-weight mean of correlations between stock-level returns and log(volume) changes over a fixed window.",
+      "formula": "score_t = mean_{i ∈ U_t}(correlation(r_i,t, Δlog(vol)_i,t)), where r_i,t = std_{s=t-9}^{t}(P_{i,s}/P_{i,s-1} - 1), Δlog(vol)_i,t = log(volume_{i,t}) - log(volume_{i,t-9})",
+      "variables": {
+        "W": "10 trading days rolling window for returns and volume changes"
+      },
+      "normalization": "None",
+      "interpretation": "Higher positive values indicate stronger alignment between price and volume trends."
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Cross-sectional standard deviation of stock-level volatility within the portfolio over a fixed window.",
+      "formula": "σ_portfolio,t = std_{i ∈ U_t}(volatility_i,t), where volatility_i,t = std_{s=t-19}^{t}(P_{i,s}/P_{i,s-1} - 1)",
+      "variables": {
+        "W": "20 trading days rolling window for volatility calculation"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate less uniform risk contribution across stocks."
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Absolute difference in portfolio returns between high and low volatility states over a fixed window.",
+      "formula": "score_t = |mean_{i ∈ U_t, volatility_i,t > 1.5σ}(r_i,t) - mean_{i ∈ U_t, volatility_i,t < 0.5σ}(r_i,t)|, where volatility_i,t = std_{s=t-59}^{t}(P_{i,s}/P_{i,s-1} - 1), σ = std_{i ∈ U_t}(volatility_i,t)",
+      "variables": {
+        "W": "60 trading days rolling window for volatility calculation"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate more consistent performance across regimes."
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "Equal-weight mean of correlations between stock-level returns and log(volume) changes over a fixed window.",
+      "formula": "score_t = mean_{i ∈ U_t}(correlation(r_i,t, Δlog(vol)_i,t)), where r_i,t = std_{s=t-9}^{t}(P_{i,s}/P_{i,s-1} - 1), Δlog(vol)_i,t = log(volume_{i,t}) - log(volume_{i,t-9})",
+      "variables": {
+        "W": "10 trading days rolling window for returns and volume changes"
+      },
+      "normalization": "None",
+      "interpretation": "Higher positive values indicate stronger information flow dominance."
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Standard deviation of pairwise correlations between stock-level returns over a fixed window.",
+      "formula": "σ_correlation,t = std_{i < j ∈ U_t}(correlation(r_i,t, r_j,t)), where r_i,t = std_{s=t-19}^{t}(P_{i,s}/P_{i,s-1} - 1)",
+      "variables": {
+        "W": "20 trading days rolling window for returns"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate less stable inter-stock relationships."
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Standard deviation of returns among bottom 10% of stocks by cumulative return over a fixed window.",
+      "formula": "σ_tail,t = std_{i ∈ tail}(r_cum,i,t), where r_cum,i,t = product_{s=t-59}^{t}(P_{i,s}/P_{i,s-1}), tail = {i ∈ U_t | r_cum,i,t ≤ quantile_{0.1}(r_cum,U_t)}",
+      "variables": {
+        "W": "60 trading days rolling window for cumulative returns"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more concentrated tail risk exposure."
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Shannon entropy of distribution of stock-level cumulative returns over a fixed window.",
+      "formula": "H_t = -Σ_{r} p(r) * log(p(r)), where r ∈ {product_{s=t-59}^{t}(P_{i,s}/P_{i,s-1}) | i ∈ U_t}, p(r) = empirical probability density of returns",
+      "variables": {
+        "W": "60 trading days rolling window for cumulative returns"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more chaotic/unordered return patterns."
+    }
+  ]
+}

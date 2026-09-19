@@ -1,0 +1,21 @@
+{
+  "experiment_id": "llm_formula_v2_2026-08-12",
+  "status": "step1_complete_analysis_stop",
+  "completed_stages": [
+    "final_audit",
+    "formula_computation",
+    "generate_formula_specs",
+    "group_asset_robustness",
+    "individual_feature_diagnostics",
+    "main_rf_mlp",
+    "negative_controls",
+    "statistical_analysis",
+    "step0_audit",
+    "validate_and_compute"
+  ],
+  "next_stage": "human_review_and_step2_decision",
+  "notes": [
+    "Original project files are read-only inputs."
+  ],
+  "updated_at": "2026-08-11T19:47:06.547194+00:00"
+}

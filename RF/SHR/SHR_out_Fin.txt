@@ -1,0 +1,28 @@
+Selected Max Average Value: 0.8108691706055009
+Shapley Importance
+                         Feature  Shapley_Importance
+                        P/S mean            0.107725
+                          Period            0.073049
+                        SPS mean            0.066667
+               Gross Margin mean            0.051268
+                        FCF mean            0.049172
+          SPS standard deviation            0.038315
+                        P/B mean            0.037956
+FCF per Share standard deviation            0.027427
+    EV/EBITDA standard deviation            0.026809
+         P/CF standard deviation            0.025058
+                  EV/EBITDA mean            0.025012
+                        P/E mean            0.023535
+          P/S standard deviation            0.022625
+                        ROA mean            0.021514
+                 Net Margin mean            0.021114
+ Gross Margin standard deviation            0.020782
+          ROA standard deviation            0.020441
+          ROE standard deviation            0.019395
+                       P/CF mean            0.018941
+                        ROE mean            0.015661
+          FCF standard deviation            0.015030
+              FCF per Share mean            0.014713
+          P/B standard deviation            0.014683
+          P/E standard deviation            0.011683
+   Net Margin standard deviation            0.008674

@@ -1,0 +1,163 @@
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Average pairwise correlation between stocks in the portfolio using equal weights over a rolling window.",
+      "formula": "Let r_{i,t} = daily return of company i on date t. Compute 60-day rolling Pearson correlations ρ_{i,j}(t) between all pairs (i,j). Portfolio metric = mean(ρ_{i,j}(t)) for all i < j",
+      "variables": {
+        "r_{i,t}": "Daily return of company i on date t computed from div_adj_close.",
+        "ρ_{i,j}(t)": "Pearson correlation between returns of companies i and j at time t"
+      },
+      "normalization": "[0,1] bounded by min/max observed values",
+      "interpretation": "Higher values indicate greater correlation between stocks (lower diversification), lower values suggest more分散的 returns across the portfolio."
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Fraction of total portfolio return contributed by top-performing companies in a rolling window.",
+      "formula": "Let R_t = equal-weight portfolio return on date t. For each day, compute 20-day trailing return for all stocks. Let S_top = sum of absolute returns from top 10% of companies. Metric = S_top / |R_t|",
+      "variables": {
+        "R_t": "Equal-weight portfolio return on date t.",
+        "S_top": "Sum of absolute values of returns from top 10% of companies"
+      },
+      "normalization": "[0,1] bounded by min/max observed values",
+      "interpretation": "Higher values indicate that a small subset of stocks drives most of the portfolio's performance, lower values suggest more distributed leadership."
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Count of sign changes in 5-day cumulative momentum over rolling window.",
+      "formula": "Let M_t = 5-day trailing cumulative return of equal-weighted portfolio. Count number of times sign(M_t) ≠ sign(M_{t-1}) within 20-day rolling window",
+      "variables": {
+        "M_t": "5-day trailing cumulative return of equal-weighted portfolio on date t"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more frequent regime shifts in portfolio momentum behavior."
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Count of volatility crossings above/below 60-day moving average threshold.",
+      "formula": "Let σ_t = 20-day rolling standard deviation of equal-weighted portfolio returns. Count number of times σ_t crosses above or below its 60-day moving average within rolling window",
+      "variables": {
+        "σ_t": "20-day rolling standard deviation of equal-weighted portfolio returns on date t"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more frequent and unstable volatility regime transitions."
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Count of transitions between bull, bear, and sideways market states.",
+      "formula": "Define state_t = 1 if R_{20} > 1%, -1 if R_{20} < -1%, else 0. Count number of times state_t ≠ state_{t-1} within 60-day rolling window",
+      "variables": {
+        "R_{20}": "20-day cumulative return of equal-weighted portfolio"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate greater frequency of regime changes in portfolio performance patterns."
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Average correlation between individual stock returns and equal-weighted portfolio returns.",
+      "formula": "Compute 20-day rolling Pearson correlations ρ_{i,t} between each stock i's return and R_t. Portfolio metric = mean(ρ_{i,t}) across all stocks",
+      "variables": {
+        "R_t": "Equal-weight portfolio return on date t.",
+        "ρ_{i,t}": "Pearson correlation between company i's returns and portfolio returns at time t"
+      },
+      "normalization": "[0,1] bounded by min/max observed values",
+      "interpretation": "Higher values indicate greater alignment with systemic market factors (higher systematic risk amplification)."
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Average number of days required to recover from drawdowns.",
+      "formula": "Identify drawdown periods where cumulative return < previous peak. For each drawdown, compute recovery_days = t - last_peak_date. Portfolio metric = mean(recovery_days) across all identified events",
+      "variables": {
+        "recovery_days": "Number of days from drawdown trough to previous peak"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate faster recovery from drawdowns (higher resilience)."
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Average pairwise correlation between stocks' dollar volume volatility.",
+      "formula": "Let D_{i,t} = close_i,t × volume_i,t. Compute 20-day rolling standard deviation σ_D,i(t) for each stock. Portfolio metric = mean of Pearson correlations between all pairs (σ_D,i, σ_D,j)",
+      "variables": {
+        "D_{i,t}": "Daily dollar volume of company i on date t (close × volume)",
+        "σ_D,i(t)": "20-day rolling standard deviation of company i's dollar volume"
+      },
+      "normalization": "[0,1] bounded by min/max observed values",
+      "interpretation": "Higher values indicate greater synchronization in liquidity risk across portfolio stocks."
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Correlation between portfolio returns and cross-sectional volatility of individual stock returns.",
+      "formula": "Compute 20-day rolling standard deviation σ_i(t) for each stock. Compute portfolio metric = Pearson correlation between R_t and mean(σ_i(t)) across all stocks",
+      "variables": {
+        "R_t": "Equal-weight portfolio return on date t.",
+        "σ_i(t)": "20-day rolling standard deviation of company i's returns"
+      },
+      "normalization": "[-1,1] bounded by min/max observed values",
+      "interpretation": "Higher positive values indicate stronger alignment between portfolio returns and market-wide dispersion patterns."
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Cross-sectional standard deviation of individual stock volatilities.",
+      "formula": "Compute 20-day rolling standard deviation σ_i(t) for each stock. Portfolio metric = cross-sectional standard deviation of {σ_i(t)} across all stocks",
+      "variables": {
+        "σ_i(t)": "20-day rolling standard deviation of company i's returns"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate more uniform risk contribution across stocks (better diversification)."
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Coefficient of variation of portfolio returns during different volatility regimes.",
+      "formula": "Define high/low volatility states based on 60-day rolling σ_t thresholds. Compute CV_high = σ_high / μ_high and CV_low = σ_low / μ_low. Portfolio metric = mean(CV_high, CV_low)",
+      "variables": {
+        "σ_t": "60-day rolling standard deviation of equal-weighted portfolio returns",
+        "μ_high": "Mean return during high volatility regime",
+        "μ_low": "Mean return during low volatility regime"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate more consistent performance across different volatility regimes."
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "R-squared of portfolio returns regressed against trading volume changes.",
+      "formula": "Let ΔV_{i,t} = volume_i,t - volume_i,t-1. Compute portfolio metric = R² from regression of R_t on {ΔV_{i,t}} across all stocks",
+      "variables": {
+        "R_t": "Equal-weight portfolio return on date t.",
+        "ΔV_{i,t}": "5-day change in trading volume for company i"
+      },
+      "normalization": "[0,1] bounded by min/max observed values",
+      "interpretation": "Higher values indicate greater proportion of price movements explained by trading volume changes (information flow)."
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Standard deviation of pairwise stock correlations over time.",
+      "formula": "Compute 20-day rolling Pearson correlations ρ_{i,j}(t) between all pairs. Portfolio metric = cross-sectional standard deviation of {ρ_{i,j}(t)} across all pairs",
+      "variables": {
+        "ρ_{i,j}(t)": "Pearson correlation between returns of companies i and j at time t"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate more stable inter-stock relationships over time."
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Cross-sectional standard deviation of returns during extreme downside events.",
+      "formula": "Identify days where R_t is in bottom 10% of historical values. Compute cross-sectional standard deviation of {r_{i,t}} on these tail risk days",
+      "variables": {
+        "R_t": "Equal-weight portfolio return on date t.",
+        "r_{i,t}": "Daily return of company i on date t"
+      },
+      "normalization": "None",
+      "interpretation": "Lower values indicate more diversified tail risk exposure across the portfolio."
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Shannon entropy of equal-weighted portfolio return distribution.",
+      "formula": "Estimate probability density function f(R) from 60-day rolling returns. Portfolio metric = -∫f(R)log(f(R))dR",
+      "variables": {
+        "R": "Equal-weight portfolio return"
+      },
+      "normalization": "None",
+      "interpretation": "Higher values indicate more unpredictable/chaotic return patterns, lower values suggest structured behavior."
+    }
+  ]
+}

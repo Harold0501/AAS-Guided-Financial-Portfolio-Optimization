@@ -1,0 +1,17 @@
+{
+  "experiment_id": "llm_discovery_v3_2026-08-13",
+  "source_root": "/Users/wanweilin/Documents/Sean's PO AAS/2025_Summer_Research_Code-main",
+  "formula_v2_dir": "experiments/llm_formula_v2",
+  "mapping_csv": "LLM/Assets_and_Instances/combined_asset_components_time.csv",
+  "raw_data_dir": "LLMD-AS-FPO/LLM_Generated_Feature/data",
+  "model": "qwen/qwen3-32b",
+  "generation_seeds": [3101, 3102, 3103, 3104, 3105],
+  "temperature": 0.35,
+  "features_per_generation": 10,
+  "heldout_asset_folds": 5,
+  "split_seed": 20260813,
+  "selector_seeds": [42, 142, 242, 342, 442],
+  "criteria": ["AR", "CR", "MDD", "SHR", "SOR"],
+  "selectors": ["RF", "MLP"],
+  "allowed_raw_fields": ["date", "company", "open", "high", "low", "close", "volume", "div_adj_close"]
+}

@@ -1,0 +1,22 @@
+{"main_cells": 90, "positive_full_formula_cells": 7, "positive_pruned_formula_cells": 6, "full_formula_positive_ci_cells": 2, "pruned_formula_positive_ci_cells": 4}
+selector criterion       configuration  mean_delta_vs_fin  bootstrap_ci_low  bootstrap_ci_high   wilcoxon_p  p_bh_primary  regret_reduction_fraction
+      RF        AR    Fin+FormulaV2All          -0.005618         -0.015002           0.003353 6.574259e-03      0.015638                  -0.117226
+      RF        AR Fin+FormulaV2Pruned          -0.004892         -0.013946           0.004260 7.037090e-03      0.015638                  -0.102075
+      RF        CR    Fin+FormulaV2All           0.004428         -0.022507           0.032813 1.220001e-02      0.023802                   0.021707
+      RF        CR Fin+FormulaV2Pruned          -0.007454         -0.046167           0.027790 1.309109e-02      0.023802                  -0.036539
+      RF       MDD    Fin+FormulaV2All           0.002934          0.001656           0.004291 9.724391e-04      0.004314                   0.231558
+      RF       MDD Fin+FormulaV2Pruned           0.003145          0.001857           0.004534 1.220117e-04      0.000813                   0.248223
+      RF       SHR    Fin+FormulaV2All          -0.015999         -0.033340           0.001022 4.044176e-02      0.057774                  -0.149754
+      RF       SHR Fin+FormulaV2Pruned          -0.012827         -0.029577           0.004101 2.440084e-02      0.037540                  -0.120062
+      RF       SOR    Fin+FormulaV2All          -0.019911         -0.055097           0.015292 1.526583e-02      0.025443                  -0.093917
+      RF       SOR Fin+FormulaV2Pruned          -0.015358         -0.049742           0.019189 4.093906e-03      0.013646                  -0.072442
+     MLP        AR    Fin+FormulaV2All           0.030856          0.018723           0.043923 1.465556e-07      0.000003                   0.364717
+     MLP        AR Fin+FormulaV2Pruned           0.028558          0.016847           0.042109 4.966623e-05      0.000497                   0.337558
+     MLP        CR    Fin+FormulaV2All           0.042898         -0.004021           0.092638 3.005585e-01      0.353598                   0.172098
+     MLP        CR Fin+FormulaV2Pruned           0.033842         -0.015940           0.084311 3.670028e-01      0.407781                   0.135767
+     MLP       MDD    Fin+FormulaV2All           0.000961         -0.000890           0.002831 5.146231e-01      0.514623                   0.080963
+     MLP       MDD Fin+FormulaV2Pruned           0.000510         -0.001407           0.002443 4.734863e-01      0.498407                   0.042961
+     MLP       SHR    Fin+FormulaV2All           0.017677         -0.000448           0.035312 9.781966e-02      0.122275                   0.131550
+     MLP       SHR Fin+FormulaV2Pruned           0.034731          0.017867           0.052057 1.078624e-03      0.004314                   0.258471
+     MLP       SOR    Fin+FormulaV2All           0.022885         -0.011612           0.057085 9.269038e-02      0.122275                   0.091961
+     MLP       SOR Fin+FormulaV2Pruned           0.054283          0.023775           0.086040 5.769901e-03      0.015638                   0.218127

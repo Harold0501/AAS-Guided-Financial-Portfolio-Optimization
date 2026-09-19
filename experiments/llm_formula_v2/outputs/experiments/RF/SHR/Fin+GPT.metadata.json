@@ -1,0 +1,15 @@
+{
+  "selector": "RF",
+  "criterion": "SHR",
+  "configuration": "Fin+GPT",
+  "n_instances": 762,
+  "n_features": 37,
+  "folds": 10,
+  "seed": 42,
+  "protocol": "exact repository shuffled KFold; one scalar model per target/fold",
+  "selection_mean": 0.8179111673082458,
+  "regret_mean": 0.105186833965041,
+  "sbs_mean": 0.6817712164469582,
+  "vbs_mean": 0.9230980012732869,
+  "completed_at": "2026-08-11T18:46:13.490568+00:00"
+}

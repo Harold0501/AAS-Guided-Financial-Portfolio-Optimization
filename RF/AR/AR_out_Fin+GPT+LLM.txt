@@ -1,0 +1,50 @@
+Selected Max Average Value: 0.33484640436865887
+Shapley Importance
+                         Feature  Shapley_Importance
+                        SPS mean            0.022299
+                        P/S mean            0.020317
+                        FCF mean            0.018166
+                         max_var            0.014072
+          FCF standard deviation            0.012429
+          ROA standard deviation            0.012081
+          SPS standard deviation            0.011655
+               Gross Margin mean            0.010939
+                          Period            0.009068
+                        P/B mean            0.008867
+                      median_var            0.008605
+                         std_var            0.008350
+          IQS standard deviation            0.008246
+                        mean_var            0.008172
+                  EV/EBITDA mean            0.007513
+                         std_avg            0.007285
+                 Net Margin mean            0.007274
+          EVC standard deviation            0.006276
+          P/S standard deviation            0.006075
+    EV/EBITDA standard deviation            0.005944
+                        VEC mean            0.005898
+          ROE standard deviation            0.005612
+                       P/CF mean            0.004949
+ Gross Margin standard deviation            0.004909
+                        PLF mean            0.004760
+                        ROA mean            0.004649
+          P/B standard deviation            0.004222
+         P/CF standard deviation            0.004155
+                         min_avg            0.004100
+          PLF standard deviation            0.004096
+                         max_avg            0.003828
+              FCF per Share mean            0.003595
+                        P/E mean            0.003446
+   Net Margin standard deviation            0.003206
+                        mean_avg            0.003086
+                        ROE mean            0.002988
+                      median_avg            0.002896
+FCF per Share standard deviation            0.002858
+                         min_var            0.002677
+                        PVS mean            0.002623
+          VEC standard deviation            0.002602
+                       RAPS mean            0.002569
+                        EVC mean            0.002204
+          PVS standard deviation            0.002097
+                        IQS mean            0.001915
+         RAPS standard deviation            0.001868
+          P/E standard deviation            0.001717

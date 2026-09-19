@@ -1,0 +1,15 @@
+{
+  "selector": "MLP",
+  "criterion": "MDD",
+  "configuration": "Fin+GPT+FormulaV2Pruned",
+  "n_instances": 762,
+  "n_features": 53,
+  "folds": 10,
+  "seed": 42,
+  "protocol": "exact repository shuffled KFold; one scalar model per target/fold",
+  "selection_mean": -0.2733957014723056,
+  "regret_mean": 0.011313782299661268,
+  "sbs_mean": -0.2776807136780766,
+  "vbs_mean": -0.26208191917264434,
+  "completed_at": "2026-08-11T19:14:47.770790+00:00"
+}

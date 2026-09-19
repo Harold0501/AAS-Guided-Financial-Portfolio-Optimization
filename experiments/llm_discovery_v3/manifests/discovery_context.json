@@ -1,0 +1,376 @@
+{
+  "protocol": {
+    "purpose": "development-only, outcome-blind portfolio-instance feature discovery",
+    "development_families": [
+      "asset_15",
+      "asset_16",
+      "asset_18",
+      "asset_19",
+      "asset_21",
+      "asset_22",
+      "asset_23",
+      "asset_24",
+      "asset_27",
+      "asset_28",
+      "asset_29",
+      "asset_30",
+      "asset_32",
+      "asset_33",
+      "asset_34",
+      "asset_35",
+      "asset_37",
+      "asset_38"
+    ],
+    "heldout_family_count": 5,
+    "heldout_names_disclosed_to_llm": false,
+    "algorithm_outcomes_included": false,
+    "future_returns_included": false
+  },
+  "schema": {
+    "raw_fields": [
+      "date",
+      "company",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "div_adj_close"
+    ],
+    "instance_definition": "A variable-length multi-asset OHLCV history ending at its decision date.",
+    "required_output": "One finite scalar per portfolio instance, invariant to asset ordering."
+  },
+  "development_distribution": {
+    "instances": 615,
+    "families": 18,
+    "observations": {
+      "min": 242.0,
+      "q10": 244.0,
+      "median": 730.0,
+      "q90": 1701.0,
+      "max": 2188.0
+    },
+    "assets": {
+      "min": 4.0,
+      "q10": 10.0,
+      "median": 22.0,
+      "q90": 55.0,
+      "max": 59.0
+    },
+    "missing_fraction": {
+      "min": 0.0,
+      "q10": 0.0,
+      "median": 0.041478,
+      "q90": 0.144755,
+      "max": 0.34943
+    },
+    "median_asset_volatility": {
+      "min": 0.011153,
+      "q10": 0.018505,
+      "median": 0.023666,
+      "q90": 0.02982,
+      "max": 0.034455
+    },
+    "median_asset_mean_return": {
+      "min": -0.002189,
+      "q10": -0.000145,
+      "median": 0.000669,
+      "q90": 0.001604,
+      "max": 0.003418
+    },
+    "cross_sectional_return_dispersion": {
+      "min": 0.007287,
+      "q10": 0.011771,
+      "median": 0.017313,
+      "q90": 0.02281,
+      "max": 0.028772
+    },
+    "mean_pairwise_correlation": {
+      "min": 0.102817,
+      "q10": 0.253181,
+      "median": 0.340995,
+      "q90": 0.519234,
+      "max": 0.673863
+    },
+    "negative_return_fraction": {
+      "min": 0.327632,
+      "q10": 0.419519,
+      "median": 0.464667,
+      "q90": 0.510659,
+      "max": 0.552018
+    },
+    "volume_log_change_volatility": {
+      "min": 0.28915,
+      "q10": 0.373269,
+      "median": 0.402476,
+      "q90": 0.446067,
+      "max": 0.516472
+    }
+  },
+  "anonymized_examples": [
+    {
+      "observations": 252,
+      "assets": 10,
+      "missing_fraction": 0.0,
+      "median_asset_volatility": 0.024385,
+      "median_asset_mean_return": -0.001663,
+      "cross_sectional_return_dispersion": 0.015105,
+      "mean_pairwise_correlation": 0.673863,
+      "negative_return_fraction": 0.523016,
+      "volume_log_change_volatility": 0.28915
+    },
+    {
+      "observations": 502,
+      "assets": 29,
+      "missing_fraction": 0.0,
+      "median_asset_volatility": 0.016921,
+      "median_asset_mean_return": 0.000329,
+      "cross_sectional_return_dispersion": 0.012598,
+      "mean_pairwise_correlation": 0.356664,
+      "negative_return_fraction": 0.485575,
+      "volume_log_change_volatility": 0.344513
+    },
+    {
+      "observations": 973,
+      "assets": 10,
+      "missing_fraction": 0.017472,
+      "median_asset_volatility": 0.021422,
+      "median_asset_mean_return": 0.000769,
+      "cross_sectional_return_dispersion": 0.014478,
+      "mean_pairwise_correlation": 0.377268,
+      "negative_return_fraction": 0.482323,
+      "volume_log_change_volatility": 0.38651
+    },
+    {
+      "observations": 245,
+      "assets": 18,
+      "missing_fraction": 0.045125,
+      "median_asset_volatility": 0.019426,
+      "median_asset_mean_return": 8.4e-05,
+      "cross_sectional_return_dispersion": 0.01108,
+      "mean_pairwise_correlation": 0.497964,
+      "negative_return_fraction": 0.446485,
+      "volume_log_change_volatility": 0.487618
+    },
+    {
+      "observations": 487,
+      "assets": 20,
+      "missing_fraction": 0.002875,
+      "median_asset_volatility": 0.020555,
+      "median_asset_mean_return": 0.00227,
+      "cross_sectional_return_dispersion": 0.015528,
+      "mean_pairwise_correlation": 0.394316,
+      "negative_return_fraction": 0.46345,
+      "volume_log_change_volatility": 0.385707
+    },
+    {
+      "observations": 1462,
+      "assets": 48,
+      "missing_fraction": 0.073159,
+      "median_asset_volatility": 0.022351,
+      "median_asset_mean_return": 0.000968,
+      "cross_sectional_return_dispersion": 0.01759,
+      "mean_pairwise_correlation": 0.305762,
+      "negative_return_fraction": 0.441818,
+      "volume_log_change_volatility": 0.414931
+    },
+    {
+      "observations": 244,
+      "assets": 48,
+      "missing_fraction": 0.012466,
+      "median_asset_volatility": 0.023591,
+      "median_asset_mean_return": 0.000973,
+      "cross_sectional_return_dispersion": 0.018013,
+      "mean_pairwise_correlation": 0.375172,
+      "negative_return_fraction": 0.467128,
+      "volume_log_change_volatility": 0.371895
+    },
+    {
+      "observations": 487,
+      "assets": 10,
+      "missing_fraction": 0.033676,
+      "median_asset_volatility": 0.020798,
+      "median_asset_mean_return": -2.9e-05,
+      "cross_sectional_return_dispersion": 0.011495,
+      "mean_pairwise_correlation": 0.483732,
+      "negative_return_fraction": 0.458316,
+      "volume_log_change_volatility": 0.439762
+    },
+    {
+      "observations": 244,
+      "assets": 10,
+      "missing_fraction": 0.003689,
+      "median_asset_volatility": 0.030445,
+      "median_asset_mean_return": 0.001751,
+      "cross_sectional_return_dispersion": 0.019035,
+      "mean_pairwise_correlation": 0.512696,
+      "negative_return_fraction": 0.478689,
+      "volume_log_change_volatility": 0.381445
+    },
+    {
+      "observations": 1701,
+      "assets": 29,
+      "missing_fraction": 0.072229,
+      "median_asset_volatility": 0.025835,
+      "median_asset_mean_return": 0.000783,
+      "cross_sectional_return_dispersion": 0.020052,
+      "mean_pairwise_correlation": 0.311003,
+      "negative_return_fraction": 0.459263,
+      "volume_log_change_volatility": 0.414474
+    },
+    {
+      "observations": 485,
+      "assets": 29,
+      "missing_fraction": 0.000284,
+      "median_asset_volatility": 0.02241,
+      "median_asset_mean_return": -0.000867,
+      "cross_sectional_return_dispersion": 0.016767,
+      "mean_pairwise_correlation": 0.348176,
+      "negative_return_fraction": 0.530039,
+      "volume_log_change_volatility": 0.403334
+    },
+    {
+      "observations": 973,
+      "assets": 44,
+      "missing_fraction": 0.104807,
+      "median_asset_volatility": 0.024491,
+      "median_asset_mean_return": 0.000908,
+      "cross_sectional_return_dispersion": 0.019617,
+      "mean_pairwise_correlation": 0.252517,
+      "negative_return_fraction": 0.44032,
+      "volume_log_change_volatility": 0.411845
+    },
+    {
+      "observations": 245,
+      "assets": 13,
+      "missing_fraction": 0.069388,
+      "median_asset_volatility": 0.020615,
+      "median_asset_mean_return": 0.000369,
+      "cross_sectional_return_dispersion": 0.013622,
+      "mean_pairwise_correlation": 0.522405,
+      "negative_return_fraction": 0.456829,
+      "volume_log_change_volatility": 0.493101
+    },
+    {
+      "observations": 487,
+      "assets": 16,
+      "missing_fraction": 0.002438,
+      "median_asset_volatility": 0.025696,
+      "median_asset_mean_return": 0.00246,
+      "cross_sectional_return_dispersion": 0.019107,
+      "mean_pairwise_correlation": 0.387686,
+      "negative_return_fraction": 0.476514,
+      "volume_log_change_volatility": 0.395493
+    },
+    {
+      "observations": 1462,
+      "assets": 22,
+      "missing_fraction": 0.153277,
+      "median_asset_volatility": 0.026387,
+      "median_asset_mean_return": 0.001531,
+      "cross_sectional_return_dispersion": 0.018226,
+      "mean_pairwise_correlation": 0.370338,
+      "negative_return_fraction": 0.404427,
+      "volume_log_change_volatility": 0.411015
+    },
+    {
+      "observations": 244,
+      "assets": 22,
+      "missing_fraction": 0.014717,
+      "median_asset_volatility": 0.026798,
+      "median_asset_mean_return": 0.003099,
+      "cross_sectional_return_dispersion": 0.022309,
+      "mean_pairwise_correlation": 0.368571,
+      "negative_return_fraction": 0.455849,
+      "volume_log_change_volatility": 0.365772
+    },
+    {
+      "observations": 487,
+      "assets": 39,
+      "missing_fraction": 0.065656,
+      "median_asset_volatility": 0.01723,
+      "median_asset_mean_return": -0.000187,
+      "cross_sectional_return_dispersion": 0.010912,
+      "mean_pairwise_correlation": 0.472997,
+      "negative_return_fraction": 0.461328,
+      "volume_log_change_volatility": 0.438867
+    },
+    {
+      "observations": 244,
+      "assets": 44,
+      "missing_fraction": 0.001118,
+      "median_asset_volatility": 0.018199,
+      "median_asset_mean_return": -0.000151,
+      "cross_sectional_return_dispersion": 0.013312,
+      "mean_pairwise_correlation": 0.408646,
+      "negative_return_fraction": 0.502235,
+      "volume_log_change_volatility": 0.378401
+    },
+    {
+      "observations": 1701,
+      "assets": 56,
+      "missing_fraction": 0.165711,
+      "median_asset_volatility": 0.030796,
+      "median_asset_mean_return": 0.000964,
+      "cross_sectional_return_dispersion": 0.023729,
+      "mean_pairwise_correlation": 0.319878,
+      "negative_return_fraction": 0.420582,
+      "volume_log_change_volatility": 0.40847
+    },
+    {
+      "observations": 485,
+      "assets": 56,
+      "missing_fraction": 0.011156,
+      "median_asset_volatility": 0.027198,
+      "median_asset_mean_return": -0.000605,
+      "cross_sectional_return_dispersion": 0.02105,
+      "mean_pairwise_correlation": 0.328082,
+      "negative_return_fraction": 0.531296,
+      "volume_log_change_volatility": 0.389251
+    },
+    {
+      "observations": 973,
+      "assets": 6,
+      "missing_fraction": 0.214971,
+      "median_asset_volatility": 0.030241,
+      "median_asset_mean_return": 0.0005,
+      "cross_sectional_return_dispersion": 0.019633,
+      "mean_pairwise_correlation": 0.174429,
+      "negative_return_fraction": 0.393114,
+      "volume_log_change_volatility": 0.413694
+    },
+    {
+      "observations": 245,
+      "assets": 12,
+      "missing_fraction": 0.010204,
+      "median_asset_volatility": 0.027552,
+      "median_asset_mean_return": 0.000487,
+      "cross_sectional_return_dispersion": 0.016654,
+      "mean_pairwise_correlation": 0.487455,
+      "negative_return_fraction": 0.461224,
+      "volume_log_change_volatility": 0.459144
+    },
+    {
+      "observations": 487,
+      "assets": 16,
+      "missing_fraction": 0.146817,
+      "median_asset_volatility": 0.02546,
+      "median_asset_mean_return": 0.001561,
+      "cross_sectional_return_dispersion": 0.019724,
+      "mean_pairwise_correlation": 0.277008,
+      "negative_return_fraction": 0.401822,
+      "volume_log_change_volatility": 0.443023
+    },
+    {
+      "observations": 1462,
+      "assets": 59,
+      "missing_fraction": 0.108778,
+      "median_asset_volatility": 0.026921,
+      "median_asset_mean_return": 0.001151,
+      "cross_sectional_return_dispersion": 0.021468,
+      "mean_pairwise_correlation": 0.268823,
+      "negative_return_fraction": 0.430766,
+      "volume_log_change_volatility": 0.423674
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "features": [
+    {
+      "name": "Portfolio Diversification Index",
+      "description": "Measures the average pairwise correlation between stocks in the portfolio using equal weights. Lower values indicate better diversification.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate pairwise Pearson correlations between all companies' returns over a 60-day rolling window.",
+        "Average the correlation matrix values across all pairs to produce a single portfolio-level metric.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,1]",
+      "interpretation": "Higher values indicate greater correlation between stocks (lower diversification), lower values indicate more分散的 returns across the portfolio."
+    },
+    {
+      "name": "Market Leadership Concentration Score",
+      "description": "Measures the fraction of total portfolio return contributed by the top-performing companies in a rolling window.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "For each day, rank companies by their 20-day trailing return.",
+        "Sum the absolute values of returns from the top 10% of companies and divide by total portfolio return (using equal weights).",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,1]",
+      "interpretation": "Higher values indicate that a small subset of stocks drives most of the portfolio's performance, lower values suggest more distributed leadership."
+    },
+    {
+      "name": "Momentum Shift Frequency",
+      "description": "Counts the number of times the portfolio transitions between positive and negative momentum regimes in a rolling window.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 5-day trailing cumulative return for equal-weighted portfolio.",
+        "Count the number of sign changes in the momentum signal over a 20-day rolling window.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Higher values indicate more frequent regime shifts in portfolio momentum behavior."
+    },
+    {
+      "name": "Volatility Regime Stability",
+      "description": "Measures the consistency of volatility clustering patterns using rolling standard deviation of returns.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 20-day rolling standard deviation of equal-weighted portfolio returns.",
+        "Count the number of times volatility crosses above/below a 60-day moving average threshold.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Higher values indicate more frequent and unstable volatility regime transitions."
+    },
+    {
+      "name": "Portfolio Regime Transition Frequency",
+      "description": "Counts the number of transitions between bull, bear, and sideways market states based on equal-weighted returns.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Define bull state as 20-day return > 1%, bear state as < -1%, sideways otherwise.",
+        "Count transitions between states in a 60-day rolling window.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Higher values indicate greater frequency of regime changes in portfolio performance patterns."
+    },
+    {
+      "name": "Systematic Risk Amplification Index",
+      "description": "Measures the average correlation between individual stock returns and equal-weighted portfolio returns.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 20-day rolling correlation between each stock's return and the equal-weighted portfolio return.",
+        "Average these correlations across all companies to produce a single metric.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,1]",
+      "interpretation": "Higher values indicate greater alignment with systemic market factors (higher systematic risk amplification)."
+    },
+    {
+      "name": "Recovery Velocity Index",
+      "description": "Measures the time taken to recover from drawdowns relative to historical benchmarks.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Identify drawdown periods (portfolio return < previous peak).",
+        "Calculate the number of days required to recover to previous peak level.",
+        "Average recovery times across all identified drawdown events."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Lower values indicate faster recovery from drawdowns (higher resilience)."
+    },
+    {
+      "name": "Liquidity Correlation Intensity",
+      "description": "Measures the average pairwise correlation between stocks' dollar volumes (close × volume).",
+      "inputs": [
+        "close",
+        "volume"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily dollar volume for each company as close × volume.",
+        "Calculate 20-day rolling standard deviation of dollar volume for each company.",
+        "Calculate pairwise Pearson correlations between all companies' dollar volume volatility.",
+        "Average these correlations across all pairs to produce a single metric."
+      ],
+      "output_range": "[0,1]",
+      "interpretation": "Higher values indicate greater synchronization in liquidity risk across portfolio stocks."
+    },
+    {
+      "name": "Sentiment Coherence Score",
+      "description": "Measures the correlation between equal-weighted portfolio returns and cross-sectional standard deviation of individual stock returns.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 20-day rolling standard deviation of individual stock returns (cross-sectionally).",
+        "Calculate 20-day rolling correlation between portfolio return and cross-sectional standard deviation.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[-1,1]",
+      "interpretation": "Higher positive values indicate stronger alignment between portfolio returns and market-wide dispersion patterns."
+    },
+    {
+      "name": "Risk Contribution Uniformity Index",
+      "description": "Measures the standard deviation of individual stock volatilities in the equal-weighted portfolio.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 20-day rolling standard deviation of returns for each company.",
+        "Compute cross-sectional standard deviation of these individual volatilities across the portfolio.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Lower values indicate more uniform risk contribution across stocks (better diversification)."
+    },
+    {
+      "name": "Portfolio Regime Adaptability Index",
+      "description": "Measures the coefficient of variation of portfolio returns during different volatility regimes.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Define high/low volatility states based on 60-day rolling standard deviation thresholds.",
+        "Calculate coefficient of variation (standard deviation/mean) of portfolio returns in each regime.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Lower values indicate more consistent performance across different volatility regimes."
+    },
+    {
+      "name": "Information Flow Dominance Metric",
+      "description": "Measures the R-squared of portfolio returns regressed against trading volume changes.",
+      "inputs": [
+        "div_adj_close",
+        "volume"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 5-day change in trading volume (volume - lagged volume) for each company.",
+        "Perform linear regression of portfolio return on volume changes across all companies.",
+        "Return the R-squared value from this regression."
+      ],
+      "output_range": "[0,1]",
+      "interpretation": "Higher values indicate greater proportion of price movements explained by trading volume changes (information flow)."
+    },
+    {
+      "name": "Dynamic Correlation Stability",
+      "description": "Measures the standard deviation of pairwise stock correlations over time.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 20-day rolling Pearson correlations between all pairs of stocks.",
+        "Compute cross-sectional standard deviation of these correlation values across the portfolio.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Lower values indicate more stable inter-stock relationships over time."
+    },
+    {
+      "name": "Tail Risk Exposure Concentration",
+      "description": "Measures the cross-sectional standard deviation of returns during extreme downside events.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Identify days where portfolio return is in the bottom 10% of historical values.",
+        "Calculate cross-sectional standard deviation of individual stock returns on these tail risk days.",
+        "Return null if fewer than 80% of required observations are available."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Lower values indicate more diversified tail risk exposure across the portfolio."
+    },
+    {
+      "name": "Portfolio Entropy of Returns",
+      "description": "Measures the Shannon entropy of the equal-weighted portfolio return distribution.",
+      "inputs": [
+        "div_adj_close"
+      ],
+      "procedure": [
+        "Sort data by company and date.",
+        "Compute daily returns for each company using div_adj_close.",
+        "Calculate 60-day rolling equal-weighted portfolio returns.",
+        "Estimate probability distribution of these returns using kernel density estimation.",
+        "Compute Shannon entropy from this distribution."
+      ],
+      "output_range": "[0,∞)",
+      "interpretation": "Higher values indicate more unpredictable/chaotic return patterns, lower values suggest structured behavior."
+    }
+  ]
+}

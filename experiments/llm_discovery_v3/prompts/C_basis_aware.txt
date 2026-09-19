@@ -1,0 +1,16 @@
+ARM C — OUTCOME-BLIND, BASIS-AWARE COMPLEMENTARITY DISCOVERY
+
+Inspect the supplied development-data context and frozen established feature basis. Discover
+reconstructable portfolio-instance characteristics that capture information missing from that
+basis. For each proposal, explicitly distinguish it from the closest listed feature; reject
+renamings and algebraic restatements. You receive NO downstream outcomes or performance feedback.
+
+<COMMON>
+
+FROZEN ESTABLISHED BASIS:
+<BASIS>
+
+DEVELOPMENT-ONLY CONTEXT:
+<CONTEXT>
+
+Return <N> features and set arm to "C".

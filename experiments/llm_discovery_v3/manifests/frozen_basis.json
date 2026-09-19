@@ -1,0 +1,14 @@
+{
+  "C1_traditional": [
+    "cross-sectional mean and standard deviation of P/E", "P/B", "P/S", "P/CF",
+    "EV/EBITDA", "gross margin", "net margin", "ROA", "ROE", "free cash flow",
+    "free cash flow per share", "sales per share", "history length"
+  ],
+  "C2_traditional_plus_GPT6": [
+    "all C1 features",
+    "PVS mean and standard deviation", "RAPS mean and standard deviation",
+    "EVC mean and standard deviation", "VEC mean and standard deviation",
+    "PLF mean and standard deviation", "IQS mean and standard deviation"
+  ],
+  "restriction": "Definitions only. No feature values, selector outcomes, rankings, or final-test results are disclosed."
+}

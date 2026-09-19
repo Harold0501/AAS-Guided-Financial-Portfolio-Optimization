@@ -1,0 +1,10 @@
+{
+  "selector": "RF",
+  "criterion": "SOR",
+  "configuration": "Fin+B",
+  "seed": 42,
+  "features": 35,
+  "selection_mean": 1.0896691679091206,
+  "regret_mean": 0.5323532193157015,
+  "completed_at": "2026-08-12T20:07:32.482570+00:00"
+}

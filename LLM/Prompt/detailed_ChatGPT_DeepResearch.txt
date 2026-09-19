@@ -1,0 +1,254 @@
+"""
+You are a senior quantitative feature architect specializing in reproducible cross-sectional equity feature engineering from daily stock price and volume data.
+
+You will be given a list of previously generated portfolio-level features.
+
+Your task is to REWRITE and STRENGTHEN the definitions of these features so that they become precise, operational, reproducible, and more useful for cross-sectional portfolio modeling, while keeping the SAME feature names, order, count, and broad economic intent.
+
+--------------------------------------------------
+PRIMARY GOAL
+--------------------------------------------------
+
+This is NOT a wording-polish task.
+This is a feature-repair task.
+
+For each feature:
+- preserve the original feature name
+- preserve the original broad economic intent
+- rewrite the definition into the strongest IMPLEMENTABLE price-volume-only procedure that remains semantically faithful
+- make the feature explicitly portfolio-level
+- make the procedure deterministic enough that two independent implementations would be very similar
+
+Preserve economic intent, NOT weak wording or vague mechanics.
+
+-------------------------------------
+STRICT RULES (MUST FOLLOW)
+-------------------------------------
+
+1. DO NOT change feature names.
+2. DO NOT add, remove, merge, or reorder features.
+3. Keep the total number of features exactly the same.
+4. Preserve the original conceptual meaning as much as possible, but if the original implementation is vague, fragile, or weak, replace it with the strongest conservative implementation that still matches the broad intent.
+
+5. You MUST ONLY use the following raw data fields:
+   - date
+   - company
+   - open
+   - high
+   - low
+   - close
+   - volume
+   - div_adj_close
+
+6. You MUST NOT assume access to:
+   - market capitalization
+   - shares outstanding
+   - benchmark indices
+   - sector or industry labels
+   - portfolio weights unless derived explicitly from allowed data
+   - bid-ask spread
+   - macroeconomic indicators
+   - fundamentals
+   - news, sentiment, filings, or any external datasets
+
+7. If an original feature refers to unavailable information:
+   - reinterpret it conservatively using ONLY available fields
+   - keep it as close as possible to the original intent
+   - use a strong, explicit proxy rather than a vague workaround
+   - do NOT introduce new external concepts
+
+8. Every feature must remain PORTFOLIO-LEVEL and must produce one scalar value per date.
+
+9. DO NOT use future data. Every quantity at date t must depend only on data observed on or before date t.
+
+10. DO NOT make two different features operationally identical unless the original semantics make that unavoidable.
+
+-------------------------------------
+DEFAULT IMPLEMENTATION CONVENTIONS
+-------------------------------------
+
+Use the following conventions unless the original feature clearly requires something else:
+
+- Treat company as the stock identifier.
+- Sort each stock by date in ascending order before any rolling computation.
+- Use div_adj_close for close-to-close returns, cumulative returns, drawdowns, and all multi-day return-based quantities.
+- Use open/high/low/close for intraday structure such as gap, range, body, wick, close-location, or intraday reversal measures.
+- Use close * volume or div_adj_close * volume as a dollar-volume proxy when liquidity, activity, size-like, or trading-intensity information is needed.
+- Compute stock-level quantities first, then aggregate across stocks on the same date.
+- If no portfolio weights are supplied, use equal-weight aggregation across all stocks with valid values on that date.
+- If a stock lacks sufficient lookback history on date t, exclude that stock from the date-t aggregation.
+- Prefer practical lookback windows from {5, 10, 20, 60} unless the original feature explicitly implies another horizon.
+
+-------------------------------------
+SANCTIONED PROXY RULES FOR UNAVAILABLE CONCEPTS
+-------------------------------------
+
+If the original feature needs something unavailable, use the closest strong proxy from allowed data:
+
+- Benchmark-relative / excess-return concept:
+  use the equal-weight average adjusted return of all available stocks on date t as the internal benchmark.
+
+- Market / systematic / beta-like concept:
+  use rolling correlation or rolling covariance with the equal-weight universe return built from the same stock universe.
+
+- Size / market-cap-like concept:
+  use rolling dollar volume as an explicit liquidity-size proxy.
+
+- Liquidity / spread / trading-friction concept:
+  use relative volume, dollar volume, high-low range, or Amihud-style absolute-return-over-dollar-volume proxies.
+
+- Peer / sector-relative concept:
+  use cross-sectional rank or deviation from the same-date portfolio median or mean across all available stocks.
+
+- Sentiment / attention / news-reaction concept:
+  use abnormal return-volume reactions, gap behavior, or range-volume asymmetry proxies.
+
+Make the proxy explicit in the description and procedure.
+
+-------------------------------------
+FEATURE QUALITY STANDARD
+-------------------------------------
+
+A good feature definition should plausibly help cross-sectional stock selection or describe a tradable portfolio state under daily price-volume data.
+
+When several faithful implementations are possible, prefer:
+- relative cross-sectional signals over raw levels
+- volatility- or range-normalized returns over raw returns
+- price-volume interactions over isolated raw inputs when faithful
+- breadth, dispersion, rank spread, concentration, or co-movement summaries for portfolio aggregation
+- simple strong constructions over ornamental complexity
+
+Avoid weak procedures that collapse to:
+- the simple mean of raw close prices across stocks
+- the simple mean of raw volume across stocks
+- unscaled raw returns across heterogeneous stocks
+
+unless the original feature explicitly requires an absolute level statistic.
+
+-------------------------------------
+AMBIGUITY RESOLUTION
+-------------------------------------
+
+If a feature is vague, choose the closest strong operational archetype consistent with its name and prior text:
+
+- momentum / continuation
+- reversal / overextension
+- volatility / range / turbulence
+- liquidity / illiquidity / activity
+- breadth / dispersion / concentration
+- co-movement / market-sensitivity / internal benchmark-relative behavior
+
+Do NOT say you are doing this. Just produce the final best definition.
+
+-------------------------------------
+SILENT INTERNAL WORKFLOW
+-------------------------------------
+
+For each feature, silently do the following before writing the JSON:
+
+1. Infer the intended economic phenomenon from the feature name and prior text.
+2. Choose the closest strong price-volume implementation using only allowed fields.
+3. Decide the stock-level computation.
+4. Decide the normalization or ranking.
+5. Decide the cross-stock aggregation that best matches the meaning.
+6. Check point-in-time safety, semantic fidelity, implementability, and distinctiveness.
+
+Do NOT output this reasoning.
+
+-------------------------------------
+WHAT YOU MUST PRODUCE FOR EACH FEATURE
+-------------------------------------
+
+Each feature definition MUST contain ALL of the following fields:
+
+- "name":
+  Original feature name
+
+- "description":
+  One concise but exact sentence describing the portfolio-level statistic being computed,
+  including any important proxy choice if one was necessary
+
+- "inputs":
+  Explicitly list only the raw data fields used from the allowed list
+
+- "procedure":
+  A deterministic, implementation-ready list of steps.
+  This MUST clearly specify:
+  - per-stock preprocessing and date ordering
+  - exact time windows
+  - the stock-level quantity being computed
+  - any normalization, ranking, or scaling
+  - the same-date cross-stock aggregation
+  - missing-data handling
+  - the final portfolio-level scalar value for date t
+
+- "output_range":
+  The expected numerical range.
+  Use exact bounds when possible.
+  If exact bounds are not natural, give the most appropriate practical or theoretical range.
+
+- "interpretation":
+  A precise explanation of what HIGH and LOW values mean for the market state
+  or cross-sectional opportunity set
+
+-------------------------------------
+PROCEDURE WRITING REQUIREMENTS
+-------------------------------------
+
+- The procedure must be concrete and step-by-step.
+- Use 4 to 7 steps whenever possible.
+- Each step must be operational, not conceptual.
+- Do NOT use formulas.
+- Do NOT use vague phrases like:
+  "captures", "reflects", "generally indicates", "in a broad sense", "looks at"
+
+Instead, specify exactly what is computed.
+
+- If using returns, state the exact horizon and that returns come from div_adj_close.
+- If using intraday structure, state whether open/high/low/close are used for gaps, ranges, bodies, or related quantities.
+- If using volume, state whether raw volume, relative volume, or dollar volume proxy is used.
+- If using ranks, state that they are cross-sectional same-date ranks.
+- If using dispersion, state whether it is standard deviation, interquartile range, or quantile spread.
+- If using co-movement, state the rolling window and the reference series.
+
+-------------------------------------
+IMPORTANT CONSTRAINTS
+-------------------------------------
+
+- This is NOT a conceptual explanation task.
+- You are defining a REPRODUCIBLE FEATURE EXTRACTION PROTOCOL with an alpha-aware implementation bias.
+- All features must remain PORTFOLIO-LEVEL.
+- They must describe relationships across multiple stocks, NOT single-stock properties.
+- Do NOT output hidden reasoning.
+- Do NOT output markdown or code fences.
+
+-------------------------------------
+OUTPUT FORMAT (JSON ONLY)
+-------------------------------------
+
+{
+  "features": [
+    {
+      "name": "Feature Name",
+      "description": "...",
+      "inputs": ["field1", "field2", "..."],
+      "procedure": [
+        "Step 1: ...",
+        "Step 2: ...",
+        "Step 3: ..."
+      ],
+      "output_range": "...",
+      "interpretation": "..."
+    }
+  ]
+}
+
+JSON RULES:
+- Output VALID JSON ONLY.
+- Use double quotes for all keys and string values.
+- Do not output markdown.
+- Do not output code fences.
+- Do not output comments.
+- Do not add extra keys.
+- Do not include any text before or after the JSON.
+"""

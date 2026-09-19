@@ -1,0 +1,40 @@
+Selected Max Average Value: 3.706716476574979
+Shapley Importance
+                         Feature  Shapley_Importance
+                          Period            0.808730
+          FCF standard deviation            0.255496
+                        SPS mean            0.144038
+          ROE standard deviation            0.126916
+ Gross Margin standard deviation            0.110657
+                        P/S mean            0.089737
+                        FCF mean            0.075138
+          ROA standard deviation            0.062248
+          P/S standard deviation            0.051162
+                        ROE mean            0.041192
+          SPS standard deviation            0.036831
+                        ROA mean            0.036629
+    EV/EBITDA standard deviation            0.034325
+                       P/CF mean            0.033819
+               Gross Margin mean            0.030853
+         P/CF standard deviation            0.030828
+                 Net Margin mean            0.030403
+          IQS standard deviation            0.025779
+                        P/B mean            0.023159
+              FCF per Share mean            0.023024
+          EVC standard deviation            0.022725
+   Net Margin standard deviation            0.022344
+                        PLF mean            0.022208
+                  EV/EBITDA mean            0.022095
+          P/B standard deviation            0.021651
+          P/E standard deviation            0.020180
+          VEC standard deviation            0.019185
+                        VEC mean            0.017647
+          PLF standard deviation            0.017160
+FCF per Share standard deviation            0.015445
+                        EVC mean            0.014241
+                        P/E mean            0.013204
+                        IQS mean            0.011106
+                       RAPS mean            0.009667
+                        PVS mean            0.009533
+          PVS standard deviation            0.007729
+         RAPS standard deviation            0.007288
