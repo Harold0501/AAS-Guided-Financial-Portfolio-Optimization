@@ -1,0 +1,10 @@
+{
+  "representation_seed": 1,
+  "rf_seed": 42,
+  "criterion": "SOR",
+  "configuration": "Fin+OH-T-PCA8",
+  "input_features": 281,
+  "selection_mean": 1.1382429993598742,
+  "regret_mean": 0.4837793878649483,
+  "completed_at": "2026-09-29T17:05:30.443560+00:00"
+}

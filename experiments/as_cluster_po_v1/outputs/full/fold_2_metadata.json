@@ -1,0 +1,92 @@
+{
+  "fold": 2,
+  "smoke": false,
+  "K": 3,
+  "train_assets": [
+    "asset_14",
+    "asset_16",
+    "asset_18",
+    "asset_19",
+    "asset_21",
+    "asset_22",
+    "asset_23",
+    "asset_24",
+    "asset_27",
+    "asset_28",
+    "asset_29",
+    "asset_30",
+    "asset_32",
+    "asset_33",
+    "asset_34",
+    "asset_35",
+    "asset_37",
+    "asset_38"
+  ],
+  "test_assets": [
+    "asset_15",
+    "asset_20",
+    "asset_25",
+    "asset_31",
+    "asset_36"
+  ],
+  "po_pretrain_epochs": 10,
+  "as_finetune_epochs": 20,
+  "cluster_po_epochs": 5,
+  "test_adapter_epochs": 10,
+  "body_ft_lr": 1e-05,
+  "residual_lr": 0.0001,
+  "label_audit": [
+    {
+      "criterion": "AR",
+      "train_label_instances": 615,
+      "test_label_instances_used": 0,
+      "train_cluster_counts": {
+        "0": 63,
+        "1": 30,
+        "2": 39
+      }
+    },
+    {
+      "criterion": "CR",
+      "train_label_instances": 615,
+      "test_label_instances_used": 0,
+      "train_cluster_counts": {
+        "0": 63,
+        "1": 30,
+        "2": 39
+      }
+    },
+    {
+      "criterion": "MDD",
+      "train_label_instances": 615,
+      "test_label_instances_used": 0,
+      "train_cluster_counts": {
+        "0": 63,
+        "1": 30,
+        "2": 39
+      }
+    },
+    {
+      "criterion": "SHR",
+      "train_label_instances": 615,
+      "test_label_instances_used": 0,
+      "train_cluster_counts": {
+        "0": 63,
+        "1": 30,
+        "2": 39
+      }
+    },
+    {
+      "criterion": "SOR",
+      "train_label_instances": 615,
+      "test_label_instances_used": 0,
+      "train_cluster_counts": {
+        "0": 63,
+        "1": 30,
+        "2": 39
+      }
+    }
+  ],
+  "test_adapter_objective": "OH-T PO target only",
+  "elapsed_seconds": 373.8603416150436
+}

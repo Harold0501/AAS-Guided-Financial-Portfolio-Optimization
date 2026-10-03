@@ -1,0 +1,10 @@
+{
+  "representation_seed": 0,
+  "rf_seed": 42,
+  "criterion": "CR",
+  "configuration": "Fin+MS-T-PCA32",
+  "input_features": 281,
+  "selection_mean": 2.6608414272660386,
+  "regret_mean": 1.2672294947269287,
+  "completed_at": "2026-09-29T16:36:28.293747+00:00"
+}

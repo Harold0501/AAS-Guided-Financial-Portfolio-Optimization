@@ -1,0 +1,218 @@
+{
+  "status": "complete",
+  "completed": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "failed": [],
+  "report": {
+    "complete": true,
+    "K": 3,
+    "summary": [
+      {
+        "representation": "clustered",
+        "rf": "cluster_specific",
+        "criterion": "AR",
+        "test_instances": 762,
+        "selection_mean": 0.2620598057263056,
+        "regret_mean": 0.1265738933650118
+      },
+      {
+        "representation": "clustered",
+        "rf": "cluster_specific",
+        "criterion": "CR",
+        "test_instances": 762,
+        "selection_mean": 2.872091235404404,
+        "regret_mean": 1.0559796865885627
+      },
+      {
+        "representation": "clustered",
+        "rf": "cluster_specific",
+        "criterion": "MDD",
+        "test_instances": 762,
+        "selection_mean": -0.28341337478684936,
+        "regret_mean": 0.02133145561420501
+      },
+      {
+        "representation": "clustered",
+        "rf": "cluster_specific",
+        "criterion": "SHR",
+        "test_instances": 762,
+        "selection_mean": 0.6230920689931915,
+        "regret_mean": 0.30000593228009537
+      },
+      {
+        "representation": "clustered",
+        "rf": "cluster_specific",
+        "criterion": "SOR",
+        "test_instances": 762,
+        "selection_mean": 1.0671599188980383,
+        "regret_mean": 0.5548624683267839
+      },
+      {
+        "representation": "clustered",
+        "rf": "global",
+        "criterion": "AR",
+        "test_instances": 762,
+        "selection_mean": 0.21664197182991798,
+        "regret_mean": 0.1719917272613994
+      },
+      {
+        "representation": "clustered",
+        "rf": "global",
+        "criterion": "CR",
+        "test_instances": 762,
+        "selection_mean": 2.6406585857893914,
+        "regret_mean": 1.2874123362035759
+      },
+      {
+        "representation": "clustered",
+        "rf": "global",
+        "criterion": "MDD",
+        "test_instances": 762,
+        "selection_mean": -0.28032982957415653,
+        "regret_mean": 0.018247910401512198
+      },
+      {
+        "representation": "clustered",
+        "rf": "global",
+        "criterion": "SHR",
+        "test_instances": 762,
+        "selection_mean": 0.6515494883502787,
+        "regret_mean": 0.27154851292300813
+      },
+      {
+        "representation": "clustered",
+        "rf": "global",
+        "criterion": "SOR",
+        "test_instances": 762,
+        "selection_mean": 1.132271970711294,
+        "regret_mean": 0.489750416513528
+      },
+      {
+        "representation": "fin_only",
+        "rf": "global",
+        "criterion": "AR",
+        "test_instances": 762,
+        "selection_mean": 0.24787966165727537,
+        "regret_mean": 0.14075403743404197
+      },
+      {
+        "representation": "fin_only",
+        "rf": "global",
+        "criterion": "CR",
+        "test_instances": 762,
+        "selection_mean": 3.0076827025004254,
+        "regret_mean": 0.920388219492542
+      },
+      {
+        "representation": "fin_only",
+        "rf": "global",
+        "criterion": "MDD",
+        "test_instances": 762,
+        "selection_mean": -0.28305467268502044,
+        "regret_mean": 0.020972753512376055
+      },
+      {
+        "representation": "fin_only",
+        "rf": "global",
+        "criterion": "SHR",
+        "test_instances": 762,
+        "selection_mean": 0.6745378955509395,
+        "regret_mean": 0.24856010572234744
+      },
+      {
+        "representation": "fin_only",
+        "rf": "global",
+        "criterion": "SOR",
+        "test_instances": 762,
+        "selection_mean": 1.1517199378996135,
+        "regret_mean": 0.4703024493252089
+      },
+      {
+        "representation": "global",
+        "rf": "global",
+        "criterion": "AR",
+        "test_instances": 762,
+        "selection_mean": 0.2206091684428408,
+        "regret_mean": 0.16802453064847656
+      },
+      {
+        "representation": "global",
+        "rf": "global",
+        "criterion": "CR",
+        "test_instances": 762,
+        "selection_mean": 2.7467734052139896,
+        "regret_mean": 1.1812975167789774
+      },
+      {
+        "representation": "global",
+        "rf": "global",
+        "criterion": "MDD",
+        "test_instances": 762,
+        "selection_mean": -0.28220719210263656,
+        "regret_mean": 0.020125272929992204
+      },
+      {
+        "representation": "global",
+        "rf": "global",
+        "criterion": "SHR",
+        "test_instances": 762,
+        "selection_mean": 0.6461149943449712,
+        "regret_mean": 0.27698300692831557
+      },
+      {
+        "representation": "global",
+        "rf": "global",
+        "criterion": "SOR",
+        "test_instances": 762,
+        "selection_mean": 1.1242925288825931,
+        "regret_mean": 0.49772985834222916
+      },
+      {
+        "representation": "random",
+        "rf": "global",
+        "criterion": "AR",
+        "test_instances": 762,
+        "selection_mean": 0.23937764709291298,
+        "regret_mean": 0.14925605199840433
+      },
+      {
+        "representation": "random",
+        "rf": "global",
+        "criterion": "CR",
+        "test_instances": 762,
+        "selection_mean": 2.847684563243099,
+        "regret_mean": 1.0803863587498685
+      },
+      {
+        "representation": "random",
+        "rf": "global",
+        "criterion": "MDD",
+        "test_instances": 762,
+        "selection_mean": -0.282164348762452,
+        "regret_mean": 0.020082429589807663
+      },
+      {
+        "representation": "random",
+        "rf": "global",
+        "criterion": "SHR",
+        "test_instances": 762,
+        "selection_mean": 0.6555093620638307,
+        "regret_mean": 0.26758863920945597
+      },
+      {
+        "representation": "random",
+        "rf": "global",
+        "criterion": "SOR",
+        "test_instances": 762,
+        "selection_mean": 1.1052238891451598,
+        "regret_mean": 0.5167984980796623
+      }
+    ],
+    "protocol": "asset-family grouped 5-fold; train-fold clustering; PO-only test I/O adapter adaptation"
+  }
+}

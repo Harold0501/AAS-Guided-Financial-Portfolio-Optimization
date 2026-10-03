@@ -1,0 +1,11 @@
+{
+  "selector": "RF",
+  "criterion": "SHR",
+  "configuration": "Fin",
+  "seed": 42,
+  "raw_input_features": 25,
+  "effective_transformer_features": 0,
+  "selection_mean": 0.6774335237474356,
+  "regret_mean": 0.2456644775258512,
+  "completed_at": "2026-09-28T18:05:20.451365+00:00"
+}

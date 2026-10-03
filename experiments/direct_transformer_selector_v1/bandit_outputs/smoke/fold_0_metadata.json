@@ -1,0 +1,29 @@
+{
+  "fold": 0,
+  "smoke": true,
+  "seed": 42,
+  "train_instances": 519,
+  "validation_instances": 63,
+  "test_instances": 180,
+  "epochs_completed": 3,
+  "best_validation_expected_reward": 0.18250097334384918,
+  "elapsed_seconds": 1.4305807100608945,
+  "history": [
+    {
+      "epoch": 0,
+      "train_loss": -0.05517603555584655,
+      "validation_expected_reward": 0.09239079058170319
+    },
+    {
+      "epoch": 1,
+      "train_loss": -0.11838131222654791,
+      "validation_expected_reward": 0.15399672091007233
+    },
+    {
+      "epoch": 2,
+      "train_loss": -0.16720564181313796,
+      "validation_expected_reward": 0.18250097334384918
+    }
+  ],
+  "reward_definition": "train-fold standardized, per-instance action-centered utility"
+}

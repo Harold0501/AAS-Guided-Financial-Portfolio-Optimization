@@ -1,0 +1,11 @@
+{
+  "selector": "MLP",
+  "criterion": "CR",
+  "configuration": "TransformerPCA32",
+  "seed": 42,
+  "raw_input_features": 512,
+  "effective_transformer_features": 32,
+  "selection_mean": 2.8550234050362264,
+  "regret_mean": 1.0730475169567415,
+  "completed_at": "2026-09-28T18:03:22.273845+00:00"
+}

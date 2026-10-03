@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-09-29T15:30:58.258756+00:00",
+  "instances": 762,
+  "contexts": 165,
+  "asset_families": 23,
+  "window": 240,
+  "raw_features": [
+    "log_open_close",
+    "log_high_close",
+    "log_low_close",
+    "log_volume_change",
+    "log_adjusted_return"
+  ],
+  "criteria": [
+    "AR",
+    "CR",
+    "MDD",
+    "SHR",
+    "SOR"
+  ],
+  "algorithms": [
+    "EW",
+    "MCW",
+    "mSSRM",
+    "MS-M",
+    "OH-M",
+    "MS-T",
+    "OH-T",
+    "MS-L",
+    "OH-L"
+  ],
+  "input_rule": "last 240 trading days strictly before decision date"
+}

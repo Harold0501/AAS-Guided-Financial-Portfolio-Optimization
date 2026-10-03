@@ -1,0 +1,15 @@
+{
+  "asset": "asset_27",
+  "target": "onehot",
+  "smoke": false,
+  "seed": 1,
+  "epochs": 50,
+  "window_size": 252,
+  "d_model": 256,
+  "trained_months": 105,
+  "representations": 9,
+  "elapsed_seconds": 31.73795478302054,
+  "raw_data_sha256": "b44c83e54ed1e3263663dfb92f05918cb8aed23f509d8dd0ce0d8175fdd96c6c",
+  "target_weights_sha256": "02bc67859bf5fdebe7c342323c471722c60adc7f4dbe3c9294301a1a82b9a0ee",
+  "completed_at": "2026-09-29T16:38:17.423057+00:00"
+}

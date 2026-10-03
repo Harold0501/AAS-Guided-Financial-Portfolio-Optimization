@@ -1,0 +1,13 @@
+{
+  "asset": "asset_21",
+  "criterion": "CR",
+  "method": "C_MS_T",
+  "instances": 6,
+  "train_instances": 6,
+  "test_instances": 0,
+  "pretrained": true,
+  "freeze_encoder": true,
+  "epochs": 30,
+  "pretrain_epochs": 10,
+  "completed_at": "2026-09-30T15:20:36.792485+00:00"
+}

@@ -1,0 +1,246 @@
+{
+  "complete": true,
+  "summary": [
+    {
+      "criterion": "AR",
+      "representation": "as_only",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.2227660938909073,
+      "regret_mean": 0.16586760520041
+    },
+    {
+      "criterion": "AR",
+      "representation": "body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.2123403880766361,
+      "regret_mean": 0.1762933110146813
+    },
+    {
+      "criterion": "AR",
+      "representation": "fin",
+      "configuration": "Fin",
+      "test_instances": 762,
+      "selection_mean": 0.24767947193396972,
+      "regret_mean": 0.1409542271573477
+    },
+    {
+      "criterion": "AR",
+      "representation": "random_body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.20472596953843364,
+      "regret_mean": 0.1839077295528837
+    },
+    {
+      "criterion": "AR",
+      "representation": "random_residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.21993935176937374,
+      "regret_mean": 0.1686943473219436
+    },
+    {
+      "criterion": "AR",
+      "representation": "residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.2142506877943757,
+      "regret_mean": 0.1743830112969417
+    },
+    {
+      "criterion": "CR",
+      "representation": "as_only",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 2.7423581139903646,
+      "regret_mean": 1.1857128080026027
+    },
+    {
+      "criterion": "CR",
+      "representation": "body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 2.7315592912029274,
+      "regret_mean": 1.19651163079004
+    },
+    {
+      "criterion": "CR",
+      "representation": "fin",
+      "configuration": "Fin",
+      "test_instances": 762,
+      "selection_mean": 3.006589312827263,
+      "regret_mean": 0.9214816091657043
+    },
+    {
+      "criterion": "CR",
+      "representation": "random_body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 2.8009718739746496,
+      "regret_mean": 1.1270990480183178
+    },
+    {
+      "criterion": "CR",
+      "representation": "random_residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 2.8233706734867923,
+      "regret_mean": 1.1047002485061752
+    },
+    {
+      "criterion": "CR",
+      "representation": "residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 2.7655084207217873,
+      "regret_mean": 1.1625625012711804
+    },
+    {
+      "criterion": "MDD",
+      "representation": "as_only",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": -0.28463507797229287,
+      "regret_mean": 0.02255315879964848
+    },
+    {
+      "criterion": "MDD",
+      "representation": "body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": -0.2873273429440862,
+      "regret_mean": 0.02524542377144185
+    },
+    {
+      "criterion": "MDD",
+      "representation": "fin",
+      "configuration": "Fin",
+      "test_instances": 762,
+      "selection_mean": -0.28572468482236907,
+      "regret_mean": 0.023642765649724732
+    },
+    {
+      "criterion": "MDD",
+      "representation": "random_body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": -0.28462871070799356,
+      "regret_mean": 0.02254679153534917
+    },
+    {
+      "criterion": "MDD",
+      "representation": "random_residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": -0.2847925472559472,
+      "regret_mean": 0.022710628083302938
+    },
+    {
+      "criterion": "MDD",
+      "representation": "residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": -0.2841756160066006,
+      "regret_mean": 0.022093696833956275
+    },
+    {
+      "criterion": "SHR",
+      "representation": "as_only",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.614457126832211,
+      "regret_mean": 0.3086408744410758
+    },
+    {
+      "criterion": "SHR",
+      "representation": "body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.6384139975596858,
+      "regret_mean": 0.28468400371360125
+    },
+    {
+      "criterion": "SHR",
+      "representation": "fin",
+      "configuration": "Fin",
+      "test_instances": 762,
+      "selection_mean": 0.6774335237474356,
+      "regret_mean": 0.2456644775258512
+    },
+    {
+      "criterion": "SHR",
+      "representation": "random_body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.6130666677790108,
+      "regret_mean": 0.31003133349427603
+    },
+    {
+      "criterion": "SHR",
+      "representation": "random_residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.613663902546128,
+      "regret_mean": 0.3094340987271588
+    },
+    {
+      "criterion": "SHR",
+      "representation": "residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.6139853411475946,
+      "regret_mean": 0.30911266012569233
+    },
+    {
+      "criterion": "SOR",
+      "representation": "as_only",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 1.0606669284271217,
+      "regret_mean": 0.5613554587977005
+    },
+    {
+      "criterion": "SOR",
+      "representation": "body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 1.0445730846414314,
+      "regret_mean": 0.5774493025833909
+    },
+    {
+      "criterion": "SOR",
+      "representation": "fin",
+      "configuration": "Fin",
+      "test_instances": 762,
+      "selection_mean": 1.1517776413397949,
+      "regret_mean": 0.4702447458850274
+    },
+    {
+      "criterion": "SOR",
+      "representation": "random_body_ft",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 1.025776679713268,
+      "regret_mean": 0.5962457075115544
+    },
+    {
+      "criterion": "SOR",
+      "representation": "random_residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 0.9511664395713867,
+      "regret_mean": 0.6708559476534357
+    },
+    {
+      "criterion": "SOR",
+      "representation": "residual",
+      "configuration": "Fin+EmbeddingPCA32",
+      "test_instances": 762,
+      "selection_mean": 1.0381308850475388,
+      "regret_mean": 0.5838915021772836
+    }
+  ],
+  "protocol": "grouped 5-fold; AS labels from train assets only; cluster PO body fine-tune and residual adapters on train contexts; test I/O adapters use OH-T PO targets only"
+}

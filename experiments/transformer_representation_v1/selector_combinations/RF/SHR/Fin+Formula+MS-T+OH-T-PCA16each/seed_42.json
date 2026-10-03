@@ -1,0 +1,10 @@
+{
+  "selector": "RF",
+  "criterion": "SHR",
+  "configuration": "Fin+Formula+MS-T+OH-T-PCA16each",
+  "seed": 42,
+  "input_features": 552,
+  "selection_mean": 0.665322882057873,
+  "regret_mean": 0.25777511921541374,
+  "completed_at": "2026-09-28T18:16:50.423177+00:00"
+}

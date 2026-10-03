@@ -1,0 +1,9 @@
+{
+  "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+  "method": "C_OH_T",
+  "criterion": "SHR",
+  "configuration": "EmbeddingRaw",
+  "instances": 762,
+  "selection_mean": 0.593194871904947,
+  "regret_mean": 0.32990312936833976
+}

@@ -1,0 +1,43 @@
+{
+  "fold": 0,
+  "smoke": true,
+  "train_assets": [
+    "asset_14",
+    "asset_15",
+    "asset_16",
+    "asset_18",
+    "asset_19",
+    "asset_20",
+    "asset_21",
+    "asset_23",
+    "asset_24",
+    "asset_25",
+    "asset_27",
+    "asset_29",
+    "asset_30",
+    "asset_31",
+    "asset_32",
+    "asset_34",
+    "asset_35",
+    "asset_36",
+    "asset_37"
+  ],
+  "test_assets": [
+    "asset_22",
+    "asset_28",
+    "asset_33",
+    "asset_38"
+  ],
+  "po_pretrain_epochs": 2,
+  "as_finetune_epochs": 2,
+  "test_adapter_epochs": 1,
+  "label_audit": [
+    {
+      "criterion": "AR",
+      "train_label_instances": 582,
+      "test_label_instances_used": 0
+    }
+  ],
+  "test_adapter_objective": "OH-T PO target only",
+  "elapsed_seconds": 18.85360205604229
+}

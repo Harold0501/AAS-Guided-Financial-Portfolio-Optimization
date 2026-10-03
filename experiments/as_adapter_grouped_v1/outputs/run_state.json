@@ -1,0 +1,157 @@
+{
+  "status": "complete",
+  "completed": [
+    1,
+    3,
+    2,
+    0,
+    4
+  ],
+  "failed": [],
+  "report": {
+    "complete": true,
+    "summary": [
+      {
+        "criterion": "AR",
+        "configuration": "EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 0.19878692265198694,
+        "regret_mean": 0.18984677643933043
+      },
+      {
+        "criterion": "AR",
+        "configuration": "Fin",
+        "test_instances": 762,
+        "selection_mean": 0.24767947193396972,
+        "regret_mean": 0.1409542271573477
+      },
+      {
+        "criterion": "AR",
+        "configuration": "Fin+EmbeddingPCA32",
+        "test_instances": 762,
+        "selection_mean": 0.23592303104230988,
+        "regret_mean": 0.15271066804900751
+      },
+      {
+        "criterion": "AR",
+        "configuration": "Fin+EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 0.1951084495820923,
+        "regret_mean": 0.193525249509225
+      },
+      {
+        "criterion": "CR",
+        "configuration": "EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 2.2570028544905076,
+        "regret_mean": 1.6710680675024598
+      },
+      {
+        "criterion": "CR",
+        "configuration": "Fin",
+        "test_instances": 762,
+        "selection_mean": 3.006589312827263,
+        "regret_mean": 0.9214816091657043
+      },
+      {
+        "criterion": "CR",
+        "configuration": "Fin+EmbeddingPCA32",
+        "test_instances": 762,
+        "selection_mean": 2.693790760187158,
+        "regret_mean": 1.2342801618058092
+      },
+      {
+        "criterion": "CR",
+        "configuration": "Fin+EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 2.460516080948435,
+        "regret_mean": 1.4675548410445323
+      },
+      {
+        "criterion": "MDD",
+        "configuration": "EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": -0.2942341774824993,
+        "regret_mean": 0.03215225830985496
+      },
+      {
+        "criterion": "MDD",
+        "configuration": "Fin",
+        "test_instances": 762,
+        "selection_mean": -0.28572468482236907,
+        "regret_mean": 0.023642765649724732
+      },
+      {
+        "criterion": "MDD",
+        "configuration": "Fin+EmbeddingPCA32",
+        "test_instances": 762,
+        "selection_mean": -0.28179311883841174,
+        "regret_mean": 0.019711199665767433
+      },
+      {
+        "criterion": "MDD",
+        "configuration": "Fin+EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": -0.28462839917963967,
+        "regret_mean": 0.022546480006995304
+      },
+      {
+        "criterion": "SHR",
+        "configuration": "EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 0.5387350229651424,
+        "regret_mean": 0.38436297830814437
+      },
+      {
+        "criterion": "SHR",
+        "configuration": "Fin",
+        "test_instances": 762,
+        "selection_mean": 0.6774335237474356,
+        "regret_mean": 0.2456644775258512
+      },
+      {
+        "criterion": "SHR",
+        "configuration": "Fin+EmbeddingPCA32",
+        "test_instances": 762,
+        "selection_mean": 0.6546785386260099,
+        "regret_mean": 0.26841946264727695
+      },
+      {
+        "criterion": "SHR",
+        "configuration": "Fin+EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 0.5659015800722336,
+        "regret_mean": 0.3571964212010532
+      },
+      {
+        "criterion": "SOR",
+        "configuration": "EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 1.0095421285015853,
+        "regret_mean": 0.6124802587232372
+      },
+      {
+        "criterion": "SOR",
+        "configuration": "Fin",
+        "test_instances": 762,
+        "selection_mean": 1.1517776413397949,
+        "regret_mean": 0.4702447458850274
+      },
+      {
+        "criterion": "SOR",
+        "configuration": "Fin+EmbeddingPCA32",
+        "test_instances": 762,
+        "selection_mean": 1.1450877580230678,
+        "regret_mean": 0.4769346292017546
+      },
+      {
+        "criterion": "SOR",
+        "configuration": "Fin+EmbeddingRaw",
+        "test_instances": 762,
+        "selection_mean": 1.0420731130647145,
+        "regret_mean": 0.5799492741601079
+      }
+    ],
+    "protocol": "asset-family grouped 5-fold; AS labels from train assets only; test I/O adapters use OH-T PO targets only"
+  }
+}

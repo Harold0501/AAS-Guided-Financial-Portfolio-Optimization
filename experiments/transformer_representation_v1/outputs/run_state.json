@@ -1,0 +1,42 @@
+{
+  "status": "complete",
+  "completed": [
+    "asset_18",
+    "asset_16",
+    "asset_15",
+    "asset_14",
+    "asset_19",
+    "asset_21",
+    "asset_20",
+    "asset_22",
+    "asset_23",
+    "asset_24",
+    "asset_25",
+    "asset_27",
+    "asset_28",
+    "asset_29",
+    "asset_30",
+    "asset_31",
+    "asset_32",
+    "asset_33",
+    "asset_34",
+    "asset_35",
+    "asset_37",
+    "asset_38",
+    "asset_36"
+  ],
+  "failed": [],
+  "elapsed_seconds": 401.09408519696444,
+  "validation": {
+    "complete": true,
+    "instances": 762,
+    "asset_families": 23,
+    "features": 512,
+    "ms_t_features": 256,
+    "oh_t_features": 256,
+    "output": "/data1/home/hz314/workspace/AAS-Guided-Financial-Portfolio-Optimization/experiments/transformer_representation_v1/outputs/transformer_representations_1repeat.csv",
+    "output_sha256": "509c9d7b543b9d76425f5a0a32600688d8380e12a464a9015ebace3bbff483b7",
+    "completed_at": "2026-09-28T17:52:38.662713+00:00"
+  },
+  "finished_at": "2026-09-28T17:52:38.664480+00:00"
+}

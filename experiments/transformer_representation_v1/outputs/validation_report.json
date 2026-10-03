@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "instances": 762,
+  "asset_families": 23,
+  "features": 512,
+  "ms_t_features": 256,
+  "oh_t_features": 256,
+  "output": "/data1/home/hz314/workspace/AAS-Guided-Financial-Portfolio-Optimization/experiments/transformer_representation_v1/outputs/transformer_representations_1repeat.csv",
+  "output_sha256": "509c9d7b543b9d76425f5a0a32600688d8380e12a464a9015ebace3bbff483b7",
+  "completed_at": "2026-09-28T17:52:38.662713+00:00"
+}

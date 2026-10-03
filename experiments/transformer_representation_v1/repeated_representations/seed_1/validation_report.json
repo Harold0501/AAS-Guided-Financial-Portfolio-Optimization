@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "instances": 762,
+  "asset_families": 23,
+  "features": 512,
+  "ms_t_features": 256,
+  "oh_t_features": 256,
+  "output": "experiments/transformer_representation_v1/repeated_representations/seed_1/transformer_representations_1repeat.csv",
+  "output_sha256": "3caf147576561609b8f60898241ff0adbab1f17eb29f04345dc181a3f9029cda",
+  "completed_at": "2026-09-29T16:41:11.956123+00:00"
+}

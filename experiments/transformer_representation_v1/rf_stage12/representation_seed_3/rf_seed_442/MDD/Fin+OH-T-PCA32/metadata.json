@@ -1,0 +1,10 @@
+{
+  "representation_seed": 3,
+  "rf_seed": 442,
+  "criterion": "MDD",
+  "configuration": "Fin+OH-T-PCA32",
+  "input_features": 281,
+  "selection_mean": -0.28406863035373237,
+  "regret_mean": 0.021986711181088057,
+  "completed_at": "2026-09-29T17:02:17.015386+00:00"
+}

@@ -1,0 +1,411 @@
+{
+  "complete": true,
+  "warning": "LEAKY ORACLE DIAGNOSTIC; do not report as valid evaluation",
+  "rows": [
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "AR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.21357450514152093,
+      "regret_mean": 0.17505919394979644
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "AR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.22011073426125044,
+      "regret_mean": 0.16852296483006698
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "AR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 0.2438175507749539,
+      "regret_mean": 0.14481614831636352
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "CR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 2.8322097063721006,
+      "regret_mean": 1.0958612156208671
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "CR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 2.7889262133092485,
+      "regret_mean": 1.139144708683719
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "CR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 3.027060190642513,
+      "regret_mean": 0.9010107313504546
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "MDD",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": -0.3136582174444151,
+      "regret_mean": 0.051576298271770696
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "MDD",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": -0.2902403031994597,
+      "regret_mean": 0.02815838402681539
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "MDD",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": -0.28575092005563313,
+      "regret_mean": 0.023669000882988792
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "SHR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.646274456957402,
+      "regret_mean": 0.27682354431588463
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "SHR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.6590147921372537,
+      "regret_mean": 0.2640832091360331
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "SHR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 0.6723457069189788,
+      "regret_mean": 0.25075229435430807
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "SOR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 1.0915489874999686,
+      "regret_mean": 0.530473399724854
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "SOR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 1.073553914074582,
+      "regret_mean": 0.5484684731502403
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "A_AS",
+      "criterion": "SOR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 1.1246177242773785,
+      "regret_mean": 0.4974046629474439
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "AR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.22328151781714298,
+      "regret_mean": 0.16535218127417442
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "AR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.22512863069977393,
+      "regret_mean": 0.16350506839154347
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "AR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 0.2439118167291894,
+      "regret_mean": 0.14472188236212802
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "CR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 2.7846773650145993,
+      "regret_mean": 1.1433935569783682
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "CR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 2.7718157174730798,
+      "regret_mean": 1.1562552045198875
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "CR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 2.8133820201855064,
+      "regret_mean": 1.1146889018074606
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "MDD",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": -0.2935114776739633,
+      "regret_mean": 0.031429558501319003
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "MDD",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": -0.2868425085279077,
+      "regret_mean": 0.024760589355263398
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "MDD",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": -0.28129959897283097,
+      "regret_mean": 0.019217679800186634
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "SHR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.6356413685863977,
+      "regret_mean": 0.28745663268688915
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "SHR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.6787157352568502,
+      "regret_mean": 0.24438226601643667
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "SHR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 0.6374451123780447,
+      "regret_mean": 0.28565288889524215
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "SOR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 1.05167297500458,
+      "regret_mean": 0.5703494122202425
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "SOR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 1.0642434274641266,
+      "regret_mean": 0.5577789597606958
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_MS_T",
+      "criterion": "SOR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 1.0963211845197942,
+      "regret_mean": 0.5257012027050282
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "AR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.17603059998378065,
+      "regret_mean": 0.2126030991075368
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "AR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.22936603186205068,
+      "regret_mean": 0.15926766722926672
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "AR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 0.23752662570312763,
+      "regret_mean": 0.15110707338818977
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "CR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 2.3269005244736047,
+      "regret_mean": 1.601170397519363
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "CR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 2.4096685325635616,
+      "regret_mean": 1.5184023894294054
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "CR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 2.7240021653736584,
+      "regret_mean": 1.2040687566193093
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "MDD",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": -0.2936306645557315,
+      "regret_mean": 0.03154874538308722
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "MDD",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": -0.28964970907545584,
+      "regret_mean": 0.027567789902811488
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "MDD",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": -0.2822948143126504,
+      "regret_mean": 0.02021289514000607
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "SHR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.593194871904947,
+      "regret_mean": 0.32990312936833976
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "SHR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.6258758088921113,
+      "regret_mean": 0.2972221923811755
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "SHR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 0.6492963980152607,
+      "regret_mean": 0.2738016032580261
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "SOR",
+      "configuration": "EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 0.9999585468358968,
+      "regret_mean": 0.6220638403889256
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "SOR",
+      "configuration": "Fin+EmbeddingRaw",
+      "instances": 762,
+      "selection_mean": 1.0605916314371322,
+      "regret_mean": 0.5614307557876901
+    },
+    {
+      "warning": "LEAKY ORACLE DIAGNOSTIC; invalid generalization estimate",
+      "method": "C_OH_T",
+      "criterion": "SOR",
+      "configuration": "Fin+EmbeddingPCA32",
+      "instances": 762,
+      "selection_mean": 1.0330152774863126,
+      "regret_mean": 0.5890071097385097
+    }
+  ]
+}

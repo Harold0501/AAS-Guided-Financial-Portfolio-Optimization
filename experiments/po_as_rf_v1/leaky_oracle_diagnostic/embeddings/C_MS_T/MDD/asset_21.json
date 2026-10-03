@@ -1,0 +1,10 @@
+{
+  "warning": "LEAKY: all labels, including RF test-fold labels, trained the encoder",
+  "asset": "asset_21",
+  "method": "C_MS_T",
+  "criterion": "MDD",
+  "instances": 6,
+  "as_epochs": 50,
+  "po_pretrain_epochs": 10,
+  "encoder_finetuned_on_as": true
+}

@@ -1,0 +1,10 @@
+{
+  "representation_seed": 2,
+  "rf_seed": 42,
+  "criterion": "SHR",
+  "configuration": "Fin+OH-T-Raw",
+  "input_features": 281,
+  "selection_mean": 0.6663210375098881,
+  "regret_mean": 0.25677696376339876,
+  "completed_at": "2026-09-29T17:05:10.188481+00:00"
+}

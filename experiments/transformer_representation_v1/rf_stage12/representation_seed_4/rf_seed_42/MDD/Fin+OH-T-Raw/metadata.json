@@ -1,0 +1,10 @@
+{
+  "representation_seed": 4,
+  "rf_seed": 42,
+  "criterion": "MDD",
+  "configuration": "Fin+OH-T-Raw",
+  "input_features": 281,
+  "selection_mean": -0.2834794466852771,
+  "regret_mean": 0.021397527512632738,
+  "completed_at": "2026-09-29T17:04:17.397514+00:00"
+}

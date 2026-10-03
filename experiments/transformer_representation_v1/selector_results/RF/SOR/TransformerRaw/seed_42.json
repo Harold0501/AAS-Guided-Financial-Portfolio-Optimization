@@ -1,0 +1,11 @@
+{
+  "selector": "RF",
+  "criterion": "SOR",
+  "configuration": "TransformerRaw",
+  "seed": 42,
+  "raw_input_features": 512,
+  "effective_transformer_features": 512,
+  "selection_mean": 1.0237899252954037,
+  "regret_mean": 0.5982324619294187,
+  "completed_at": "2026-09-28T18:06:11.407286+00:00"
+}

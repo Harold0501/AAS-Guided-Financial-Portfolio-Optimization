@@ -1,0 +1,11 @@
+{
+  "selector": "RF",
+  "criterion": "MDD",
+  "configuration": "TransformerRaw",
+  "seed": 42,
+  "raw_input_features": 512,
+  "effective_transformer_features": 512,
+  "selection_mean": -0.28414706786731475,
+  "regret_mean": 0.022065148694670477,
+  "completed_at": "2026-09-28T18:04:54.996853+00:00"
+}

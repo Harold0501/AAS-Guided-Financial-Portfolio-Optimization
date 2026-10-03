@@ -1,0 +1,10 @@
+{
+  "selector": "RF",
+  "criterion": "MDD",
+  "configuration": "Fin+Detail+MS-T+OH-T-PCA16each",
+  "seed": 42,
+  "input_features": 552,
+  "selection_mean": -0.29171218588596,
+  "regret_mean": 0.029630266713315645,
+  "completed_at": "2026-09-28T18:15:50.909229+00:00"
+}

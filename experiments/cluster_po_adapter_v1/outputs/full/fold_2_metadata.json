@@ -1,0 +1,47 @@
+{
+  "fold": 2,
+  "smoke": false,
+  "K": 3,
+  "train_assets": [
+    "asset_15",
+    "asset_16",
+    "asset_18",
+    "asset_19",
+    "asset_21",
+    "asset_22",
+    "asset_23",
+    "asset_24",
+    "asset_27",
+    "asset_28",
+    "asset_29",
+    "asset_30",
+    "asset_32",
+    "asset_33",
+    "asset_34",
+    "asset_35",
+    "asset_37",
+    "asset_38"
+  ],
+  "test_assets": [
+    "asset_14",
+    "asset_20",
+    "asset_25",
+    "asset_31",
+    "asset_36"
+  ],
+  "train_cluster_counts": {
+    "0": 30,
+    "1": 50,
+    "2": 52
+  },
+  "test_cluster_counts": {
+    "0": 5,
+    "1": 17,
+    "2": 11
+  },
+  "global_epochs": 30,
+  "cluster_epochs": 15,
+  "adapter_epochs": 15,
+  "elapsed_seconds": 308.4485606600065,
+  "test_adapter_rule": "PO-only adaptation; no AS outcomes"
+}

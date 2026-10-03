@@ -1,0 +1,15 @@
+{
+  "asset": "asset_19",
+  "target": "maxsortino",
+  "smoke": false,
+  "seed": 1,
+  "epochs": 50,
+  "window_size": 252,
+  "d_model": 256,
+  "trained_months": 45,
+  "representations": 3,
+  "elapsed_seconds": 13.602348644984886,
+  "raw_data_sha256": "909b14333dca32efff665290af60375ea53c89e364cec0b7e9ecf661610f8232",
+  "target_weights_sha256": "a49ec5d59e0b3822ca1b4f383b6d740f2c66dbd38ded4f46d3a07b72a593d32b",
+  "completed_at": "2026-09-29T16:36:07.352307+00:00"
+}

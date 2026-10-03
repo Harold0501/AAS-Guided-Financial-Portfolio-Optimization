@@ -1,0 +1,6 @@
+/data0/envs/opt_orbit_llm/sDFLwDE/lib/python3.11/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+{"asset": "asset_16", "target": "maxsortino", "representations": 3, "elapsed_seconds": 17.094679570989683}
+/data0/envs/opt_orbit_llm/sDFLwDE/lib/python3.11/site-packages/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+{"asset": "asset_16", "target": "onehot", "representations": 3, "elapsed_seconds": 16.803210739977658}

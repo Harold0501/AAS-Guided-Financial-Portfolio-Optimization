@@ -1,0 +1,42 @@
+{
+  "status": "complete",
+  "completed": [
+    "asset_16",
+    "asset_18",
+    "asset_14",
+    "asset_15",
+    "asset_19",
+    "asset_20",
+    "asset_21",
+    "asset_22",
+    "asset_23",
+    "asset_25",
+    "asset_24",
+    "asset_27",
+    "asset_28",
+    "asset_29",
+    "asset_30",
+    "asset_31",
+    "asset_32",
+    "asset_33",
+    "asset_34",
+    "asset_35",
+    "asset_37",
+    "asset_36",
+    "asset_38"
+  ],
+  "failed": [],
+  "elapsed_seconds": 358.8500166400336,
+  "validation": {
+    "complete": true,
+    "instances": 762,
+    "asset_families": 23,
+    "features": 512,
+    "ms_t_features": 256,
+    "oh_t_features": 256,
+    "output": "experiments/transformer_representation_v1/repeated_representations/seed_1/transformer_representations_1repeat.csv",
+    "output_sha256": "3caf147576561609b8f60898241ff0adbab1f17eb29f04345dc181a3f9029cda",
+    "completed_at": "2026-09-29T16:41:11.956123+00:00"
+  },
+  "finished_at": "2026-09-29T16:41:11.957070+00:00"
+}

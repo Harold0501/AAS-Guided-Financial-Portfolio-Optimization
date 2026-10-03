@@ -1,0 +1,11 @@
+{
+  "selector": "RF",
+  "criterion": "MDD",
+  "configuration": "TransformerPCA32",
+  "seed": 42,
+  "raw_input_features": 512,
+  "effective_transformer_features": 32,
+  "selection_mean": -0.28242827784690605,
+  "regret_mean": 0.020346358674261707,
+  "completed_at": "2026-09-28T18:04:56.599555+00:00"
+}

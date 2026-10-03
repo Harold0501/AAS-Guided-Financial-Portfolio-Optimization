@@ -1,0 +1,10 @@
+{
+  "selector": "MLP",
+  "criterion": "MDD",
+  "configuration": "Fin+MS-T-PCA32",
+  "seed": 42,
+  "input_features": 281,
+  "selection_mean": -0.28989471334728545,
+  "regret_mean": 0.02781279417464116,
+  "completed_at": "2026-09-28T18:13:32.920043+00:00"
+}

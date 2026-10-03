@@ -1,0 +1,10 @@
+{
+  "selector": "MLP",
+  "criterion": "AR",
+  "configuration": "Fin+GPT+MS-T+OH-T-PCA16each",
+  "seed": 42,
+  "input_features": 549,
+  "selection_mean": 0.22951320260250108,
+  "regret_mean": 0.15912049648881632,
+  "completed_at": "2026-09-28T18:12:48.763437+00:00"
+}

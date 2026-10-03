@@ -1,0 +1,13 @@
+{
+  "asset": "asset_34",
+  "criterion": "SHR",
+  "method": "C_MS_T",
+  "instances": 45,
+  "train_instances": 44,
+  "test_instances": 1,
+  "pretrained": true,
+  "freeze_encoder": true,
+  "epochs": 30,
+  "pretrain_epochs": 10,
+  "completed_at": "2026-09-30T15:28:04.684034+00:00"
+}

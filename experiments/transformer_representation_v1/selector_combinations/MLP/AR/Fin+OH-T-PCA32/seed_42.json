@@ -1,0 +1,10 @@
+{
+  "selector": "MLP",
+  "criterion": "AR",
+  "configuration": "Fin+OH-T-PCA32",
+  "seed": 42,
+  "input_features": 281,
+  "selection_mean": 0.237839038573995,
+  "regret_mean": 0.15079466051732243,
+  "completed_at": "2026-09-28T18:12:45.875566+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "asset": "asset_20",
+  "criterion": "SHR",
+  "method": "A_AS",
+  "instances": 6,
+  "train_instances": 6,
+  "test_instances": 0,
+  "pretrained": false,
+  "freeze_encoder": false,
+  "epochs": 30,
+  "pretrain_epochs": 0,
+  "completed_at": "2026-09-30T15:20:23.971604+00:00"
+}

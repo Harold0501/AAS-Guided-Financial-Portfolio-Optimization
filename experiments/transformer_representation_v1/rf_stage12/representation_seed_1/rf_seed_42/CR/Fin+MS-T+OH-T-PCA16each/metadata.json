@@ -1,0 +1,10 @@
+{
+  "representation_seed": 1,
+  "rf_seed": 42,
+  "criterion": "CR",
+  "configuration": "Fin+MS-T+OH-T-PCA16each",
+  "input_features": 537,
+  "selection_mean": 2.723755547880942,
+  "regret_mean": 1.2043153741120252,
+  "completed_at": "2026-09-29T17:03:53.240915+00:00"
+}

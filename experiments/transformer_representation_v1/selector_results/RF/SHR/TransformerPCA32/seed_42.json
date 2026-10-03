@@ -1,0 +1,11 @@
+{
+  "selector": "RF",
+  "criterion": "SHR",
+  "configuration": "TransformerPCA32",
+  "seed": 42,
+  "raw_input_features": 512,
+  "effective_transformer_features": 32,
+  "selection_mean": 0.5541592492377823,
+  "regret_mean": 0.36893875203550447,
+  "completed_at": "2026-09-28T18:05:36.774365+00:00"
+}

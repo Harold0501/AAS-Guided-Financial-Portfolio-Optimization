@@ -1,0 +1,11 @@
+{
+  "selector": "MLP",
+  "criterion": "SHR",
+  "configuration": "Fin+TransformerRaw",
+  "seed": 42,
+  "raw_input_features": 537,
+  "effective_transformer_features": 512,
+  "selection_mean": 0.619342215419149,
+  "regret_mean": 0.30375578585413776,
+  "completed_at": "2026-09-28T18:03:47.684089+00:00"
+}

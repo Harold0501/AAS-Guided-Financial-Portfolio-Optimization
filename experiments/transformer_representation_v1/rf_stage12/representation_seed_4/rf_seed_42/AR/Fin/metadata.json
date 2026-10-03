@@ -1,0 +1,10 @@
+{
+  "representation_seed": 4,
+  "rf_seed": 42,
+  "criterion": "AR",
+  "configuration": "Fin",
+  "input_features": 25,
+  "selection_mean": 0.24767947193396972,
+  "regret_mean": 0.1409542271573477,
+  "completed_at": "2026-09-29T16:58:59.267342+00:00"
+}
